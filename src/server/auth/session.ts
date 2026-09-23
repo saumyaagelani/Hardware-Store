@@ -6,6 +6,7 @@ import { cache } from "react";
 import type { StaffPermission, User } from "@/lib/types";
 import type { PricingViewer } from "@/lib/pricing";
 import { getDb } from "@/server/db";
+import { env } from "@/config/env";
 
 /**
  * Signed-cookie sessions. The cookie only carries the user id and expiry; the
@@ -53,7 +54,7 @@ export async function startSession(userId: string): Promise<void> {
   store.set(COOKIE_NAME, encodeSession(userId, expiresAt), {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production" && (process.env.NEXT_PUBLIC_SITE_URL ?? "").startsWith("https"),
+    secure: process.env.NODE_ENV === "production" && env.siteUrl.startsWith("https"),
     path: "/",
     maxAge: MAX_AGE_SECONDS,
   });

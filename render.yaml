@@ -1,0 +1,27 @@
+# Render Blueprint — one-click deploy of the prototype.
+# Render dashboard → New → Blueprint → select this repository/branch.
+services:
+  - type: web
+    name: northline-prototype
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NEXT_PUBLIC_DEMO_MODE
+        value: "true"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATA_DIR
+        value: /tmp/northline-data
+    # Free instances have temporary storage: demo data re-seeds whenever the
+    # service restarts or redeploys (handy as a clean slate before a meeting).
+    # To keep changes permanently, switch to a paid plan and uncomment:
+    # disk:
+    #   name: northline-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
+    # …then set DATA_DIR to /var/data.

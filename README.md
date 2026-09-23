@@ -49,6 +49,22 @@ No secrets are committed to the repository.
 
 ---
 
+## Deploying a shareable demo (Render)
+
+The repo includes a `render.yaml` Blueprint.
+
+1. Sign in at https://render.com (free) and connect your GitHub account.
+2. **New → Blueprint** → choose this repository and the branch to deploy → **Apply**.
+3. Wait for the first build (~3–5 min). Your link will look like `https://northline-prototype.onrender.com`.
+
+Notes:
+- The free plan sleeps after ~15 min of inactivity; the first visit afterwards takes ~30–60 s to wake. Open the link a minute before a meeting.
+- Free instances use temporary storage, so demo data resets to the original seed on each restart or redeploy. For permanent changes, use a paid plan with the disk block in `render.yaml`.
+- `SESSION_SECRET` is generated automatically; the public URL is detected automatically (`RENDER_EXTERNAL_URL`). To use a custom domain, set `NEXT_PUBLIC_SITE_URL`.
+- Demo mode stays on (presenter toolbar + demo logins). Anyone with the link can sign in with the demo accounts — share it only with the client.
+
+---
+
 ## Demo accounts & presenting
 
 All demo accounts use the password **`Demo1234`**. Emails use the reserved `example.com` domain.
