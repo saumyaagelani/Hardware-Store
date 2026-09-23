@@ -49,9 +49,7 @@ export function LoginForm({ next, demoAccounts, demoPassword }: { next?: string;
         <TextField label="Email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} error={errors.email} />
         <TextField label="Password" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} error={errors.password} />
         <div className="flex justify-end">
-          <span className="text-xs text-body" title="Password reset emails are a Stage 2 feature">
-            Forgot password? Contact us to reset (online reset coming soon)
-          </span>
+          <span className="text-xs text-body">Forgot your password? Contact us — online reset is coming soon.</span>
         </div>
         <Button type="submit" size="lg" className="w-full" loading={pending}>
           Sign in

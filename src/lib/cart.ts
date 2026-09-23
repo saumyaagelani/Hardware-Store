@@ -173,7 +173,7 @@ export function estimateDelivery(
       ? "Large order — our team will confirm the delivery fee before dispatch. You won't be charged for delivery today."
       : freeDelivery
         ? `Free ${zone.name.toLowerCase()} on this order.`
-        : `${zone.name}: ${zone.leadTime}.`,
+        : `Estimated delivery: ${zone.leadTime}.`,
   };
 }
 

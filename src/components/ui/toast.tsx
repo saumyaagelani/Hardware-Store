@@ -25,7 +25,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={push}>
       {children}
-      <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[70] flex flex-col items-center gap-2 px-4 sm:right-4 sm:left-auto sm:items-end" aria-live="polite">
+      <div className="pointer-events-none fixed inset-x-0 bottom-16 z-[70] flex flex-col items-center gap-2 px-4" aria-live="polite">
         {toasts.map((t) => {
           const Icon = t.tone === "success" ? CheckCircle2 : t.tone === "error" ? XCircle : Info;
           return (

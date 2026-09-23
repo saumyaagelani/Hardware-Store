@@ -132,7 +132,7 @@ export function CheckoutForm({
     setCardErrors({});
     let token: string | undefined;
     if (payment === "card") {
-      const result = tokenizeDemoCard(card);
+      const result = tokenizeDemoCard({ ...card, name: card.name || contact.fullName });
       if (!result.ok) {
         setCardErrors(result.errors);
         setFormError("Please check your card details.");
@@ -340,7 +340,7 @@ export function CheckoutForm({
               />
               <TextField containerClassName="sm:col-span-2" label="Expiry (MM / YY)" inputMode="numeric" autoComplete="cc-exp" placeholder="MM / YY" value={card.expiry} onChange={(e) => setCard({ ...card, expiry: formatExpiry(e.target.value) })} error={cardErrors.expiry} />
               <TextField containerClassName="sm:col-span-2" label="Security code" inputMode="numeric" autoComplete="cc-csc" placeholder="CVC" maxLength={4} value={card.cvc} onChange={(e) => setCard({ ...card, cvc: e.target.value.replace(/\D/g, "") })} error={cardErrors.cvc} />
-              <TextField containerClassName="sm:col-span-4" label="Name on card" autoComplete="cc-name" value={card.name} onChange={(e) => setCard({ ...card, name: e.target.value })} error={cardErrors.name} />
+              <TextField containerClassName="sm:col-span-4" label="Name on card" autoComplete="cc-name" placeholder={contact.fullName || undefined} hint={!card.name && contact.fullName ? "Defaults to your contact name" : undefined} value={card.name} onChange={(e) => setCard({ ...card, name: e.target.value })} error={cardErrors.name} />
             </div>
           ) : null}
           {payment === "etransfer" ? (

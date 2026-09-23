@@ -34,9 +34,9 @@ export function DemoToolbar({ current }: { current: string | null }) {
     });
 
   return (
-    <div className="fixed bottom-4 left-4 z-[60] print:hidden">
+    <div className="fixed right-4 bottom-4 z-[60] flex flex-col items-end print:hidden">
       {open ? (
-        <div className="mb-2 w-72 rounded-lg border border-ink-line bg-ink p-3 text-white shadow-menu">
+        <div className="mb-2 ml-auto w-72 rounded-lg border border-ink-line bg-ink p-3 text-white shadow-menu">
           <div className="mb-2 flex items-center justify-between">
             <p className="font-display text-sm font-bold tracking-wide text-gold uppercase">Demo personas</p>
             <button type="button" onClick={() => setOpen(false)} className="rounded p-1 text-white/70 hover:text-white" aria-label="Close demo panel">

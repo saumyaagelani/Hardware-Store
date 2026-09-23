@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "demo:reset": "node -e \"require('fs').rmSync(process.env.DATA_DIR||'.data',{recursive:true,force:true});console.log('Demo data will be re-seeded on next start')\""
   },
   "dependencies": {
     "lucide-react": "^1.47.0",

@@ -16,12 +16,16 @@ interface Props {
 function useFilterNavigation() {
   const router = useRouter();
   const pathname = usePathname();
-  const params = useSearchParams();
+  const urlParams = useSearchParams();
   const [pending, start] = useTransition();
+  // Optimistic copy of the query so controls react instantly while the new
+  // results load. Components are re-keyed on URL change, which resets this.
+  const [params, setParams] = useState(() => new URLSearchParams(urlParams.toString()));
 
   const update = (mutator: (p: URLSearchParams) => void) => {
     const next = new URLSearchParams(params.toString());
     mutator(next);
+    setParams(next);
     const qs = next.toString();
     start(() => router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false }));
   };
@@ -184,6 +188,11 @@ export function MobileFilters({ facets, showCategories, total }: Props) {
 }
 
 export function SortSelect({ options }: { options: { value: string; label: string }[] }) {
+  const urlParams = useSearchParams();
+  return <SortSelectInner key={urlParams.toString()} options={options} />;
+}
+
+function SortSelectInner({ options }: { options: { value: string; label: string }[] }) {
   const { params, setValue, pending } = useFilterNavigation();
   return (
     <label className="flex items-center gap-2 text-sm text-body">
@@ -212,6 +221,11 @@ export interface ActiveChip {
 }
 
 export function ActiveFilters({ chips }: { chips: ActiveChip[] }) {
+  const urlParams = useSearchParams();
+  return <ActiveFiltersInner key={urlParams.toString()} chips={chips} />;
+}
+
+function ActiveFiltersInner({ chips }: { chips: ActiveChip[] }) {
   const { update } = useFilterNavigation();
   if (!chips.length) return null;
   return (

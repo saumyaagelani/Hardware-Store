@@ -59,9 +59,11 @@ export async function SiteHeader() {
                 <HardHat className="h-3.5 w-3.5" aria-hidden /> Contractor pricing
               </span>
             ) : null}
-            <Link href="/quote" className={buttonClass("primary", "md", "hidden md:inline-flex")}>
-              <FileText className="h-4 w-4" aria-hidden /> Free Quote
-            </Link>
+            <span className="hidden md:block">
+              <Link href="/quote" className={buttonClass("primary", "md")}>
+                <FileText className="h-4 w-4" aria-hidden /> Free Quote
+              </Link>
+            </span>
             <AccountMenu user={headerUser} />
             <CartButton />
           </div>

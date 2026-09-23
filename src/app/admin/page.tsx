@@ -113,7 +113,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
                     </span>
                   </span>
                   <StatusBadge tone={orderStatusMeta[o.status].tone}>{orderStatusMeta[o.status].label}</StatusBadge>
-                  <span className="w-24 text-right font-semibold text-ink">{formatMoney(o.total)}</span>
+                  <span className="hidden w-24 text-right font-semibold text-ink sm:block">{formatMoney(o.total)}</span>
                 </Link>
               </li>
             ))}
