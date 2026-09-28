@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, BadgePercent, ChevronDown, HardHat, LayoutGrid } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 import { departments, primaryNav } from "@/config/site";
 import type { NavCategory } from "./types";
 import { cn } from "@/lib/cn";
@@ -29,53 +29,50 @@ export function MainNav({ categories }: { categories: NavCategory[] }) {
   }, [open]);
 
   return (
-    <div className="relative hidden border-b border-ink bg-ink lg:block" ref={ref}>
-      <nav aria-label="Main" className="container-page flex h-12 items-stretch">
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-controls="mega-menu"
-          className={cn("-ml-px flex items-center gap-2 px-4 font-display text-[0.9375rem] font-bold tracking-wide text-ink uppercase transition-colors", open ? "bg-gold" : "bg-gold hover:opacity-90")}
-        >
-          <LayoutGrid className="h-4.5 w-4.5" aria-hidden />
-          Shop All
-          <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} aria-hidden />
-        </button>
-        <ul className="ml-2 flex items-stretch">
-          {primaryNav.map((item) => {
-            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <li key={item.href} className="flex">
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "flex items-center px-3 text-[0.875rem] font-medium whitespace-nowrap transition-colors xl:px-4",
-                    active ? "text-gold" : "text-white/85 hover:text-white",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-        <ul className="ml-auto flex items-stretch">
-          <li className="flex">
-            <Link href="/deals" className="flex items-center gap-1.5 px-3 text-[0.875rem] font-semibold text-gold hover:text-white xl:px-4">
-              <BadgePercent className="h-4 w-4" aria-hidden /> Deals
-            </Link>
-          </li>
-          <li className="flex">
-            <Link href="/contractors" className="flex items-center gap-1.5 px-3 text-[0.875rem] font-medium text-white/85 hover:text-white xl:px-4">
-              <HardHat className="h-4 w-4" aria-hidden /> Contractors
-            </Link>
-          </li>
-        </ul>
+    <div className="relative hidden bg-ink lg:block" ref={ref}>
+      <nav aria-label="Main" className="container-page">
+        <div className="flex h-[4.5rem] items-stretch border-t border-ink-line">
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-controls="mega-menu"
+            className={cn("my-3 flex shrink-0 items-center gap-2.5 border-r border-ink-line pr-5 text-[0.875rem] font-medium transition-colors xl:pr-7 xl:text-[0.9375rem]", open ? "text-gold" : "text-white hover:text-gold")}
+          >
+            {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+            Shop all<span className="hidden xl:inline"> products</span>
+          </button>
+          <ul className="flex flex-1 items-stretch justify-evenly">
+            {primaryNav.map((item) => {
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <li key={item.href} className="flex">
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "relative flex items-center px-1.5 text-[0.875rem] font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-[0.9375rem]",
+                      active ? "text-gold after:absolute after:inset-x-1.5 after:bottom-0 after:h-0.5 after:bg-gold xl:after:inset-x-3" : "text-white hover:text-gold",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+            <li className="hidden xl:flex">
+              <Link href="/deals" className={cn("flex items-center px-3 text-[0.9375rem] font-medium whitespace-nowrap transition-colors xl:px-3", pathname === "/deals" ? "text-gold" : "text-white hover:text-gold")}>
+                Deals
+              </Link>
+            </li>
+          </ul>
+          <Link href="/contractors" className="flex shrink-0 items-center gap-1.5 pl-3 text-[0.875rem] font-medium whitespace-nowrap text-gold hover:text-white xl:pl-4 xl:text-[0.9375rem]">
+            Contractor pricing <ArrowUpRight className="h-4.5 w-4.5" aria-hidden />
+          </Link>
+        </div>
       </nav>
 
       {open ? (
-        <div id="mega-menu" className="absolute inset-x-0 top-full z-40 border-t-2 border-gold bg-white shadow-menu">
+        <div id="mega-menu" className="absolute inset-x-0 top-full z-40 border-t border-ink-line bg-white shadow-menu">
           <div className="container-page grid grid-cols-[1fr_280px] gap-10 py-8">
             <div className="grid grid-cols-3 gap-x-8 gap-y-8 xl:grid-cols-5">
               {departments.map((dept) => {

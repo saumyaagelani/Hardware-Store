@@ -19,7 +19,8 @@ export function HeaderSearch({ className, id = "site-search" }: { className?: st
   }
 
   return (
-    <form role="search" onSubmit={submit} className={cn("relative flex w-full", className)}>
+    <form role="search" onSubmit={submit} className={cn("relative flex h-12 w-full items-center gap-3 rounded-md border border-ink-line bg-white/[0.04] pr-2 pl-4 transition-colors focus-within:border-muted lg:h-14", className)}>
+      <Search className="h-5 w-5 shrink-0 text-muted" aria-hidden />
       <label htmlFor={id} className="sr-only">
         Search products
       </label>
@@ -28,13 +29,12 @@ export function HeaderSearch({ className, id = "site-search" }: { className?: st
         type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search vinyl, doors, vanities, SKU…"
+        placeholder="Search flooring, doors, vanities & more"
         autoComplete="off"
-        className="h-11 w-full rounded-l-md border border-r-0 border-line bg-mist pr-3 pl-4 text-[0.9375rem] text-ink placeholder:text-muted focus:border-ink focus:bg-white focus:outline-none"
+        className="h-full w-full min-w-0 bg-transparent text-[0.9375rem] text-white placeholder:text-muted focus:outline-none [&::-webkit-search-cancel-button]:invert"
       />
-      <button type="submit" className="flex h-11 shrink-0 items-center gap-2 rounded-r-md bg-ink px-4 text-sm font-semibold text-white hover:opacity-90" aria-label="Search">
-        <Search className="h-4.5 w-4.5" aria-hidden />
-        <span className="hidden xl:inline">Search</span>
+      <button type="submit" className="shrink-0 rounded-sm border border-ink-line px-2.5 py-1 text-xs font-medium text-muted transition-colors hover:border-gold hover:text-gold" aria-label="Search">
+        Search
       </button>
     </form>
   );

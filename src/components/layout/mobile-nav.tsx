@@ -20,7 +20,7 @@ export function MobileNav({ categories, user }: { categories: NavCategory[]; use
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className="-ml-2 rounded-md p-2 text-ink hover:bg-mist lg:hidden" aria-label="Open menu">
+      <button type="button" onClick={() => setOpen(true)} className="-ml-2 rounded-md p-2 text-white hover:text-gold lg:hidden" aria-label="Open menu">
         <Menu className="h-6 w-6" aria-hidden />
       </button>
       <Dialog open={open} onClose={() => setOpen(false)} title="Menu" variant="drawer" side="left">

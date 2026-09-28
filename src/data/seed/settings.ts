@@ -71,10 +71,10 @@ export function buildBanners(): Banner[] {
 
 export function buildContent(): SiteContent {
   return {
-    heroEyebrow: "Flooring · Doors · Bath · Plumbing",
-    heroTitle: "Building materials for every project, big or small.",
+    heroEyebrow: "Your foundation for a better home",
+    heroTitle: "Quality materials for every project. Better prices.",
     heroBody:
-      "Shop waterproof vinyl, doors and hardware, vanities and shower systems — with in-store pickup, local delivery and dedicated pricing for contractors.",
+      "Waterproof vinyl, interior doors and hardware, vanities and shower systems — with in-store pickup, local delivery and dedicated pricing for contractors.",
     aboutTitle: "Your local building supply partner",
     aboutBody:
       "Placeholder About Us copy — to be supplied by the client. Describe the company history, the team, the showroom and what makes the service different for homeowners and trade professionals.",

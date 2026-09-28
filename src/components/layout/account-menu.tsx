@@ -27,11 +27,11 @@ export function AccountMenu({ user }: { user: HeaderUser | null }) {
 
   if (!user) {
     return (
-      <Link href="/account/login" className="flex items-center gap-2 rounded-md p-2 text-ink hover:bg-mist" aria-label="Sign in or create an account">
+      <Link href="/account/login" className="flex items-center gap-2 rounded-md p-2 text-white transition-colors hover:text-gold" aria-label="Sign in or create an account">
         <UserRound className="h-6 w-6" aria-hidden />
         <span className="hidden text-left text-xs leading-tight xl:block">
-          <span className="block text-body">Sign in</span>
-          <span className="block font-semibold text-ink">Account</span>
+          <span className="block text-muted">Sign in</span>
+          <span className="block font-semibold">Account</span>
         </span>
       </Link>
     );
@@ -48,7 +48,7 @@ export function AccountMenu({ user }: { user: HeaderUser | null }) {
 
   return (
     <div className="relative" ref={ref}>
-      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-haspopup="menu" className="flex items-center gap-2 rounded-md p-2 text-ink hover:bg-mist">
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-haspopup="menu" className="flex items-center gap-2 rounded-md p-2 text-white transition-colors hover:text-gold">
         <span className="relative">
           <UserRound className="h-6 w-6" aria-hidden />
           {user.accountType === "contractor" && user.contractorStatus === "approved" ? (
@@ -56,8 +56,8 @@ export function AccountMenu({ user }: { user: HeaderUser | null }) {
           ) : null}
         </span>
         <span className="hidden text-left text-xs leading-tight xl:block">
-          <span className="block text-body">Hi, {user.firstName}</span>
-          <span className="flex items-center gap-0.5 font-semibold text-ink">
+          <span className="block text-muted">Hi, {user.firstName}</span>
+          <span className="flex items-center gap-0.5 font-semibold">
             My account <ChevronDown className="h-3 w-3" aria-hidden />
           </span>
         </span>

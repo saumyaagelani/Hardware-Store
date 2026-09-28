@@ -6,7 +6,7 @@ test.describe.configure({ mode: "serial" });
 test("A — guest: home → category → product → cart → checkout → confirmation", async ({ page }) => {
   const errors = watchConsole(page);
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Building materials");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Quality materials");
   await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Vinyl Flooring" }).click();
   await expect(page).toHaveURL(/\/shop\/vinyl/);
   await expect(page.getByRole("heading", { level: 1, name: "Vinyl Flooring" })).toBeVisible();

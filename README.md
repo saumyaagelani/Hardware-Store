@@ -141,7 +141,7 @@ Defined once in `src/app/globals.css` (`@theme`). The default Tailwind palette i
 
 | Token | Colour | Used for |
 | --- | --- | --- |
-| `ink` | `#111827` Primary dark | Header, hero, footer, dark buttons, headings |
+| `ink` | `#111827` Primary dark | Header, navigation, hero, footer, dark buttons, headings |
 | `gold` | `#F5B82E` Gold accent | Primary buttons, highlights, sale flags |
 | `white` | `#FFFFFF` | Page and card backgrounds |
 | `mist` | `#F3F4F6` Light gray | Section backgrounds, image backdrops |
@@ -192,7 +192,7 @@ All backgrounds and brand surfaces use only these five. A few functional shades 
 | --- | --- |
 | Business name, phone, email, address, hours, social links | `src/config/business.ts` |
 | Colours, radius, shadows, typography | `src/app/globals.css` (`@theme` tokens) |
-| Logo | `src/components/layout/logo.tsx` |
+| Logo | `src/components/layout/logo.tsx` (browser-tab icon: `src/app/icon.svg`) |
 | Navigation & footer links, departments | `src/config/site.ts` |
 | Products & categories (seed) | `src/data/seed/products.ts`, `src/data/seed/categories.ts` — or edit live in Admin |
 | Delivery zones, pickup locations, tax | Admin → Delivery / Pickup settings (defaults in `src/data/seed/settings.ts`) |
@@ -220,13 +220,40 @@ After editing seed files run `npm run demo:reset` (or use the toolbar) so the da
 - Uploads are stored on local disk without virus scanning.
 - Admin permissions are basic (admin vs staff with section permissions).
 
-See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the Stage 2 checklist.
+See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
+
+## Project documents
+
+| Document | For | What it contains |
+| --- | --- | --- |
+| [HANDOFF.md](./HANDOFF.md) | Developers | How to install, run, test and deploy; env vars; key files; routes; demo accounts, test cards and postal codes; data model; known limitations |
+| [PHASE_2_PLAN.md](./PHASE_2_PLAN.md) | Developers | Current architecture, what is production-ready vs demo-only, the recommended Phase 2 order, migration risks |
+| [PRODUCTION_TODO.md](./PRODUCTION_TODO.md) | Everyone | Launch checklist. Each item is marked: can do now, needs client info, or needs third-party credentials |
+| [CLIENT_INFORMATION_REQUIRED.md](./CLIENT_INFORMATION_REQUIRED.md) | The client | Everything the store owner must supply, split into "required before production" and "optional / later" |
+| [NEXT_CLAUDE_PROMPT.md](./NEXT_CLAUDE_PROMPT.md) | Future AI session | Ready-to-paste prompt for starting Phase 2 **after** client approval |
+| `docs/Website-Features-Guide.pdf` / `.docx` | The client | Illustrated tour of every feature with links |
 
 ---
 
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-09-28 — Dark header and hero (reference-style theme)
+- The top of every page now uses the dark style the client asked for, based on the reference design. It has a dark header with a white logo, a large dark search box, "Get a free quote", account and cart (with a count bubble).
+- New navigation row under the header: "Shop all products" (opens the full category menu), the main categories, Deals, and a gold "Contractor pricing" link.
+- New homepage banner: a split layout with a large headline on the left ("Quality materials for every project." with **"Better prices."** in gold) and a full-height picture on the right with an "Explore vinyl flooring" card.
+- Colours are unchanged: dark #111827, gold #F5B82E, white #FFFFFF, light greys #F3F4F6 and #9CA3AF.
+- The homepage headline can still be edited in Admin → Website content. If it has two sentences, the last one is shown in gold.
+- All other pages, user journeys, demo accounts and sample data are unchanged. On existing local installs the demo data re-seeds once so the new homepage wording appears.
+
+### 2026-09-28 — Handoff and Phase 2 planning documents
+- Added **HANDOFF.md**: everything a developer needs to take over the project (commands, settings, key files, pages, demo logins, test cards, postal codes, data model, known limitations, next step).
+- Added **PHASE_2_PLAN.md**: how to turn the prototype into the real store without rebuilding it. Covers what is ready, what is demo-only, the order of work, and the risks.
+- Rewrote **PRODUCTION_TODO.md** as a launch checklist grouped by topic. Each item says whether it can be done now, needs information from the client, or needs an outside account (payments, email, hosting).
+- Added **CLIENT_INFORMATION_REQUIRED.md**: a list to send to the client of everything we need from them, split into "needed before launch" and "can come later".
+- Added **NEXT_CLAUDE_PROMPT.md**: a ready-made starting instruction for the next phase, to be used only after the client approves the prototype.
+- No website changes in this update. Phase 2 has **not** been started, pending client approval.
 
 ### 2026-09-28 — Stage 1 audit and stabilisation
 - Checked every page as a guest, customer, pending, rejected and approved contractor, staff member and administrator, looking for errors and layout problems.

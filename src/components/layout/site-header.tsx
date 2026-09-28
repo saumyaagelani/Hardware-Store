@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { FileText, HardHat } from "lucide-react";
+import { ArrowUpRight, HardHat } from "lucide-react";
 import { getCurrentUser } from "@/server/auth/session";
 import { getDb } from "@/server/db";
 import { categoryProductCounts, getCategories } from "@/server/services/catalog";
@@ -12,7 +12,6 @@ import { AccountMenu } from "./account-menu";
 import { MainNav } from "./main-nav";
 import { MobileNav } from "./mobile-nav";
 import type { HeaderUser, NavCategory } from "./types";
-import { buttonClass } from "@/components/ui/button";
 
 export async function SiteHeader() {
   const user = await getCurrentUser();
@@ -46,24 +45,22 @@ export async function SiteHeader() {
         Skip to content
       </a>
       <AnnouncementBar items={announcements} />
-      <div className="border-b border-line bg-white">
-        <div className="container-page flex h-16 items-center gap-3 sm:h-20 lg:gap-8">
+      <div className="bg-ink text-white">
+        <div className="container-page flex h-16 items-center gap-3 sm:h-20 lg:h-24 lg:gap-10">
           <MobileNav categories={categories} user={headerUser} />
-          <Logo className="shrink-0" />
-          <Suspense fallback={<div className="hidden h-11 flex-1 lg:block" />}>
-            <HeaderSearch className="hidden max-w-2xl flex-1 lg:flex" />
+          <Logo tone="light" className="shrink-0" />
+          <Suspense fallback={<div className="hidden h-14 flex-1 lg:block" />}>
+            <HeaderSearch className="mx-auto hidden max-w-xl flex-1 lg:flex" />
           </Suspense>
-          <div className="ml-auto flex items-center gap-1 sm:gap-2">
+          <div className="ml-auto flex items-center gap-1 sm:gap-2 lg:ml-0">
             {contractorActive ? (
-              <span className="hidden items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-xs font-bold text-gold xl:inline-flex">
+              <span className="hidden items-center gap-1.5 rounded-full border border-gold/40 px-3 py-1.5 text-xs font-bold text-gold 2xl:inline-flex">
                 <HardHat className="h-3.5 w-3.5" aria-hidden /> Contractor pricing
               </span>
             ) : null}
-            <span className="hidden md:block">
-              <Link href="/quote" className={buttonClass("primary", "md")}>
-                <FileText className="h-4 w-4" aria-hidden /> Free Quote
-              </Link>
-            </span>
+            <Link href="/quote" className="hidden items-center gap-1.5 px-2 text-[0.9375rem] font-semibold whitespace-nowrap text-white hover:text-gold md:inline-flex">
+              Get a free quote <ArrowUpRight className="h-4.5 w-4.5" aria-hidden />
+            </Link>
             <AccountMenu user={headerUser} />
             <CartButton />
           </div>
