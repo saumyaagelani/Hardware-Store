@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures";
 import { expectNoHorizontalOverflow, login, watchConsole } from "./helpers";
 
 const publicPages = ["/", "/shop", "/shop/doors", "/search?q=vanity", "/search?q=zzzz", "/deals", "/products/60in-frameless-sliding-shower-door", "/cart", "/checkout", "/quote", "/contractors", "/contractors/apply", "/contact", "/account/login", "/account/register", "/policies/delivery", "/does-not-exist"];

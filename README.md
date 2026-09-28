@@ -103,7 +103,7 @@ All demo accounts use the password **`Demo1234`**. Emails use the reserved `exam
 - **Tailwind CSS v4** with a locked design-token palette (`src/app/globals.css`) — the default Tailwind colour palette is disabled so only approved tokens can be used
 - **Zod** validation (shared client/server schemas), **lucide-react** icons (single icon set)
 - **Vitest** unit tests, **Playwright** end-to-end tests
-- Fonts: Inter (body) and Barlow (display) via `next/font` (self-hosted at build)
+- Fonts: **Satoshi** for body and headings, the same typeface as the reference site. It is loaded from Fontshare's official web-font CSS in `src/app/layout.tsx` under the ITF Free Font License, and no font files are committed. Inter (self-hosted via `next/font`) is the fallback. Weights: 400 body, 500 hero heading and buttons, 600 labels/nav/section headings, 700 page titles
 
 ```
 src/
@@ -246,6 +246,13 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-09-28 — Satoshi typeface and hero fine-tuning
+- The whole website (shop, account, checkout, quotes, contractor pages, admin and footer) now uses **Satoshi** for all text and headings, the same typeface as the reference site. It loads from Fontshare, the official free web-font service from its designers; if it can't load, the site falls back to Inter.
+- Lighter, more premium weights: regular for body text, medium for the homepage headline and buttons, semi-bold for labels, menus and section headings.
+- The homepage banner was rebuilt to the client's target screenshot, measured pixel by pixel at 1600 × 900: 53/47 split, the same heading size and line breaks ("Quality building / supplies. / **Better prices.**"), a two-line description, smaller buttons side by side, the divider with "For homeowners & professionals" and "Canadian projects. Covered." on one line, and the "Explore vinyl flooring" card in the same place. It scales proportionally on other desktop sizes and stacks on tablets and phones.
+- The banner description now uses the reference wording: "Flooring, interior doors, tiles and bathroom essentials. Thoughtfully selected for the spaces you live in and the projects you build."
+- Colours, pictures, menus and features are unchanged. The banner picture is still our placeholder illustration until the client supplies a real photo.
 
 ### 2026-09-28 — Homepage banner size and alignment
 - The homepage banner is now much larger and fills most of the first screen on computers: about 750px tall on a laptop (1280px wide), 810px on a 1440px screen, and up to 900px on large screens.

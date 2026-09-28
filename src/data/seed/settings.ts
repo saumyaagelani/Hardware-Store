@@ -74,7 +74,7 @@ export function buildContent(): SiteContent {
     heroEyebrow: "Your foundation for a better home",
     heroTitle: "Quality building supplies. Better prices.",
     heroBody:
-      "Waterproof vinyl, interior doors and hardware, vanities and shower systems — with in-store pickup, local delivery and dedicated pricing for contractors.",
+      "Flooring, interior doors, tiles and bathroom essentials. Thoughtfully selected for the spaces you live in and the projects you build.",
     aboutTitle: "Your local building supply partner",
     aboutBody:
       "Placeholder About Us copy — to be supplied by the client. Describe the company history, the team, the showroom and what makes the service different for homeowners and trade professionals.",

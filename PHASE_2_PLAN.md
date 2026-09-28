@@ -17,7 +17,7 @@ The approach is an **evolution, not a rewrite**. Stage 1 was built so that the U
 | Framework | Next.js 16.3 (App Router, Turbopack), React 19.2, TypeScript 5 | Server components by default; server actions for all mutations |
 | Styling | Tailwind CSS v4, locked `@theme` tokens in `src/app/globals.css` | Default palette disabled. Only the approved colours and functional shades can be used |
 | Validation | Zod 4 schemas in `src/lib/validation.ts`, shared by client and server | |
-| Icons / fonts | lucide-react; Inter and Barlow via `next/font` | |
+| Icons / fonts | lucide-react; Satoshi (Fontshare web-font CSS), Inter fallback via `next/font` | Consider self-hosting Satoshi WOFF2 files (permitted under the ITF Free Font License) to remove the third-party request |
 | Data | JSON file store `DATA_DIR/db.json` (`src/server/db.ts`) | Seeded from `src/data/seed`. In-memory fallback if the disk isn't writable |
 | Auth | scrypt password hashes and an HMAC-signed session cookie (`nl_session`, 14 days) | The user is re-read from the store on every request |
 | Payments | `PaymentProvider` interface; demo provider and browser-side demo card tokenizer | Test cards only |

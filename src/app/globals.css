@@ -51,8 +51,17 @@
   --color-special-soft: #ede9fe;
 
   /* Typography */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-barlow), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Satoshi for body AND display, as on the reference site (loaded in app/layout.tsx) */
+  --font-sans: "Satoshi", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Satoshi", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /*
+   * Weight scale tuned for Satoshi (reference hierarchy is restrained):
+   * body 400 · medium 500 (hero heading, buttons) · semibold 600 (nav,
+   * labels, section headings) · bold 600 · extrabold 700 (page titles).
+   */
+  --font-weight-bold: 600;
+  --font-weight-extrabold: 700;
 
   /* Shape — one consistent radius scale */
   --radius-*: initial;
@@ -127,7 +136,7 @@
   .eyebrow {
     font-family: var(--font-display);
     font-size: 0.8125rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-gold-dark);
@@ -210,12 +219,12 @@
   }
   .prose-store h2 {
     font-size: 1.375rem;
-    font-weight: 700;
+    font-weight: 600;
     margin: 1.75rem 0 0.75rem;
   }
   .prose-store h3 {
     font-size: 1.125rem;
-    font-weight: 700;
+    font-weight: 600;
     margin: 1.25rem 0 0.5rem;
   }
 

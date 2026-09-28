@@ -1,13 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { business } from "@/config/business";
 import { env } from "@/config/env";
 import { Analytics } from "@/components/analytics";
 import { DemoToolbarServer } from "@/components/layout/demo-toolbar-server";
 
+/*
+ * Typeface: Satoshi (Indian Type Foundry), matching the reference site. It is
+ * served by Fontshare's official web-font CSS (@font-face, WOFF2) under the ITF
+ * Free Font License — no font files are committed to this repository.
+ * Inter (self-hosted by next/font) is the metric-compatible fallback while
+ * Satoshi loads or if Fontshare is unreachable.
+ */
+const SATOSHI_CSS = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const barlow = Barlow({ subsets: ["latin"], weight: ["500", "600", "700", "800"], variable: "--font-barlow", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
@@ -28,7 +35,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-CA" data-scroll-behavior="smooth" className={`${inter.variable} ${barlow.variable}`}>
+    <html lang="en-CA" data-scroll-behavior="smooth" className={inter.variable}>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={SATOSHI_CSS} />
+      </head>
       <body className="min-h-screen antialiased">
         {children}
         <DemoToolbarServer />

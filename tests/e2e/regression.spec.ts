@@ -1,4 +1,5 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "./fixtures";
+import type { Page } from "@playwright/test";
 import { expectNoHorizontalOverflow, login, logout, watchConsole } from "./helpers";
 
 /**
@@ -100,7 +101,7 @@ test("product variations change the price and carry into the cart", async ({ pag
   const errors = watchConsole(page);
   await page.goto("/products/contour-lever-passage-set");
   await expect(page.getByText("$29.99").first()).toBeVisible();
-  await page.locator("label").filter({ hasText: "Brushed Brass" }).click();
+  await page.locator("label").filter({ hasText: "Brushed Brass" }).first().click();
   await expect(page.getByText("$34.99").first()).toBeVisible();
   await page.getByRole("button", { name: "Add to cart" }).first().click();
   const drawer = page.getByRole("dialog", { name: /Your cart/ });
@@ -111,7 +112,7 @@ test("product variations change the price and carry into the cart", async ({ pag
   // Size variant: 36" (default, -$12) → 48" (base price).
   await page.goto("/products/solid-red-oak-stair-tread");
   await expect(page.getByText("$57.99").first()).toBeVisible();
-  await page.locator("label").filter({ hasText: '48"' }).click();
+  await page.locator("label").filter({ hasText: '48"' }).first().click();
   await expect(page.getByText("$69.99").first()).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -146,7 +147,7 @@ test("cart delivery checker: local, out-of-area and invalid postal codes", async
 
 test("product → request a quote carries the product and variant", async ({ page }) => {
   await page.goto("/products/shaker-1-panel-interior-door-slab");
-  await page.locator("label").filter({ hasText: '32"' }).click();
+  await page.locator("label").filter({ hasText: '32"' }).first().click();
   await page.getByRole("link", { name: "Request a quote for this item" }).click();
   await expect(page).toHaveURL(/\/quote\?/);
   await expect(page.getByText("Selected items", { exact: true })).toBeVisible();
@@ -162,7 +163,7 @@ test("product → request a quote carries the product and variant", async ({ pag
 
 test("upload validation rejects oversized and spoofed files", async ({ page }) => {
   await page.goto("/quote");
-  const input = page.getByLabel("Upload project files");
+  const input = page.getByLabel("Upload project files").first();
   await input.setInputFiles({ name: "huge.pdf", mimeType: "application/pdf", buffer: Buffer.alloc(11 * 1024 * 1024, 0x25) });
   await expect(page.getByText(/larger than|too large|exceeds/i).first()).toBeVisible();
   await input.setInputFiles({ name: "fake.pdf", mimeType: "application/pdf", buffer: Buffer.from("MZ not really a pdf") });
