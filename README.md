@@ -228,6 +228,9 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the Stage 2 checklist.
 
 Newest first. Every code change pushed to GitHub gets an entry here.
 
+### 2026-09-28 — Website features guide
+- Added `docs/Website-Features-Guide.docx`: a Word guide listing every feature with direct links and click-by-click steps to reach it (shopping, checkout, quotes, contractor program, customer account, admin dashboard), plus demo accounts and test card details.
+
 ### 2026-09-28 — Brand colour clean-up
 - All backgrounds and brand surfaces now use only the five approved colours (#111827, #F5B82E, #FFFFFF, #F3F4F6, #9CA3AF).
 - Removed in-between shades: lighter dark `#1F2937` (hero right panel, cards), off-white `#F9FAFB`, pale gold tint.
