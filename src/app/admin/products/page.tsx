@@ -63,7 +63,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps<"/ad
           {products.map((p) => {
             const s = describeStock(p.inventory);
             return (
-              <tr key={p.id} className="hover:bg-canvas">
+              <tr key={p.id} className="hover:bg-mist">
                 <Td>
                   <Link href={`/admin/products/${p.id}`} className="flex items-center gap-3">
                     <img src={p.images[0]?.src} alt="" className="h-11 w-11 shrink-0 rounded bg-mist object-cover ring-1 ring-line" />

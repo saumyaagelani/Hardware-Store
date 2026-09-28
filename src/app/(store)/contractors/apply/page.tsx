@@ -11,7 +11,7 @@ export default async function ContractorApplyPage() {
   if (user && user.accountType === "contractor" && user.contractorStatus !== "rejected") redirect("/contractors/apply/submitted");
   const a = user?.businessAddress ?? user?.billingAddress;
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page max-w-3xl py-6 lg:py-10">
         <Breadcrumbs items={[{ label: "Contractor Program", href: "/contractors" }, { label: "Apply" }]} />
         <div className="mt-6 rounded-lg border border-line bg-white p-6 sm:p-10">

@@ -20,7 +20,7 @@ export default async function CheckoutPage() {
       }
     : null;
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page py-6 lg:py-10">
         <div className="mb-6 flex items-center justify-between gap-4">
           <h1 className="text-3xl font-extrabold text-ink sm:text-4xl">Checkout</h1>

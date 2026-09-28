@@ -45,7 +45,7 @@ export function CategoryEditor({ category, productCount }: { category: Category;
             <p className="field-label">Subcategories</p>
             <ul className="flex flex-wrap gap-2">
               {subs.map((s, i) => (
-                <li key={i} className="flex items-center gap-1 rounded-md border border-line bg-canvas pr-1">
+                <li key={i} className="flex items-center gap-1 rounded-md border border-line bg-mist pr-1">
                   <input
                     aria-label={`Subcategory ${i + 1}`}
                     value={s.name}

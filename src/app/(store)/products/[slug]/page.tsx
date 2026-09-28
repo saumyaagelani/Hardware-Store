@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             <ul className="space-y-2">
               {product.features.map((f) => (
                 <li key={f} className="flex gap-2.5 text-sm text-ink">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-dark" aria-hidden /> {f}
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden /> {f}
                 </li>
               ))}
             </ul>
@@ -107,7 +107,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             ...product.specifications.map((s) => [s.label, s.value]),
             ...(product.minOrderQty ? [["Minimum order", String(product.minOrderQty)]] : []),
           ].map(([label, value], i) => (
-            <div key={`${label}-${i}`} className="flex justify-between gap-4 border-b border-line px-4 py-3 text-sm odd:bg-canvas sm:[&:nth-last-child(-n+2)]:border-b-0">
+            <div key={`${label}-${i}`} className="flex justify-between gap-4 border-b border-line px-4 py-3 text-sm odd:bg-mist sm:[&:nth-last-child(-n+2)]:border-b-0">
               <dt className="text-body">{label}</dt>
               <dd className="text-right font-medium text-ink">{value}</dd>
             </div>

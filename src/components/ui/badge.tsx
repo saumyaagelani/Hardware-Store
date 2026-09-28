@@ -9,7 +9,7 @@ const tones: Record<Tone, string> = {
   success: "bg-success-soft text-success",
   danger: "bg-danger-soft text-danger",
   special: "bg-special-soft text-special",
-  gold: "bg-gold-soft text-ink",
+  gold: "bg-mist text-ink",
 };
 
 const dots: Record<Tone, string> = {
@@ -19,7 +19,7 @@ const dots: Record<Tone, string> = {
   success: "bg-success",
   danger: "bg-danger",
   special: "bg-special",
-  gold: "bg-gold-dark",
+  gold: "bg-gold",
 };
 
 export function StatusBadge({ tone, children, className, dot = true }: { tone: Tone; children: ReactNode; className?: string; dot?: boolean }) {

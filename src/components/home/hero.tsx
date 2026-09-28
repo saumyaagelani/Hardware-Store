@@ -6,7 +6,6 @@ import { ButtonLink } from "@/components/ui/button";
 export function Hero({ content }: { content: SiteContent }) {
   return (
     <section className="relative overflow-hidden bg-ink text-white">
-      <div aria-hidden className="absolute inset-y-0 right-0 hidden w-1/2 bg-ink-soft lg:block" />
       <div className="container-page relative grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-20">
         <div>
           <p className="eyebrow text-gold!">{content.heroEyebrow}</p>

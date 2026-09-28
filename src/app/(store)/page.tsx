@@ -41,7 +41,7 @@ export default async function HomePage() {
         <CategoryTiles categories={getCategories()} counts={categoryProductCounts()} />
       </section>
 
-      <section className="bg-canvas py-14 lg:py-20">
+      <section className="bg-mist py-14 lg:py-20">
         <div className="container-page">
           <SectionHeading eyebrow="Customer favourites" title="Featured products" href="/shop?sort=featured" />
           <ProductGrid products={featured} priorityCount={4} />

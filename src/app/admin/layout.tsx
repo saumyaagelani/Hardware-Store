@@ -22,13 +22,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   };
   return (
     <ToastProvider>
-      <div className="flex min-h-screen bg-canvas">
+      <div className="flex min-h-screen bg-mist">
         <AdminSidebar counts={counts} />
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-line bg-white px-4 sm:px-6">
             <AdminMobileNav counts={counts} />
             <p className="hidden text-sm text-body sm:block">
-              <span className="rounded bg-gold-soft px-1.5 py-0.5 text-xs font-semibold text-ink">Prototype</span> Changes are saved to the demo data store.
+              <span className="rounded bg-mist px-1.5 py-0.5 text-xs font-semibold text-ink">Prototype</span> Changes are saved to the demo data store.
             </p>
             <div className="ml-auto flex items-center gap-2">
               <Link href="/" className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-ink hover:bg-mist">

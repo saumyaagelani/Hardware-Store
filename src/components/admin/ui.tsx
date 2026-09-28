@@ -30,7 +30,7 @@ export function Table({ children, className }: { children: ReactNode; className?
 }
 
 export function Th({ children, className }: { children?: ReactNode; className?: string }) {
-  return <th className={cn("bg-canvas px-4 py-3 text-left text-xs font-semibold tracking-wide whitespace-nowrap text-body uppercase", className)}>{children}</th>;
+  return <th className={cn("bg-mist px-4 py-3 text-left text-xs font-semibold tracking-wide whitespace-nowrap text-body uppercase", className)}>{children}</th>;
 }
 
 export function Td({ children, className }: { children?: ReactNode; className?: string }) {

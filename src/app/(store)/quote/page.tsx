@@ -34,7 +34,7 @@ export default async function QuotePage({ searchParams }: PageProps<"/quote">) {
   };
 
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page py-6 lg:py-8">
         <Breadcrumbs items={[{ label: "Free Quote" }]} />
         <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_340px] lg:gap-10">

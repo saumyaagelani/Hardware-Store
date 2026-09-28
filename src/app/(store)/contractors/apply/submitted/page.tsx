@@ -25,7 +25,7 @@ export default async function ContractorStatusPage() {
   ];
 
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page max-w-3xl py-10 lg:py-14">
         <div className="rounded-lg border border-line bg-white p-6 text-center sm:p-10">
           <Icon className={status === "approved" ? "mx-auto h-14 w-14 text-success" : status === "pending" ? "mx-auto h-14 w-14 text-warning" : "mx-auto h-14 w-14 text-danger"} aria-hidden />

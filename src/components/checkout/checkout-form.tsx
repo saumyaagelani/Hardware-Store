@@ -305,7 +305,7 @@ export function CheckoutForm({
             </span>
           }
         >
-          <div className="mb-4 rounded-md border border-dashed border-gold-dark bg-gold-soft p-3 text-xs leading-relaxed text-ink">
+          <div className="mb-4 rounded-md border border-dashed border-gold bg-mist p-3 text-xs leading-relaxed text-ink">
             <strong>Prototype payment mode.</strong> No real charges are made. Use test card <code className="font-semibold">4242 4242 4242 4242</code> (any future expiry, any CVC), or <code className="font-semibold">4000 0000 0000 0002</code> to see a declined payment.
           </div>
           <ChoiceCards
@@ -364,7 +364,7 @@ export function CheckoutForm({
       </div>
 
       <aside className="h-fit lg:sticky lg:top-6" aria-label="Order summary">
-        <div className="rounded-lg border border-line bg-canvas p-5 sm:p-6">
+        <div className="rounded-lg border border-line bg-mist p-5 sm:p-6">
           <h2 className="font-display text-xl font-bold text-ink">Order summary</h2>
           <ul className="mt-4 max-h-80 divide-y divide-line overflow-y-auto">
             {loading || !snapshot

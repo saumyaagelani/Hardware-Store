@@ -47,7 +47,7 @@ export default async function AdminOrdersPage({ searchParams }: PageProps<"/admi
         </thead>
         <tbody>
           {orders.map((o) => (
-            <tr key={o.id} className="hover:bg-canvas">
+            <tr key={o.id} className="hover:bg-mist">
               <Td>
                 <Link href={`/admin/orders/${o.id}`} className="font-semibold text-ink hover:underline">
                   {o.number}

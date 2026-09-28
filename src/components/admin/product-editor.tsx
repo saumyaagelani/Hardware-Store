@@ -214,7 +214,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
             />
             <TextField label="Sale ends" optional type="date" value={d.pricing.saleEndsAt} onChange={(e) => setPricing("saleEndsAt", e.target.value)} />
           </div>
-          <div className="mt-5 grid gap-3 rounded-md bg-canvas p-4 sm:grid-cols-3">
+          <div className="mt-5 grid gap-3 rounded-md bg-mist p-4 sm:grid-cols-3">
             {(
               [
                 ["Guests & retail customers", pricingPreview.guest],
@@ -387,7 +387,7 @@ function RelationPicker({ label, value, onChange, options }: { label: string; va
       <p className="mb-2 text-sm font-semibold text-ink">{label}</p>
       <ul className="mb-2 space-y-1.5">
         {value.map((id) => (
-          <li key={id} className="flex items-center justify-between gap-2 rounded-md bg-canvas px-3 py-2 text-sm">
+          <li key={id} className="flex items-center justify-between gap-2 rounded-md bg-mist px-3 py-2 text-sm">
             <span className="truncate text-ink">{byId.get(id)?.name ?? id}</span>
             <button type="button" onClick={() => onChange(value.filter((x) => x !== id))} className="text-body hover:text-danger" aria-label={`Remove ${byId.get(id)?.name ?? id}`}>
               <Trash2 className="h-4 w-4" aria-hidden />

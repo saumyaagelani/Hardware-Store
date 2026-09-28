@@ -11,7 +11,7 @@ export default async function RegisterPage({ searchParams }: PageProps<"/account
   if (await getCurrentUser()) redirect("/account");
   const { email } = await searchParams;
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page max-w-3xl py-10 lg:py-14">
         <div className="rounded-lg border border-line bg-white p-6 sm:p-10">
           <h1 className="text-3xl font-extrabold text-ink">Create your account</h1>

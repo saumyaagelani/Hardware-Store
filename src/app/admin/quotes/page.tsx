@@ -42,7 +42,7 @@ export default async function AdminQuotesPage({ searchParams }: PageProps<"/admi
         </thead>
         <tbody>
           {quotes.map((x) => (
-            <tr key={x.id} className="hover:bg-canvas">
+            <tr key={x.id} className="hover:bg-mist">
               <Td>
                 <Link href={`/admin/quotes/${x.id}`} className="font-semibold whitespace-nowrap text-ink hover:underline">
                   {x.reference}

@@ -29,7 +29,7 @@ export default async function ContentPage() {
               </div>
             ))}
           </dl>
-          <p className="mt-4 rounded-md bg-gold-soft p-3 text-xs text-ink">
+          <p className="mt-4 rounded-md bg-mist p-3 text-xs text-ink">
             Placeholder values. Business details live in <code>src/config/business.ts</code> so they update site-wide in one place.
           </p>
         </Panel>

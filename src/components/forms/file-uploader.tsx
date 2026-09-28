@@ -68,7 +68,7 @@ export function FileUploader({ value, onChange }: { value: UploadedItem[]; onCha
         }}
         onDragLeave={() => setDragging(false)}
         onDrop={onDrop}
-        className={cn("flex flex-col items-center rounded-lg border-2 border-dashed px-6 py-8 text-center transition-colors", dragging ? "border-gold-dark bg-gold-soft" : "border-line bg-canvas")}
+        className={cn("flex flex-col items-center rounded-lg border-2 border-dashed px-6 py-8 text-center transition-colors", dragging ? "border-gold bg-mist" : "border-line bg-mist")}
       >
         <UploadCloud className="h-9 w-9 text-body" aria-hidden />
         <p className="mt-2 text-sm font-semibold text-ink">

@@ -59,7 +59,7 @@ export default async function ContractorsPage() {
               </p>
             ) : null}
           </div>
-          <div className="rounded-lg border border-ink-line bg-ink-soft p-6 sm:p-8">
+          <div className="rounded-lg border border-ink-line bg-ink p-6 sm:p-8">
             <p className="font-display text-lg font-bold">How approval works</p>
             <ol className="mt-5 space-y-5">
               {[
@@ -84,7 +84,7 @@ export default async function ContractorsPage() {
         <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map(({ icon: Icon, title, body }) => (
             <li key={title} className="rounded-lg border border-line p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-md bg-gold-soft text-ink">
+              <span className="flex h-11 w-11 items-center justify-center rounded-md bg-mist text-ink">
                 <Icon className="h-5.5 w-5.5" aria-hidden />
               </span>
               <p className="mt-4 font-display text-lg font-bold text-ink">{title}</p>

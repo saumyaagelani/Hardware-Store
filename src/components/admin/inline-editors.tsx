@@ -14,7 +14,7 @@ function SaveButton({ pending, saved, dirty, onClick }: { pending: boolean; save
       type="button"
       onClick={onClick}
       disabled={!dirty || pending}
-      className={cn("inline-flex h-9 min-w-16 items-center justify-center gap-1 rounded-md px-3 text-xs font-semibold", dirty ? "bg-ink text-white hover:bg-ink-soft" : saved ? "text-success" : "text-muted")}
+      className={cn("inline-flex h-9 min-w-16 items-center justify-center gap-1 rounded-md px-3 text-xs font-semibold", dirty ? "bg-ink text-white hover:opacity-90" : saved ? "text-success" : "text-muted")}
     >
       {pending ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden /> : saved && !dirty ? <Check className="h-3.5 w-3.5" aria-hidden /> : null}
       {saved && !dirty ? "Saved" : "Save"}

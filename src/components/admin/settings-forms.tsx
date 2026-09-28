@@ -115,7 +115,7 @@ export function DeliverySettingsForm({ zones, oversizedUnitThreshold, deliveryNo
             </div>
           ))}
         </div>
-        <div className="mt-5 rounded-md bg-canvas p-4">
+        <div className="mt-5 rounded-md bg-mist p-4">
           <label htmlFor="zone-test" className="text-sm font-semibold text-ink">
             Test a postal code
           </label>

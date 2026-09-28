@@ -50,7 +50,7 @@ export default async function EmailsPage() {
                 <span className="text-xs text-body">{formatDateTime(e.createdAt)}</span>
                 <StatusBadge tone={e.status === "simulated" ? "info" : e.status === "sent" ? "success" : e.status === "disabled" ? "neutral" : "danger"}>{e.status === "simulated" ? "Simulated" : e.status}</StatusBadge>
               </summary>
-              <pre className="border-t border-line bg-canvas px-4 py-3 font-sans text-sm whitespace-pre-wrap text-ink">{e.body}</pre>
+              <pre className="border-t border-line bg-mist px-4 py-3 font-sans text-sm whitespace-pre-wrap text-ink">{e.body}</pre>
             </details>
           </li>
         ))}

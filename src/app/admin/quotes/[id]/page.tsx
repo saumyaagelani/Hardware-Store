@@ -42,7 +42,7 @@ export default async function AdminQuotePage({ params }: PageProps<"/admin/quote
       />
       <div className="grid gap-6 2xl:grid-cols-[1fr_320px]">
         <div className="min-w-0 space-y-5">
-          {quote.adminNotes ? <p className="rounded-md border border-gold-dark bg-gold-soft p-3 text-sm text-ink">Internal note: {quote.adminNotes}</p> : null}
+          {quote.adminNotes ? <p className="rounded-md border border-gold bg-mist p-3 text-sm text-ink">Internal note: {quote.adminNotes}</p> : null}
           <QuoteDetailBody quote={quote} files={db.uploads.filter((u) => quote.fileIds.includes(u.id))} admin productSlugs={Object.fromEntries(db.products.map((p) => [p.id, p.slug]))} />
         </div>
         <Panel title="Update quote" className="h-fit">

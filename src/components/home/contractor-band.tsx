@@ -36,7 +36,7 @@ export function ContractorBand({ pitch }: { pitch: string }) {
         </div>
         <ul className="grid gap-4 sm:grid-cols-2">
           {perks.map(({ icon: Icon, title, body }) => (
-            <li key={title} className="rounded-lg border border-ink-line bg-ink-soft p-6">
+            <li key={title} className="rounded-lg border border-ink-line bg-ink p-6">
               <Icon className="h-7 w-7 text-gold" aria-hidden />
               <p className="mt-4 font-display text-lg font-bold">{title}</p>
               <p className="mt-1.5 text-sm leading-relaxed text-white/70">{body}</p>

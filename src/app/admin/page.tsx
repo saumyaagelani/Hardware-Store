@@ -104,7 +104,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
           <ul className="divide-y divide-line">
             {db.orders.slice(0, 6).map((o) => (
               <li key={o.id}>
-                <Link href={`/admin/orders/${o.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-canvas">
+                <Link href={`/admin/orders/${o.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-mist">
                   <span className="min-w-0 flex-1">
                     <span className="font-semibold text-ink">{o.number}</span>
                     <span className="block truncate text-xs text-body">
@@ -123,7 +123,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
           <ul className="divide-y divide-line">
             {db.quotes.slice(0, 6).map((q) => (
               <li key={q.id}>
-                <Link href={`/admin/quotes/${q.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-canvas">
+                <Link href={`/admin/quotes/${q.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-mist">
                   <span className="min-w-0 flex-1">
                     <span className="font-semibold text-ink">{q.reference}</span>
                     <span className="block truncate text-xs text-body">
@@ -145,7 +145,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
               const s = describeStock(p.inventory);
               return (
                 <li key={p.id}>
-                  <Link href={`/admin/products/${p.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-canvas">
+                  <Link href={`/admin/products/${p.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-mist">
                     <img src={p.images[0]?.src} alt="" className="h-10 w-10 rounded bg-mist object-cover" />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-medium text-ink">{p.name}</span>
@@ -173,7 +173,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
               </li>
             ))}
           </ul>
-          <Link href="/admin/emails" className="flex items-center justify-center gap-1 border-t border-line py-3 text-sm font-semibold text-ink hover:bg-canvas">
+          <Link href="/admin/emails" className="flex items-center justify-center gap-1 border-t border-line py-3 text-sm font-semibold text-ink hover:bg-mist">
             View all notifications <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </Panel>

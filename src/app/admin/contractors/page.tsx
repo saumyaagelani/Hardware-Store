@@ -41,7 +41,7 @@ export default async function ContractorsAdminPage({ searchParams }: PageProps<"
         </thead>
         <tbody>
           {list.map((u) => (
-            <tr key={u.id} className="hover:bg-canvas">
+            <tr key={u.id} className="hover:bg-mist">
               <Td>
                 <Link href={`/admin/contractors/${u.id}`} className="font-semibold text-ink hover:underline">
                   {u.companyName}

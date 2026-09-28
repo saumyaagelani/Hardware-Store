@@ -224,7 +224,7 @@ export function ProductDetail({
 function ContractorNote({ state, price }: { state: ViewerState; price: PriceView }) {
   if (price.mode === "price" && price.kind === "contractor") {
     return (
-      <p className="mt-3 flex items-start gap-2 rounded-md bg-gold-soft px-3 py-2 text-[0.8125rem] text-ink">
+      <p className="mt-3 flex items-start gap-2 rounded-md bg-mist px-3 py-2 text-[0.8125rem] text-ink">
         <HardHat className="mt-px h-4 w-4 shrink-0" aria-hidden /> Your approved contractor pricing is applied automatically at checkout.
       </p>
     );

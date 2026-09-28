@@ -20,7 +20,7 @@ export default async function QuoteConfirmationPage({ params }: PageProps<"/quot
   const files = db.uploads.filter((u) => quote.fileIds.includes(u.id));
 
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page max-w-3xl py-10 lg:py-14">
         <div className="rounded-lg border border-line bg-white p-6 text-center sm:p-10">
           <CheckCircle2 className="mx-auto h-14 w-14 text-success" aria-hidden />

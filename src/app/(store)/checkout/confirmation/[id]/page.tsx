@@ -24,7 +24,7 @@ export default async function ConfirmationPage({ params }: PageProps<"/checkout/
 
   const f = order.fulfilment;
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page max-w-4xl py-10 lg:py-14">
         <div className="rounded-lg border border-line bg-white p-6 text-center sm:p-10">
           <CheckCircle2 className="mx-auto h-14 w-14 text-success" aria-hidden />
@@ -43,7 +43,7 @@ export default async function ConfirmationPage({ params }: PageProps<"/checkout/
         </div>
 
         {order.payment.method === "etransfer" && order.payment.status === "awaiting_payment" ? (
-          <div className="mt-5 flex gap-4 rounded-lg border border-gold-dark bg-gold-soft p-5">
+          <div className="mt-5 flex gap-4 rounded-lg border border-gold bg-mist p-5">
             <Landmark className="h-6 w-6 shrink-0 text-ink" aria-hidden />
             <div className="text-sm text-ink">
               <p className="font-semibold">Complete your Interac e-Transfer</p>

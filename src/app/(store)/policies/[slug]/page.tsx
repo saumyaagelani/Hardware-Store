@@ -59,7 +59,7 @@ export default async function PolicyPage({ params }: PageProps<"/policies/[slug]
       <Breadcrumbs items={[{ label: policy.title }]} />
       <h1 className="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">{policy.title}</h1>
       <p className="mt-2 text-body">{policy.intro}</p>
-      <p className="mt-5 flex gap-2 rounded-md border border-dashed border-gold-dark bg-gold-soft p-3 text-sm text-ink">
+      <p className="mt-5 flex gap-2 rounded-md border border-dashed border-gold bg-mist p-3 text-sm text-ink">
         <AlertTriangle className="h-4.5 w-4.5 shrink-0" aria-hidden /> Prototype placeholder content — {business.name} will provide final policy wording.
       </p>
       <div className="prose-store mt-6">

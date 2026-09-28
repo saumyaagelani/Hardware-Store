@@ -9,7 +9,7 @@ export function OrdersList({ orders, hrefBase }: { orders: Order[]; hrefBase: st
   return (
     <div className="overflow-hidden rounded-lg border border-line bg-white">
       <table className="w-full text-sm">
-        <thead className="hidden bg-canvas text-left text-xs font-semibold tracking-wide text-body uppercase sm:table-header-group">
+        <thead className="hidden bg-mist text-left text-xs font-semibold tracking-wide text-body uppercase sm:table-header-group">
           <tr>
             <th className="px-5 py-3">Order</th>
             <th className="px-5 py-3">Date</th>
@@ -21,7 +21,7 @@ export function OrdersList({ orders, hrefBase }: { orders: Order[]; hrefBase: st
         </thead>
         <tbody className="divide-y divide-line">
           {orders.map((o) => (
-            <tr key={o.id} className="group relative flex flex-wrap items-center gap-x-4 gap-y-1 px-5 py-4 hover:bg-canvas sm:table-row sm:p-0">
+            <tr key={o.id} className="group relative flex flex-wrap items-center gap-x-4 gap-y-1 px-5 py-4 hover:bg-mist sm:table-row sm:p-0">
               <td className="font-semibold text-ink sm:px-5 sm:py-4">
                 <Link href={`${hrefBase}/${o.number}`} className="after:absolute after:inset-0">
                   {o.number}
@@ -54,7 +54,7 @@ export function QuotesList({ quotes, hrefBase }: { quotes: Quote[]; hrefBase: st
   return (
     <div className="overflow-hidden rounded-lg border border-line bg-white">
       <table className="w-full text-sm">
-        <thead className="hidden bg-canvas text-left text-xs font-semibold tracking-wide text-body uppercase sm:table-header-group">
+        <thead className="hidden bg-mist text-left text-xs font-semibold tracking-wide text-body uppercase sm:table-header-group">
           <tr>
             <th className="px-5 py-3">Reference</th>
             <th className="px-5 py-3">Project</th>
@@ -65,7 +65,7 @@ export function QuotesList({ quotes, hrefBase }: { quotes: Quote[]; hrefBase: st
         </thead>
         <tbody className="divide-y divide-line">
           {quotes.map((q) => (
-            <tr key={q.id} className="group relative flex flex-wrap items-center gap-x-4 gap-y-1 px-5 py-4 hover:bg-canvas sm:table-row sm:p-0">
+            <tr key={q.id} className="group relative flex flex-wrap items-center gap-x-4 gap-y-1 px-5 py-4 hover:bg-mist sm:table-row sm:p-0">
               <td className="font-semibold whitespace-nowrap text-ink sm:px-5 sm:py-4">
                 <Link href={`${hrefBase}/${q.reference}`} className="after:absolute after:inset-0">
                   {q.reference}

@@ -30,9 +30,9 @@ export function HeaderSearch({ className, id = "site-search" }: { className?: st
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search vinyl, doors, vanities, SKU…"
         autoComplete="off"
-        className="h-11 w-full rounded-l-md border border-r-0 border-line bg-canvas pr-3 pl-4 text-[0.9375rem] text-ink placeholder:text-muted focus:border-ink focus:bg-white focus:outline-none"
+        className="h-11 w-full rounded-l-md border border-r-0 border-line bg-mist pr-3 pl-4 text-[0.9375rem] text-ink placeholder:text-muted focus:border-ink focus:bg-white focus:outline-none"
       />
-      <button type="submit" className="flex h-11 shrink-0 items-center gap-2 rounded-r-md bg-ink px-4 text-sm font-semibold text-white hover:bg-ink-soft" aria-label="Search">
+      <button type="submit" className="flex h-11 shrink-0 items-center gap-2 rounded-r-md bg-ink px-4 text-sm font-semibold text-white hover:opacity-90" aria-label="Search">
         <Search className="h-4.5 w-4.5" aria-hidden />
         <span className="hidden xl:inline">Search</span>
       </button>

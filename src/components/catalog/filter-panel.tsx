@@ -139,7 +139,7 @@ function FilterFields({ facets, showCategories }: Omit<Props, "total">) {
             Max $
             <input type="number" min={0} inputMode="numeric" value={max} onChange={(e) => setMax(e.target.value)} className="field-input mt-1 min-h-9! py-1.5!" />
           </label>
-          <button type="submit" className="h-9 rounded-md bg-ink px-3 text-sm font-semibold text-white hover:bg-ink-soft">
+          <button type="submit" className="h-9 rounded-md bg-ink px-3 text-sm font-semibold text-white hover:opacity-90">
             Go
           </button>
         </form>

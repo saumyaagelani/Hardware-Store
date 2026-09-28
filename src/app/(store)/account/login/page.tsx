@@ -18,7 +18,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/account/lo
   if (user && !denied) redirect(next && next.startsWith("/") && !next.startsWith("//") ? next : isStaff(user) ? "/admin" : "/account");
 
   return (
-    <div className="bg-canvas">
+    <div className="bg-mist">
       <div className="container-page grid max-w-5xl gap-6 py-10 lg:grid-cols-[1.1fr_1fr] lg:py-16">
         <div className="rounded-lg border border-line bg-white p-6 sm:p-10">
           <h1 className="text-3xl font-extrabold text-ink">Sign in</h1>
@@ -43,7 +43,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/account/lo
             <HardHat className="h-7 w-7 text-gold" aria-hidden />
             <h2 className="mt-3 font-display text-xl font-bold">Contractor or trade business?</h2>
             <p className="mt-1 text-sm text-white/70">Apply for a trade account to unlock contractor pricing, project quotes and job-site delivery.</p>
-            <Link href="/contractors/apply" className="mt-5 inline-flex h-11 items-center rounded-md bg-gold px-5 text-sm font-semibold text-ink hover:bg-gold-dark">
+            <Link href="/contractors/apply" className="mt-5 inline-flex h-11 items-center rounded-md bg-gold px-5 text-sm font-semibold text-ink hover:opacity-90">
               Apply for a contractor account
             </Link>
           </div>

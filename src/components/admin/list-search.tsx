@@ -43,7 +43,7 @@ export function ListSearch({ placeholder, selects = [] }: { placeholder: string;
           ))}
         </select>
       ))}
-      <button type="submit" className="h-10 rounded-md bg-ink px-4 text-sm font-semibold text-white hover:bg-ink-soft">
+      <button type="submit" className="h-10 rounded-md bg-ink px-4 text-sm font-semibold text-white hover:opacity-90">
         Search
       </button>
     </form>

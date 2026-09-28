@@ -29,14 +29,14 @@ export function MainNav({ categories }: { categories: NavCategory[] }) {
   }, [open]);
 
   return (
-    <div className="relative hidden border-b border-ink-soft bg-ink lg:block" ref={ref}>
+    <div className="relative hidden border-b border-ink bg-ink lg:block" ref={ref}>
       <nav aria-label="Main" className="container-page flex h-12 items-stretch">
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-controls="mega-menu"
-          className={cn("-ml-px flex items-center gap-2 px-4 font-display text-[0.9375rem] font-bold tracking-wide text-ink uppercase transition-colors", open ? "bg-gold-dark" : "bg-gold hover:bg-gold-dark")}
+          className={cn("-ml-px flex items-center gap-2 px-4 font-display text-[0.9375rem] font-bold tracking-wide text-ink uppercase transition-colors", open ? "bg-gold" : "bg-gold hover:opacity-90")}
         >
           <LayoutGrid className="h-4.5 w-4.5" aria-hidden />
           Shop All

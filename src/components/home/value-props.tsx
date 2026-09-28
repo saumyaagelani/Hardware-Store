@@ -13,7 +13,7 @@ export function ValueProps() {
       <ul className="container-page grid grid-cols-2 gap-x-4 gap-y-6 py-8 lg:grid-cols-4 lg:py-10">
         {props.map(({ icon: Icon, title, body }) => (
           <li key={title} className="flex flex-col gap-3 sm:flex-row sm:items-start">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-gold-soft text-ink">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-mist text-ink">
               <Icon className="h-5.5 w-5.5" aria-hidden />
             </span>
             <span>

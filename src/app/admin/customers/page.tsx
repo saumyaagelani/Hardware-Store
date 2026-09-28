@@ -44,7 +44,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/admin/
           {list.map((u) => {
             const orders = db.orders.filter((o) => o.userId === u.id && o.status !== "cancelled");
             return (
-              <tr key={u.id} className="hover:bg-canvas">
+              <tr key={u.id} className="hover:bg-mist">
                 <Td>
                   <Link href={`/admin/customers/${u.id}`} className="font-semibold text-ink hover:underline">
                     {u.fullName}

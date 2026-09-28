@@ -38,7 +38,7 @@ export function CoverageCalculator({
     setRooms((all) => all.map((r, idx) => (idx === i ? { ...r, [key]: value === "" ? 0 : Number(value) } : r)));
 
   return (
-    <section aria-labelledby="calc-title" className="rounded-lg border border-line bg-canvas p-4 sm:p-5">
+    <section aria-labelledby="calc-title" className="rounded-lg border border-line bg-mist p-4 sm:p-5">
       <div className="flex items-center gap-2">
         <Calculator className="h-5 w-5 text-gold-dark" aria-hidden />
         <h2 id="calc-title" className="font-display text-lg font-bold text-ink">
@@ -137,7 +137,7 @@ export function CoverageCalculator({
               ) : null}
             </div>
             {onApply ? (
-              <button type="button" onClick={() => onApply(result.units)} className="mt-3 h-10 w-full rounded-md bg-gold text-sm font-semibold text-ink hover:bg-gold-dark">
+              <button type="button" onClick={() => onApply(result.units)} className="mt-3 h-10 w-full rounded-md bg-gold text-sm font-semibold text-ink hover:opacity-90">
                 Use {plural(result.units)}
               </button>
             ) : null}

@@ -57,7 +57,7 @@ export function LoginForm({ next, demoAccounts, demoPassword }: { next?: string;
       </form>
 
       {demoAccounts?.length ? (
-        <div className="mt-8 rounded-lg border border-dashed border-gold-dark bg-gold-soft p-4">
+        <div className="mt-8 rounded-lg border border-dashed border-gold bg-mist p-4">
           <p className="text-sm font-semibold text-ink">Demo accounts</p>
           <p className="mt-0.5 text-xs text-body">
             Password for all: <code className="font-semibold text-ink">{demoPassword}</code> — click to fill.

@@ -188,7 +188,7 @@ export function QuoteForm({
       <Section title="Products" description="Tell us what you need. Add items from your cart or a product page, or describe it in your own words.">
         {items.length ? (
           <div className="mb-5 overflow-hidden rounded-lg border border-line">
-            <div className="flex items-center justify-between bg-canvas px-4 py-2.5 text-xs font-semibold tracking-wide text-body uppercase">
+            <div className="flex items-center justify-between bg-mist px-4 py-2.5 text-xs font-semibold tracking-wide text-body uppercase">
               <span className="flex items-center gap-2">
                 {fromCart ? <ShoppingCart className="h-4 w-4" aria-hidden /> : <FileText className="h-4 w-4" aria-hidden />}
                 {fromCart ? "Items from your cart" : "Selected items"}

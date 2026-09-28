@@ -60,7 +60,7 @@ export function CartView() {
       </div>
 
       <aside className="h-fit space-y-4 lg:sticky lg:top-6" aria-label="Order summary">
-        <div className="rounded-lg border border-line bg-canvas p-5 sm:p-6">
+        <div className="rounded-lg border border-line bg-mist p-5 sm:p-6">
           <h2 className="font-display text-xl font-bold text-ink">Order summary</h2>
           {snapshot?.contractorPricing ? (
             <p className="mt-3 flex items-center gap-2 rounded-md bg-ink px-3 py-2 text-xs font-semibold text-gold">

@@ -105,7 +105,7 @@ function NavList({ counts, onNavigate }: { counts: AdminCounts; onNavigate?: () 
                     href={href}
                     onClick={onNavigate}
                     aria-current={active ? "page" : undefined}
-                    className={cn("flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors", active ? "bg-gold font-semibold text-ink" : "text-white/75 hover:bg-ink-soft hover:text-white")}
+                    className={cn("flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors", active ? "bg-gold font-semibold text-ink" : "text-white/75 hover:bg-white/10 hover:text-white")}
                   >
                     <Icon className="h-4.5 w-4.5 shrink-0" aria-hidden />
                     <span className="flex-1">{label}</span>

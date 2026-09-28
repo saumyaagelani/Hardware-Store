@@ -83,7 +83,7 @@ export function MobileNav({ categories, user }: { categories: NavCategory[]; use
               <Phone className="h-5 w-5 text-body" aria-hidden /> Contact & Location
             </Link>
           </nav>
-          <div className="mt-2 border-t border-line bg-canvas p-5 text-sm text-body">
+          <div className="mt-2 border-t border-line bg-mist p-5 text-sm text-body">
             <p className="font-semibold text-ink">Need help?</p>
             <a href={business.phoneHref} className="mt-1 block font-semibold text-ink">
               {business.phone}

@@ -25,7 +25,7 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 
 function SocialIcon({ label, href, path }: { label: string; href: string; path: string }) {
   return (
-    <a href={href} aria-label={`${label} (link to be added)`} className="flex h-9 w-9 items-center justify-center rounded-md bg-ink-soft text-white/80 hover:bg-gold hover:text-ink">
+    <a href={href} aria-label={`${label} (link to be added)`} className="flex h-9 w-9 items-center justify-center rounded-md bg-ink text-white/80 hover:bg-gold hover:text-ink">
       <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
         <path d={path} />
       </svg>

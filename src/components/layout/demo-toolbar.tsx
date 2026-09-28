@@ -58,7 +58,7 @@ export function DemoToolbar({ current }: { current: string | null }) {
                       } else setMessage(res.error ?? "Could not switch persona");
                     })
                   }
-                  className={cn("w-full rounded-md px-2.5 py-2 text-left hover:bg-ink-soft disabled:opacity-60", current === p.key && "bg-ink-soft ring-1 ring-gold")}
+                  className={cn("w-full rounded-md px-2.5 py-2 text-left hover:bg-white/10 disabled:opacity-60", current === p.key && "bg-white/10 ring-1 ring-gold")}
                 >
                   <span className="block text-sm font-semibold">{p.label}</span>
                   <span className="block text-xs text-white/60">{p.note}</span>
@@ -76,7 +76,7 @@ export function DemoToolbar({ current }: { current: string | null }) {
                     router.refresh();
                   })
                 }
-                className={cn("w-full rounded-md px-2.5 py-2 text-left hover:bg-ink-soft", current === null && "bg-ink-soft ring-1 ring-gold")}
+                className={cn("w-full rounded-md px-2.5 py-2 text-left hover:bg-white/10", current === null && "bg-white/10 ring-1 ring-gold")}
               >
                 <span className="block text-sm font-semibold">Guest (signed out)</span>
                 <span className="block text-xs text-white/60">Public retail pricing</span>
@@ -110,7 +110,7 @@ export function DemoToolbar({ current }: { current: string | null }) {
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="flex items-center gap-2 rounded-full bg-ink py-2 pr-3 pl-2.5 text-xs font-semibold text-white shadow-raised ring-1 ring-ink-line hover:bg-ink-soft"
+        className="flex items-center gap-2 rounded-full bg-ink py-2 pr-3 pl-2.5 text-xs font-semibold text-white shadow-raised ring-1 ring-ink-line hover:opacity-90"
       >
         <FlaskConical className="h-4 w-4 text-gold" aria-hidden />
         Demo{current ? `: ${personas.find((p) => p.key === current)?.label ?? "Signed in"}` : ": Guest"}

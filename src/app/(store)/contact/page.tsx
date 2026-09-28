@@ -31,7 +31,7 @@ export default async function ContactPage() {
             { icon: Mail, title: "Email", body: <a href={`mailto:${business.email}`} className="font-semibold text-ink hover:underline">{business.email}</a> },
           ].map(({ icon: Icon, title, body }) => (
             <div key={title} className="flex gap-4 rounded-lg border border-line p-5">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-gold-soft text-ink">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-mist text-ink">
                 <Icon className="h-5 w-5" aria-hidden />
               </span>
               <div className="text-sm">
@@ -41,7 +41,7 @@ export default async function ContactPage() {
             </div>
           ))}
           <div className="flex gap-4 rounded-lg border border-line p-5">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-gold-soft text-ink">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-mist text-ink">
               <Clock className="h-5 w-5" aria-hidden />
             </span>
             <div className="flex-1 text-sm">
@@ -63,7 +63,7 @@ export default async function ContactPage() {
             <h2 className="mb-5 font-display text-2xl font-bold text-ink">Send us a message</h2>
             <ContactForm initial={{ name: user?.fullName ?? "", email: user?.email ?? "", phone: user?.phone ?? "" }} />
           </div>
-          <Link href="/quote" className="flex items-center gap-4 rounded-lg bg-ink p-5 text-white hover:bg-ink-soft">
+          <Link href="/quote" className="flex items-center gap-4 rounded-lg bg-ink p-5 text-white hover:opacity-90">
             <FileText className="h-7 w-7 shrink-0 text-gold" aria-hidden />
             <span>
               <span className="block font-display text-lg font-bold">Need pricing for a project?</span>

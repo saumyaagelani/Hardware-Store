@@ -22,7 +22,7 @@ export function CategoryTiles({ categories, counts }: { categories: Category[]; 
         </li>
       ))}
       <li>
-        <Link href="/deals" className="group flex h-full min-h-44 flex-col justify-between rounded-lg bg-gold p-4 text-ink transition-colors hover:bg-gold-dark">
+        <Link href="/deals" className="group flex h-full min-h-44 flex-col justify-between rounded-lg bg-gold p-4 text-ink transition-colors hover:opacity-90">
           <BadgePercent className="h-8 w-8" aria-hidden />
           <span>
             <span className="block font-display text-xl leading-tight font-extrabold">Deals & Sale</span>

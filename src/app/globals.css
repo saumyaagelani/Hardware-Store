@@ -17,14 +17,16 @@
   --color-mist: #f3f4f6; /* Light gray */
   --color-muted: #9ca3af; /* Muted gray */
 
-  /* Neutral support shades (derived from the ink/gray family) */
-  --color-ink-soft: #1f2937;
+  /*
+   * Functional shades — NOT used for backgrounds or brand surfaces.
+   * body/line: readable body text and hairline borders (muted gray is too
+   * light for paragraph text). gold-dark: small gold text on white, where the
+   * brand gold would be unreadable. ink-line: dividers on dark backgrounds.
+   */
   --color-ink-line: #374151;
   --color-body: #4b5563;
   --color-line: #e5e7eb;
-  --color-canvas: #f9fafb;
-  --color-gold-dark: #d99a12;
-  --color-gold-soft: #fdf3dc;
+  --color-gold-dark: #b7830f;
 
   /* Semantic status colours (stock, quote & order states, validation) */
   --color-success: #15803d;
