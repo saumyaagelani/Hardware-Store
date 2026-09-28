@@ -6,14 +6,16 @@ import { CartDrawer } from "@/components/cart/cart-drawer";
 export default function StoreLayout({ children }: { children: React.ReactNode }) {
   return (
     <CartProvider>
-      <div className="flex min-h-screen flex-col">
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+      <div className="theme-dark">
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </div>
+        <CartDrawer />
       </div>
-      <CartDrawer />
     </CartProvider>
   );
 }

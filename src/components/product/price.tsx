@@ -37,7 +37,7 @@ export function PriceDisplay({ price, size = "md", showUnit = true, className }:
         </span>
       ) : null}
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-        <span className={cn("font-display font-bold tracking-tight", amountClass, price.kind === "sale" ? "text-danger" : "text-ink")}>
+        <span className={cn("font-display font-bold tracking-tight", amountClass, price.kind === "sale" ? "price-sale text-danger" : "text-ink")}>
           <span className="sr-only">{price.kind === "sale" ? "Sale price" : price.kind === "contractor" ? "Contractor price" : "Price"}: </span>
           {formatMoney(price.amount)}
           {unit}
@@ -49,7 +49,7 @@ export function PriceDisplay({ price, size = "md", showUnit = true, className }:
           </span>
         ) : null}
         {price.savingsPercent && price.kind === "sale" ? (
-          <span className="text-xs font-bold text-danger">Save {price.savingsPercent}%</span>
+          <span className="price-sale text-xs font-bold text-danger">Save {price.savingsPercent}%</span>
         ) : null}
       </div>
     </div>

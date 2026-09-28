@@ -29,7 +29,7 @@ export function MainNav({ categories }: { categories: NavCategory[] }) {
   }, [open]);
 
   return (
-    <div className="relative hidden bg-ink lg:block" ref={ref}>
+    <div className="relative hidden bg-page lg:block" ref={ref}>
       <nav aria-label="Main" className="container-page">
         <div className="flex h-[4.5rem] items-stretch border-t border-ink-line">
           <button
@@ -40,7 +40,7 @@ export function MainNav({ categories }: { categories: NavCategory[] }) {
             className={cn("my-3 flex shrink-0 items-center gap-2.5 border-r border-ink-line pr-5 text-[0.875rem] font-medium transition-colors xl:pr-7 xl:text-[0.9375rem]", open ? "text-gold" : "text-white hover:text-gold")}
           >
             {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
-            Shop all<span className="hidden xl:inline"> products</span>
+            <span>Shop all<span className="hidden xl:inline"> products</span></span>
           </button>
           <ul className="flex flex-1 items-stretch justify-evenly">
             {primaryNav.map((item) => {

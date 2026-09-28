@@ -32,7 +32,7 @@ export function MobileNav({ categories, user }: { categories: NavCategory[]; use
             <Link href="/quote" className="flex items-center justify-center gap-2 rounded-md bg-gold px-3 py-3 text-sm font-semibold text-ink">
               <FileText className="h-4 w-4" aria-hidden /> Free Quote
             </Link>
-            <Link href={user ? "/account" : "/account/login"} className="flex items-center justify-center gap-2 rounded-md bg-ink px-3 py-3 text-sm font-semibold text-white">
+            <Link href={user ? "/account" : "/account/login"} className="btn-dark flex items-center justify-center gap-2 rounded-md bg-ink px-3 py-3 text-sm font-semibold text-white">
               <UserRound className="h-4 w-4" aria-hidden /> {user ? "My Account" : "Sign In"}
             </Link>
           </div>

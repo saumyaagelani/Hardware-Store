@@ -31,7 +31,7 @@ export function NewsletterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email address"
-          className="h-11 min-w-0 flex-1 rounded-l-md border border-r-0 border-ink-line bg-ink px-4 text-sm text-white placeholder:text-muted focus:border-gold focus:outline-none"
+          className="h-11 min-w-0 flex-1 rounded-l-md border border-r-0 border-ink-line bg-page px-4 text-sm text-white placeholder:text-muted focus:border-gold focus:outline-none"
         />
         <button type="submit" disabled={pending} className="h-11 shrink-0 rounded-r-md bg-gold px-4 text-sm font-semibold text-ink hover:opacity-90 disabled:opacity-60">
           {pending ? "…" : "Subscribe"}

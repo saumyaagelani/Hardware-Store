@@ -139,7 +139,7 @@ function FilterFields({ facets, showCategories }: Omit<Props, "total">) {
             Max $
             <input type="number" min={0} inputMode="numeric" value={max} onChange={(e) => setMax(e.target.value)} className="field-input mt-1 min-h-9! py-1.5!" />
           </label>
-          <button type="submit" className="h-9 rounded-md bg-ink px-3 text-sm font-semibold text-white hover:opacity-90">
+          <button type="submit" className="btn-dark h-9 rounded-md bg-ink px-3 text-sm font-semibold text-white hover:opacity-90">
             Go
           </button>
         </form>
@@ -178,7 +178,7 @@ export function MobileFilters({ facets, showCategories, total }: Props) {
           <FilterFields key={params.toString()} facets={facets} showCategories={showCategories} />
         </div>
         <div className="sticky bottom-0 border-t border-line bg-white p-4">
-          <button type="button" onClick={() => setOpen(false)} className="h-11 w-full rounded-md bg-ink font-semibold text-white">
+          <button type="button" onClick={() => setOpen(false)} className="btn-dark h-11 w-full rounded-md bg-ink font-semibold text-white">
             Show {total} result{total === 1 ? "" : "s"}
           </button>
         </div>

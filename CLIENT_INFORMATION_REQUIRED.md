@@ -21,7 +21,7 @@ Everything on the demo site today (business name "Northline Building Supply", ad
 ### A2. Business identity
 - [ ] Legal business name and the trading name to show on the website
 - [ ] Logo files: vector (SVG, AI or EPS) preferred, otherwise high-resolution PNG with transparent background; light and dark versions if you have them
-- [ ] Brand guidelines if any (the approved colours #111827, #F5B82E, #FFFFFF, #F3F4F6 and #9CA3AF are already applied)
+- [ ] Brand guidelines if any (already applied: the reference dark theme — #1D211C, #262B24, #32382F, #F3F1E9, #B2B7AA, #40463C, #CDD7BD — with the approved #F5B82E yellow accent)
 - [ ] Business number / HST registration number (for receipts and invoices)
 
 ### A3. Contact details and locations

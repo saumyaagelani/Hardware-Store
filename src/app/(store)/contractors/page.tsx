@@ -28,7 +28,7 @@ export default async function ContractorsPage() {
   const pitch = getDb().content.contractorPitch;
   return (
     <>
-      <section className="bg-ink text-white">
+      <section className="bg-surface text-white">
         <div className="container-page py-6">
           <Breadcrumbs items={[{ label: "Contractor Program" }]} />
         </div>

@@ -10,7 +10,7 @@ const perks = [
 
 export function ContractorBand({ pitch }: { pitch: string }) {
   return (
-    <section className="bg-ink text-white">
+    <section className="bg-surface text-white">
       <div className="container-page grid grid-cols-1 gap-12 py-14 lg:grid-cols-[1fr_1.1fr] lg:py-20">
         <div>
           <p className="eyebrow text-gold!">For contractors & trade</p>

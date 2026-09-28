@@ -8,7 +8,7 @@ export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-gold text-ink hover:opacity-90 border border-gold",
-  dark: "bg-ink text-white hover:opacity-90 border border-ink",
+  dark: "btn-dark bg-ink text-white hover:opacity-90 border border-ink",
   outline: "bg-white text-ink border border-ink hover:bg-ink hover:text-white",
   "outline-light": "bg-transparent text-white border border-white/40 hover:border-white hover:bg-white/10",
   ghost: "bg-transparent text-ink border border-transparent hover:bg-mist",

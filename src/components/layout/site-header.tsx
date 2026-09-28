@@ -45,7 +45,7 @@ export async function SiteHeader() {
         Skip to content
       </a>
       <AnnouncementBar items={announcements} />
-      <div className="bg-ink text-white">
+      <div className="bg-page text-white">
         <div className="container-page flex h-16 items-center gap-3 sm:h-20 lg:h-24 lg:gap-10">
           <MobileNav categories={categories} user={headerUser} />
           <Logo tone="light" className="shrink-0" />

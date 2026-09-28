@@ -139,15 +139,23 @@ tests/
 
 Defined once in `src/app/globals.css` (`@theme`). The default Tailwind palette is disabled, so only these tokens can be used.
 
-| Token | Colour | Used for |
-| --- | --- | --- |
-| `ink` | `#111827` Primary dark | Header, navigation, hero, footer, dark buttons, headings |
-| `gold` | `#F5B82E` Gold accent | Primary buttons, highlights, sale flags |
-| `white` | `#FFFFFF` | Page and card backgrounds |
-| `mist` | `#F3F4F6` Light gray | Section backgrounds, image backdrops |
-| `muted` | `#9CA3AF` Muted gray | Small labels, placeholders |
+**Storefront: reference dark theme + client-approved accent.** The storefront layout adds the `theme-dark` class. That class remaps the light-theme utilities onto the reference palette in one place, so individual components need no per-file colour changes. The admin keeps the light theme.
 
-All backgrounds and brand surfaces use only these five. A few functional shades remain for readability: body text `#4B5563`, borders `#E5E7EB`, dividers on dark `#374151`, small gold text on white `#B7830F`, plus green/amber/red/blue/purple status colours for stock and order states.
+| Token | Colour | Role (reference variable) |
+| --- | --- | --- |
+| `page` / `ink` | `#1D211C` | Page background, header, nav, footer (`--bg`) |
+| `surface` | `#262B24` | Cards, panels, menus, cart drawer, hero panel (`--surface`) |
+| `surface-2` | `#32382F` | Raised panels, hover states, top strip (`--surface2`) |
+| `cream` | `#F3F1E9` | Primary text (`--text`) |
+| `stone` | `#B2B7AA` | Secondary / muted text (`--muted`) |
+| `edge` / `ink-line` | `#40463C` | Borders and dividers (`--line`) |
+| `sage` | `#CDD7BD` | Pale sage button treatment (the "dark" button variant) (`--button`) |
+| `inverse` | `#20291C` | Text on sage and light cards (`--inverse`) |
+| `gold` | `#F5B82E` | **Brand accent**, client-approved. Replaces the reference's `#D6B47D`. Used for primary buttons, highlighted headline words, eyebrows, active nav, contractor-pricing link, sale prices and badges, selected options, accent icons |
+
+**Admin (light theme):** white `#FFFFFF`, light gray `#F3F4F6`, muted gray `#9CA3AF`, body text `#4B5563`, borders `#E5E7EB`, with the dark `#1D211C` sidebar and the same `#F5B82E` accent. `gold-dark` `#B7830F` is kept only for small gold text on white in the admin, where the bright gold is unreadable; the storefront uses `#F5B82E` instead.
+
+Status colours (stock, order and quote states, errors) have lighter tints on the dark storefront so they stay readable.
 
 ---
 
@@ -238,6 +246,13 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-09-28 — Reference dark theme with the approved yellow accent
+- The whole storefront (shop, product pages, cart, checkout, quotes, contractor pages and customer account) now uses the reference website's dark olive colours: page #1D211C, cards #262B24, raised panels #32382F, text #F3F1E9, secondary text #B2B7AA, lines #40463C, and pale sage buttons #CDD7BD.
+- The only accent colour is the client-approved yellow #F5B82E, replacing the reference's #D6B47D. It is used for highlighted words, active menu items, the contractor-pricing link, sale prices, selected options and main buttons.
+- The cart pop-out, the full category menu, the mobile menu and all forms are dark too. Error and stock messages use lighter shades so they are readable.
+- The admin area keeps its light layout for easy day-to-day use, with the new dark olive sidebar.
+- Layout, text, pictures and features are unchanged.
 
 ### 2026-09-28 — Dark header and hero (reference-style theme)
 - The top of every page now uses the dark style the client asked for, based on the reference design. It has a dark header with a white logo, a large dark search box, "Get a free quote", account and cart (with a count bubble).

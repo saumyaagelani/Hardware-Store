@@ -11,19 +11,29 @@
   --color-*: initial;
 
   /* Approved brand palette */
-  --color-ink: #111827; /* Primary dark */
-  --color-gold: #f5b82e; /* Accent */
+  --color-ink: #1d211c; /* Primary dark (reference --bg) */
+  --color-gold: #f5b82e; /* Brand accent (client-approved; replaces the reference #d6b47d) */
   --color-white: #ffffff;
-  --color-mist: #f3f4f6; /* Light gray */
-  --color-muted: #9ca3af; /* Muted gray */
+  --color-mist: #f3f4f6; /* Light gray (admin / light surfaces) */
+  --color-muted: #9ca3af; /* Muted gray (admin / light surfaces) */
+
+  /* Reference dark theme (storefront) — approved client palette */
+  --color-page: #1d211c; /* --bg */
+  --color-surface: #262b24; /* --surface: cards, panels, menus */
+  --color-surface-2: #32382f; /* --surface2: raised panels, hover, strips */
+  --color-cream: #f3f1e9; /* --text */
+  --color-stone: #b2b7aa; /* --muted */
+  --color-edge: #40463c; /* --line */
+  --color-sage: #cdd7bd; /* --button: pale sage button treatment */
+  --color-inverse: #20291c; /* --inverse: text on sage / light surfaces */
 
   /*
    * Functional shades — NOT used for backgrounds or brand surfaces.
-   * body/line: readable body text and hairline borders (muted gray is too
-   * light for paragraph text). gold-dark: small gold text on white, where the
-   * brand gold would be unreadable. ink-line: dividers on dark backgrounds.
+   * body/line: readable body text and hairline borders on light surfaces.
+   * gold-dark: small gold text on WHITE only (admin); the dark storefront
+   * uses the brand gold instead. ink-line: dividers on dark backgrounds.
    */
-  --color-ink-line: #374151;
+  --color-ink-line: #40463c;
   --color-body: #4b5563;
   --color-line: #e5e7eb;
   --color-gold-dark: #b7830f;
@@ -53,9 +63,9 @@
 
   /* Elevation — restrained */
   --shadow-*: initial;
-  --shadow-card: 0 1px 2px rgb(17 24 39 / 0.06), 0 1px 3px rgb(17 24 39 / 0.04);
-  --shadow-raised: 0 10px 30px -12px rgb(17 24 39 / 0.25);
-  --shadow-menu: 0 18px 40px -16px rgb(17 24 39 / 0.35);
+  --shadow-card: 0 1px 2px rgb(29 33 28 / 0.06), 0 1px 3px rgb(29 33 28 / 0.04);
+  --shadow-raised: 0 10px 30px -12px rgb(0 0 0 / 0.35);
+  --shadow-menu: 0 18px 40px -16px rgb(0 0 0 / 0.5);
 
   --breakpoint-xs: 26rem;
 }
@@ -164,7 +174,7 @@
   select.field-input {
     appearance: none;
     padding-right: 2.25rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23111827' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%231d211c' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
   }
@@ -228,6 +238,163 @@
     100% {
       background-position: 0 50%;
     }
+  }
+}
+
+/*
+ * ------------------------------------------------------------------
+ * STOREFRONT DARK THEME (reference palette + #F5B82E accent)
+ * Applied by the `theme-dark` class on the storefront layout; the admin
+ * keeps the light theme. Remaps the light-theme utilities centrally so
+ * components don't need per-file colour changes. `:where()` keeps the
+ * specificity equal to the utility being remapped, so hover/focus
+ * variants still win.
+ * ------------------------------------------------------------------
+ */
+.theme-dark {
+  background-color: var(--color-page);
+  color: var(--color-cream);
+  color-scheme: dark;
+}
+html:has(.theme-dark),
+html:has(.theme-dark) body {
+  background-color: var(--color-page);
+}
+
+@layer utilities {
+  /* Surfaces */
+  :where(.theme-dark) .bg-white {
+    background-color: var(--color-surface);
+  }
+  :where(.theme-dark) .bg-mist {
+    background-color: var(--color-page);
+  }
+  :where(.theme-dark) .odd\:bg-mist:nth-child(odd),
+  :where(.theme-dark) .hover\:bg-mist:hover {
+    background-color: var(--color-surface-2);
+  }
+  :where(.theme-dark) .bg-ink {
+    background-color: var(--color-surface-2);
+  }
+  :where(.theme-dark) .hover\:bg-ink:hover {
+    background-color: var(--color-surface-2);
+  }
+  :where(.theme-dark) .bg-line {
+    background-color: var(--color-edge);
+  }
+
+  /* Text */
+  :where(.theme-dark) .text-ink,
+  :where(.theme-dark) .text-white,
+  :where(.theme-dark) .hover\:text-ink:hover,
+  :where(.theme-dark) .hover\:text-white:hover,
+  :where(.theme-dark) .group:hover .group-hover\:text-ink {
+    color: var(--color-cream);
+  }
+  :where(.theme-dark) .text-body,
+  :where(.theme-dark) .text-muted {
+    color: var(--color-stone);
+  }
+  :where(.theme-dark) .placeholder\:text-muted::placeholder {
+    color: var(--color-stone);
+  }
+  :where(.theme-dark) .text-gold-dark,
+  :where(.theme-dark) .hover\:text-gold-dark:hover,
+  :where(.theme-dark) .eyebrow {
+    color: var(--color-gold);
+  }
+
+  /* Borders */
+  :where(.theme-dark) .border-line,
+  :where(.theme-dark) .hover\:border-line:hover,
+  :where(.theme-dark) .divide-line > :not(:last-child) {
+    border-color: var(--color-edge);
+  }
+  :where(.theme-dark) .ring-line {
+    --tw-ring-color: var(--color-edge);
+  }
+  :where(.theme-dark) .border-ink,
+  :where(.theme-dark) .hover\:border-ink:hover {
+    border-color: var(--color-stone);
+  }
+  /* Selected / active state (dark fill + dark border) → brand accent */
+  :where(.theme-dark) .bg-ink.border-ink {
+    border-color: var(--color-gold);
+  }
+
+  /* Dark text stays dark on gold and on the sage/cream light treatments */
+  :where(.theme-dark) .bg-gold.text-ink,
+  :where(.theme-dark) .bg-gold .text-ink,
+  :where(.theme-dark) .bg-gold .text-body,
+  :where(.theme-dark) .hover\:bg-gold.hover\:text-ink:hover {
+    color: var(--color-ink);
+  }
+
+  /* Dark button variant → reference pale-sage button (doubled class beats the remaps above) */
+  :where(.theme-dark) .btn-dark.btn-dark {
+    background-color: var(--color-sage);
+    border-color: var(--color-sage);
+    color: var(--color-inverse);
+  }
+
+  /*
+   * Status colours: the light-theme values are too dark on the olive
+   * background, so the storefront uses lighter tints for text and
+   * translucent tints for the "soft" chip backgrounds.
+   */
+  :where(.theme-dark) .text-success { color: #86c98e; }
+  :where(.theme-dark) .text-danger { color: #ef9a8f; }
+  :where(.theme-dark) .text-warning { color: #f0c27a; }
+  :where(.theme-dark) .text-info { color: #9db8f2; }
+  :where(.theme-dark) .text-special { color: #c7b0f3; }
+  :where(.theme-dark) .bg-success-soft { background-color: rgb(134 201 142 / 0.14); }
+  :where(.theme-dark) .bg-danger-soft { background-color: rgb(239 154 143 / 0.14); }
+  :where(.theme-dark) .bg-warning-soft { background-color: rgb(240 194 122 / 0.14); }
+  :where(.theme-dark) .bg-info-soft { background-color: rgb(157 184 242 / 0.14); }
+  :where(.theme-dark) .bg-special-soft { background-color: rgb(199 176 243 / 0.14); }
+
+  /* Sale prices are a promotional highlight → brand accent */
+  :where(.theme-dark) .price-sale.price-sale { color: var(--color-gold); }
+
+  /* Form controls */
+  :where(.theme-dark) .accent-ink {
+    accent-color: var(--color-gold);
+  }
+}
+
+@layer components {
+  :where(.theme-dark) .field-label {
+    color: var(--color-cream);
+  }
+  :where(.theme-dark) .field-input {
+    background-color: var(--color-page);
+    border-color: var(--color-edge);
+    color: var(--color-cream);
+  }
+  :where(.theme-dark) .field-input:hover {
+    border-color: var(--color-stone);
+  }
+  :where(.theme-dark) .field-input:focus {
+    border-color: var(--color-cream);
+  }
+  :where(.theme-dark) .field-input::placeholder {
+    color: var(--color-stone);
+  }
+  :where(.theme-dark) .field-input:disabled {
+    background-color: var(--color-surface);
+    color: var(--color-stone);
+  }
+  :where(.theme-dark) select.field-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23f3f1e9' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+  :where(.theme-dark) .field-hint,
+  :where(.theme-dark) .prose-store p,
+  :where(.theme-dark) .prose-store ul {
+    color: var(--color-stone);
+  }
+  :where(.theme-dark) .skeleton {
+    background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-surface-2) 37%, var(--color-surface) 63%);
+    background-size: 400% 100%;
   }
 }
 

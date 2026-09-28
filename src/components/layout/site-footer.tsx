@@ -35,7 +35,7 @@ function SocialIcon({ label, href, path }: { label: string; href: string; path: 
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto bg-ink text-white">
+    <footer className="mt-auto bg-page text-white">
       <div className="border-b border-ink-line">
         <div className="container-page flex flex-col items-start justify-between gap-6 py-10 lg:flex-row lg:items-center">
           <div>
