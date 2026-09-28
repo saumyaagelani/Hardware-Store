@@ -247,6 +247,16 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 
 Newest first. Every code change pushed to GitHub gets an entry here.
 
+### 2026-09-28 — Homepage banner size and alignment
+- The homepage banner is now much larger and fills most of the first screen on computers: about 750px tall on a laptop (1280px wide), 810px on a 1440px screen, and up to 900px on large screens.
+- On computers the banner is split evenly: text on the left half, picture on the right half. Both halves start and end at exactly the same line, so it reads as one block.
+- The headline is bigger and reads "Quality building supplies. **Better prices.**" (the last part in yellow). It adjusts smoothly to the screen size.
+- The text has more breathing room and is centred vertically. The description fits on about three lines, and the "Shop products" and "Get a free quote" buttons sit side by side.
+- Added "For homeowners & professionals — Canadian projects. Covered." with a divider at the bottom of the text panel, as in the reference. The small line beside "Your foundation for a better home" is now yellow.
+- The picture fills the whole right half. "A good home starts with a great foundation." sits near its top, and the "Explore vinyl flooring" card sits near its bottom with even margins.
+- On tablets and phones the text comes first and the picture follows below, with readable text and full-width buttons on phones. Nothing scrolls sideways.
+- Colours, header, menus and features are unchanged.
+
 ### 2026-09-28 — Reference dark theme with the approved yellow accent
 - The whole storefront (shop, product pages, cart, checkout, quotes, contractor pages and customer account) now uses the reference website's dark olive colours: page #1D211C, cards #262B24, raised panels #32382F, text #F3F1E9, secondary text #B2B7AA, lines #40463C, and pale sage buttons #CDD7BD.
 - The only accent colour is the client-approved yellow #F5B82E, replacing the reference's #D6B47D. It is used for highlighted words, active menu items, the contractor-pricing link, sale prices, selected options and main buttons.

@@ -5,7 +5,7 @@ import { buildUsers } from "./people";
 import { buildActivity } from "./activity";
 import { buildBanners, buildContent, buildSettings } from "./settings";
 
-export const DB_VERSION = 2;
+export const DB_VERSION = 3;
 
 /** Build a fresh demo database. Dates are relative to `now` so demos always look current. */
 export function createSeedDatabase(now = new Date()): Database {

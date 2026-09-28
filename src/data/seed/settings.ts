@@ -72,7 +72,7 @@ export function buildBanners(): Banner[] {
 export function buildContent(): SiteContent {
   return {
     heroEyebrow: "Your foundation for a better home",
-    heroTitle: "Quality materials for every project. Better prices.",
+    heroTitle: "Quality building supplies. Better prices.",
     heroBody:
       "Waterproof vinyl, interior doors and hardware, vanities and shower systems — with in-store pickup, local delivery and dedicated pricing for contractors.",
     aboutTitle: "Your local building supply partner",
