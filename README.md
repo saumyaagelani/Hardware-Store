@@ -4,6 +4,9 @@ A client-facing prototype for a hardware / building-materials store selling viny
 
 The prototype demonstrates the full customer, contractor and admin experience with realistic demo data. External production services (payments, email, file storage, database) are simulated behind clean interfaces so the codebase can move to production in Stage 2 without a rewrite.
 
+**Live demo:** https://northline-prototype.onrender.com (branch `claude/intelligent-edison-536z5s`, auto-deploys on every push)
+**Last updated:** 2026-09-28 — see the [Change log](#change-log) at the bottom.
+
 > **Placeholder notice:** "Northline Building Supply", the address, phone numbers, emails, hours, brand names, product specifications and policies are **fictional placeholders**. Product images are generated illustrations, not photographs. Replace them before launch (see [Where to change things](#where-to-change-things)).
 
 ---
@@ -132,6 +135,22 @@ tests/
 
 ---
 
+## Brand colours
+
+Defined once in `src/app/globals.css` (`@theme`). The default Tailwind palette is disabled, so only these tokens can be used.
+
+| Token | Colour | Used for |
+| --- | --- | --- |
+| `ink` | `#111827` Primary dark | Header, hero, footer, dark buttons, headings |
+| `gold` | `#F5B82E` Gold accent | Primary buttons, highlights, sale flags |
+| `white` | `#FFFFFF` | Page and card backgrounds |
+| `mist` | `#F3F4F6` Light gray | Section backgrounds, image backdrops |
+| `muted` | `#9CA3AF` Muted gray | Small labels, placeholders |
+
+All backgrounds and brand surfaces use only these five. A few functional shades remain for readability: body text `#4B5563`, borders `#E5E7EB`, dividers on dark `#374151`, small gold text on white `#B7830F`, plus green/amber/red/blue/purple status colours for stock and order states.
+
+---
+
 ## How key features work
 
 ### Contractor pricing
@@ -202,3 +221,32 @@ After editing seed files run `npm run demo:reset` (or use the toolbar) so the da
 - Admin permissions are basic (admin vs staff with section permissions).
 
 See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the Stage 2 checklist.
+
+---
+
+## Change log
+
+Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-09-28 — Brand colour clean-up
+- All backgrounds and brand surfaces now use only the five approved colours (#111827, #F5B82E, #FFFFFF, #F3F4F6, #9CA3AF).
+- Removed in-between shades: lighter dark `#1F2937` (hero right panel, cards), off-white `#F9FAFB`, pale gold tint.
+- Button hovers now fade slightly instead of switching to a different colour.
+- Added the Brand colours section, live demo link and this change log to the README.
+
+### 2026-09-27 — Online demo on Render
+- Added `render.yaml` so the site can be deployed from GitHub in one step (free plan, demo mode on).
+- The site detects its public web address automatically for links, sitemap and secure logins.
+- Live at https://northline-prototype.onrender.com.
+
+### 2026-09-23 — Tests, fixes and documentation
+- Added 48 unit tests and 26 end-to-end tests covering all seven required user journeys.
+- Fixed: mobile header was wider than the screen, admin dashboard overflowed on phones, filter checkboxes lagged after clicking.
+- Card name at checkout now defaults to the customer's name.
+- Added README, PRODUCTION_TODO.md and .env.example.
+
+### 2026-09-23 — First prototype
+- Storefront: homepage, 11 categories, search, filters, product pages, square-footage calculator, stock labels.
+- Cart, checkout (pickup/delivery, demo payments), free quote form with uploads, cart-to-quote.
+- Contractor application and approval with server-side contractor pricing.
+- Customer dashboard and full admin dashboard.
