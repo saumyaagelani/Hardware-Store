@@ -44,7 +44,7 @@ export function StaffManager({ staff, meId, canManage }: { staff: StaffRow[]; me
           </Button>
         ) : null}
       </div>
-      <ul className="grid gap-3 lg:grid-cols-2">
+      <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         {staff.map((s) => (
           <li key={s.id} className="rounded-lg border border-line bg-white p-5">
             <div className="flex items-start justify-between gap-3">

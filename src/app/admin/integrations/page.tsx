@@ -26,7 +26,7 @@ export default async function IntegrationsPage() {
   return (
     <>
       <AdminHeader title="Integrations" description="Status of production services. None are required for the prototype to run." />
-      <ul className="grid gap-3 lg:grid-cols-2">
+      <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         {items.map((i) => (
           <li key={i.name} className="flex gap-3 rounded-lg border border-line bg-white p-5">
             {i.ready ? <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-success" aria-hidden /> : <CircleDashed className="mt-0.5 h-5 w-5 shrink-0 text-muted" aria-hidden />}

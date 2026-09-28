@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { quickUpdateInventoryAction, quickUpdatePricingAction } from "@/app/actions/admin";
 import { statusFromQuantity, stockStatusOptions } from "@/lib/stock";
 import { cn } from "@/lib/cn";
+import { toDateInput } from "@/lib/format";
 
 function SaveButton({ pending, saved, dirty, onClick }: { pending: boolean; saved: boolean; dirty: boolean; onClick: () => void }) {
   return (
@@ -26,11 +27,11 @@ export function InventoryRow({ product }: { product: Pick<Product, "id" | "inven
   const router = useRouter();
   const [status, setStatus] = useState(product.inventory.status);
   const [qty, setQty] = useState(String(product.inventory.quantity));
-  const [restock, setRestock] = useState(product.inventory.restockDate?.slice(0, 10) ?? "");
+  const [restock, setRestock] = useState(toDateInput(product.inventory.restockDate));
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
-  const dirty = status !== product.inventory.status || Number(qty) !== product.inventory.quantity || restock !== (product.inventory.restockDate?.slice(0, 10) ?? "");
+  const dirty = status !== product.inventory.status || Number(qty) !== product.inventory.quantity || restock !== (toDateInput(product.inventory.restockDate));
 
   return (
     <>

@@ -73,7 +73,7 @@ export function AddressBook({ billing, delivery }: { billing?: Address; delivery
           </Button>
         </div>
         {delivery.length ? (
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {delivery.map((a, i) => (
               <AddressCard
                 key={`${a.line1}-${i}`}

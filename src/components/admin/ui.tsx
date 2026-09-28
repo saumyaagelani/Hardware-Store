@@ -23,7 +23,7 @@ export function AdminHeader({ title, description, actions, back }: { title: stri
 
 export function Table({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-x-auto rounded-lg border border-line bg-white", className)}>
+    <div className={cn("relative overflow-x-auto rounded-lg border border-line bg-white", className)}>
       <table className="w-full min-w-[640px] text-sm">{children}</table>
     </div>
   );

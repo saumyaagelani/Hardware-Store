@@ -12,7 +12,7 @@ export function QuoteSteps({ pitch }: { pitch: string }) {
   return (
     <section className="bg-mist">
       <div className="container-page py-14 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.6fr] lg:items-center">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.6fr] lg:items-center">
           <div>
             <p className="eyebrow">Free quote service</p>
             <h2 className="mt-3 text-3xl leading-tight font-extrabold text-ink sm:text-[2.5rem]">Tell us about your project. We&apos;ll price it for free.</h2>
@@ -26,7 +26,7 @@ export function QuoteSteps({ pitch }: { pitch: string }) {
               </ButtonLink>
             </div>
           </div>
-          <ol className="grid gap-4 sm:grid-cols-2">
+          <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {steps.map(({ icon: Icon, title, body }, i) => (
               <li key={title} className="relative rounded-lg border border-line bg-white p-6">
                 <span className="absolute top-5 right-5 font-display text-4xl font-extrabold text-mist">0{i + 1}</span>

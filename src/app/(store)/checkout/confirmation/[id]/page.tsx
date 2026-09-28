@@ -54,7 +54,7 @@ export default async function ConfirmationPage({ params }: PageProps<"/checkout/
           </div>
         ) : null}
 
-        <div className="mt-5 grid gap-5 md:grid-cols-2">
+        <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
           <div className="rounded-lg border border-line bg-white p-5">
             <h2 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
               {f.method === "pickup" ? <MapPin className="h-5 w-5 text-gold-dark" aria-hidden /> : <Truck className="h-5 w-5 text-gold-dark" aria-hidden />}

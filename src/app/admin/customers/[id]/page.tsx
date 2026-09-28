@@ -48,7 +48,7 @@ export default async function CustomerPage({ params }: PageProps<"/admin/custome
         <StatCard label="Quotes" value={quotes.length} />
         <StatCard label="Files" value={files.length} />
       </div>
-      <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_340px]">
         <div className="min-w-0 space-y-5">
           <Panel title="Orders" bodyClassName="p-0">
             {orders.length ? <OrdersList orders={orders} hrefBase="/admin/orders/by-number" /> : <p className="p-5 text-sm text-body">No orders.</p>}

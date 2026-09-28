@@ -6,7 +6,7 @@ import { ButtonLink } from "@/components/ui/button";
 export function Hero({ content }: { content: SiteContent }) {
   return (
     <section className="relative overflow-hidden bg-ink text-white">
-      <div className="container-page relative grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-20">
+      <div className="container-page relative grid grid-cols-1 items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-20">
         <div>
           <p className="eyebrow text-gold!">{content.heroEyebrow}</p>
           <h1 className="mt-4 max-w-xl text-[2.375rem] leading-[1.05] font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem]">{content.heroTitle}</h1>
@@ -19,7 +19,7 @@ export function Hero({ content }: { content: SiteContent }) {
               <FileText className="h-5 w-5" aria-hidden /> Get a Free Quote
             </ButtonLink>
           </div>
-          <ul className="mt-9 grid gap-3 text-sm text-white/80 sm:grid-cols-3">
+          <ul className="mt-9 grid grid-cols-1 gap-3 text-sm text-white/80 sm:grid-cols-3">
             {["In-store pickup, same day", "Local delivery zones", "Trade pricing for contractors"].map((t) => (
               <li key={t} className="flex items-center gap-2">
                 <BadgeCheck className="h-4.5 w-4.5 shrink-0 text-gold" aria-hidden /> {t}

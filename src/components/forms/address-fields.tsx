@@ -46,7 +46,7 @@ export function AddressFields({
   const set = (key: keyof AddressValue) => (e: { target: { value: string } }) => onChange({ ...value, [key]: e.target.value });
   const err = (key: string) => errors[`${prefix}.${key}`];
   return (
-    <div className="grid gap-4 sm:grid-cols-6">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-6">
       <TextField containerClassName="sm:col-span-6" label="Street address" required autoComplete={`${prefix === "billing" ? "billing" : "shipping"} address-line1`} value={value.line1} onChange={set("line1")} error={err("line1")} />
       <TextField containerClassName="sm:col-span-6" label="Apartment, unit, suite" optional autoComplete={`${prefix === "billing" ? "billing" : "shipping"} address-line2`} value={value.line2} onChange={set("line2")} error={err("line2")} />
       <TextField containerClassName="sm:col-span-2" label="City" required autoComplete={`${prefix === "billing" ? "billing" : "shipping"} address-level2`} value={value.city} onChange={set("city")} error={err("city")} />

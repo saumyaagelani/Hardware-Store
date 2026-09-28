@@ -13,7 +13,7 @@ export default async function ContentPage() {
   return (
     <>
       <AdminHeader title="Website content" description="Editable homepage and marketing copy." />
-      <div className="grid gap-6 2xl:grid-cols-[1fr_340px]">
+      <div className="grid grid-cols-1 gap-6 2xl:grid-cols-[1fr_340px]">
         <ContentForm content={getDb().content} />
         <Panel title="Business details" className="h-fit">
           <dl className="space-y-2 text-sm">

@@ -7,7 +7,7 @@ export function FulfilmentSection({ settings }: { settings: StoreSettings }) {
   const pickup = settings.pickupLocations.filter((l) => l.active);
   const zones = settings.deliveryZones.filter((z) => z.active);
   return (
-    <div className="grid gap-5 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
       <div className="rounded-lg border border-line bg-white p-6 sm:p-8">
         <div className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-md bg-mist text-ink">

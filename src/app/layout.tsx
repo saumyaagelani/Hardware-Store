@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-CA" className={`${inter.variable} ${barlow.variable}`}>
+    <html lang="en-CA" data-scroll-behavior="smooth" className={`${inter.variable} ${barlow.variable}`}>
       <body className="min-h-screen antialiased">
         {children}
         <DemoToolbarServer />

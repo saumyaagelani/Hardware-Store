@@ -45,7 +45,7 @@ export function ProfileForm({
     >
       <section className="rounded-lg border border-line bg-white p-5 sm:p-6">
         <h2 className="mb-5 font-display text-lg font-bold text-ink">Personal information</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <TextField label="Full name" required value={f.fullName} onChange={set("fullName")} error={errors.fullName} autoComplete="name" />
           <TextField label="Phone" type="tel" required value={f.phone} onChange={set("phone")} error={errors.phone} autoComplete="tel" />
           <TextField containerClassName="sm:col-span-2" label="Email" value={email} disabled hint="Contact us to change the email on your account." />
@@ -53,7 +53,7 @@ export function ProfileForm({
       </section>
       <section className="rounded-lg border border-line bg-white p-5 sm:p-6">
         <h2 className="mb-5 font-display text-lg font-bold text-ink">Company information</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <TextField label="Company name" optional={!isContractor} required={isContractor} value={f.companyName} onChange={set("companyName")} autoComplete="organization" />
           <TextField label="HST / business number" optional value={f.hstNumber} onChange={set("hstNumber")} />
         </div>

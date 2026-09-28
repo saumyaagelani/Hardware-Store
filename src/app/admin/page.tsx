@@ -56,7 +56,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
         <StatCard label="Contractor applications" value={pendingApps.length} hint="Awaiting review" icon={<HardHat className="h-5 w-5" />} />
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.4fr_1fr]">
         <Panel title="Sales — last 14 days">
           <ul className="flex h-44 items-end gap-1.5" aria-label="Daily sales">
             {days.map((d) => (
@@ -99,7 +99,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
         </Panel>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Panel title="Recent orders" action={{ href: "/admin/orders", label: "All orders" }} bodyClassName="p-0">
           <ul className="divide-y divide-line">
             {db.orders.slice(0, 6).map((o) => (
@@ -138,7 +138,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
         </Panel>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Panel title="Stock alerts" action={{ href: "/admin/inventory?filter=alerts", label: "Inventory" }} bodyClassName="p-0">
           <ul className="divide-y divide-line">
             {stockAlerts.slice(0, 6).map((p) => {

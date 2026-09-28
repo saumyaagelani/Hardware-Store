@@ -37,7 +37,7 @@ export default async function QuotePage({ searchParams }: PageProps<"/quote">) {
     <div className="bg-mist">
       <div className="container-page py-6 lg:py-8">
         <Breadcrumbs items={[{ label: "Free Quote" }]} />
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_340px] lg:gap-10">
+        <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_340px] lg:gap-10">
           <div className="rounded-lg border border-line bg-white p-5 sm:p-8">
             <p className="eyebrow">Free quote</p>
             <h1 className="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">{fromCart ? "Request a quote for your cart" : "Tell us about your project"}</h1>

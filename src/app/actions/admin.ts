@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import type { ActionResult } from "@/lib/action-result";
 import type { ArtKind, Banner, OrderStatus, Product, QuoteStatus, StaffPermission, User } from "@/lib/types";
 import { fieldErrors, emailField, requiredText, addressSchema } from "@/lib/validation";
-import { slugify } from "@/lib/format";
+import { dateInputToEndOfDayISO, dateInputToISO, slugify } from "@/lib/format";
 import { getDb, mutate, newId } from "@/server/db";
 import { requireStaff } from "@/server/auth/session";
 import { hashPassword } from "@/server/auth/password";
@@ -145,14 +145,14 @@ export async function saveProductAction(id: string | null, input: ProductInput):
         contractor: d.pricing.contractor,
         visibility: d.pricing.visibility,
         unit: d.pricing.unit,
-        saleEndsAt: d.pricing.saleEndsAt ? new Date(d.pricing.saleEndsAt).toISOString() : undefined,
+        saleEndsAt: d.pricing.saleEndsAt ? dateInputToEndOfDayISO(d.pricing.saleEndsAt) : undefined,
       },
       inventory: {
         ...base.inventory,
         status: d.inventory.status,
         quantity: d.inventory.quantity,
         lowStockThreshold: d.inventory.lowStockThreshold,
-        restockDate: d.inventory.restockDate ? new Date(d.inventory.restockDate).toISOString() : undefined,
+        restockDate: d.inventory.restockDate ? dateInputToISO(d.inventory.restockDate) : undefined,
         leadTime: d.inventory.leadTime || undefined,
       },
       coverage: d.coveragePerUnit ? { type: "area", perUnit: d.coveragePerUnit, unitLabel: d.coverageUnitLabel || "box" } : undefined,
@@ -195,7 +195,7 @@ export async function quickUpdateInventoryAction(id: string, input: { status: Pr
     if (!p) return;
     p.inventory.quantity = parsed.data.quantity;
     p.inventory.status = parsed.data.status;
-    p.inventory.restockDate = parsed.data.restockDate ? new Date(parsed.data.restockDate).toISOString() : p.inventory.status === "out_of_stock" ? p.inventory.restockDate : undefined;
+    p.inventory.restockDate = parsed.data.restockDate ? dateInputToISO(parsed.data.restockDate) : p.inventory.status === "out_of_stock" ? p.inventory.restockDate : undefined;
     p.updatedAt = new Date().toISOString();
   });
   refresh();

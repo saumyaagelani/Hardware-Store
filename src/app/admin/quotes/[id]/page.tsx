@@ -40,7 +40,7 @@ export default async function AdminQuotePage({ params }: PageProps<"/admin/quote
         back={{ href: "/admin/quotes", label: "Quote requests" }}
         actions={<StatusBadge tone={quoteStatusMeta[quote.status].tone}>{quoteStatusMeta[quote.status].label}</StatusBadge>}
       />
-      <div className="grid gap-6 2xl:grid-cols-[1fr_320px]">
+      <div className="grid grid-cols-1 gap-6 2xl:grid-cols-[1fr_320px]">
         <div className="min-w-0 space-y-5">
           {quote.adminNotes ? <p className="rounded-md border border-gold bg-mist p-3 text-sm text-ink">Internal note: {quote.adminNotes}</p> : null}
           <QuoteDetailBody quote={quote} files={db.uploads.filter((u) => quote.fileIds.includes(u.id))} admin productSlugs={Object.fromEntries(db.products.map((p) => [p.id, p.slug]))} />

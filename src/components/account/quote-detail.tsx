@@ -18,7 +18,7 @@ export function QuoteDetailBody({ quote, files, admin = false, productSlugs = {}
     ["Source", quote.source === "cart" ? "Cart → quote" : quote.source === "product" ? "Product page" : "Quote form"],
   ];
   return (
-    <div className="grid gap-5 xl:grid-cols-[1fr_320px]">
+    <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1fr_320px]">
       <div className="space-y-5">
         {quote.status === "quoted" && quote.quotedAmount ? (
           <div className="flex flex-col gap-2 rounded-lg bg-ink p-5 text-white sm:flex-row sm:items-center sm:justify-between">
@@ -58,7 +58,7 @@ export function QuoteDetailBody({ quote, files, admin = false, productSlugs = {}
           </div>
         </Panel>
         <Panel title="Project details">
-          <dl className="grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+          <dl className="grid grid-cols-1 gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
             {rows
               .filter(([, v]) => v)
               .map(([k, v]) => (
@@ -77,7 +77,7 @@ export function QuoteDetailBody({ quote, files, admin = false, productSlugs = {}
         </Panel>
         <Panel title={`Files (${files.length})`}>
           {files.length ? (
-            <ul className="grid gap-2 sm:grid-cols-2">
+            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {files.map((f) => (
                 <li key={f.id}>
                   <a href={`/api/uploads/${f.id}`} className="flex items-center gap-3 rounded-md border border-line p-3 text-sm hover:border-ink">

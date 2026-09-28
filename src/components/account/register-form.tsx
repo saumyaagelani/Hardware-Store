@@ -53,7 +53,7 @@ export function RegisterForm({ initialEmail = "" }: { initialEmail?: string }) {
       ) : null}
       <fieldset className="space-y-4">
         <legend className="mb-4 font-display text-lg font-bold text-ink">Your details</legend>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <TextField label="Full name" required autoComplete="name" value={f.fullName} onChange={set("fullName")} error={errors.fullName} />
           <TextField label="Phone" type="tel" required autoComplete="tel" value={f.phone} onChange={set("phone")} error={errors.phone} />
           <TextField containerClassName="sm:col-span-2" label="Email" type="email" required autoComplete="email" value={f.email} onChange={set("email")} error={errors.email} />

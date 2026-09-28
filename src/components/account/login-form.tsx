@@ -62,7 +62,7 @@ export function LoginForm({ next, demoAccounts, demoPassword }: { next?: string;
           <p className="mt-0.5 text-xs text-body">
             Password for all: <code className="font-semibold text-ink">{demoPassword}</code> — click to fill.
           </p>
-          <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
+          <ul className="mt-3 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
             {demoAccounts.map((a) => (
               <li key={a.email}>
                 <button

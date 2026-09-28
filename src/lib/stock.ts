@@ -9,7 +9,7 @@ export interface StockDisplay {
 }
 
 const shortDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-CA", { month: "short", day: "numeric", timeZone: "UTC" });
+  new Date(iso).toLocaleDateString("en-CA", { month: "short", day: "numeric", timeZone: "America/Toronto" });
 
 /** Human-friendly stock indicator. */
 export function describeStock(inventory: ProductInventory): StockDisplay {

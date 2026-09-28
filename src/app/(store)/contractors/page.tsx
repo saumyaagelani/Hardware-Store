@@ -32,7 +32,7 @@ export default async function ContractorsPage() {
         <div className="container-page py-6">
           <Breadcrumbs items={[{ label: "Contractor Program" }]} />
         </div>
-        <div className="container-page grid gap-10 pb-14 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:pb-20">
+        <div className="container-page grid grid-cols-1 gap-10 pb-14 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:pb-20">
           <div>
             <p className="eyebrow text-gold!">Contractor & trade program</p>
             <h1 className="mt-3 text-4xl leading-tight font-extrabold sm:text-5xl">Trade pricing and service for the pros.</h1>
@@ -81,7 +81,7 @@ export default async function ContractorsPage() {
       </section>
       <section className="container-page py-14 lg:py-20">
         <h2 className="text-3xl font-extrabold text-ink">Why trade customers choose us</h2>
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map(({ icon: Icon, title, body }) => (
             <li key={title} className="rounded-lg border border-line p-6">
               <span className="flex h-11 w-11 items-center justify-center rounded-md bg-mist text-ink">
@@ -95,7 +95,7 @@ export default async function ContractorsPage() {
         <div className="mt-12 flex flex-col items-start justify-between gap-5 rounded-lg bg-mist p-6 sm:flex-row sm:items-center sm:p-8">
           <div>
             <p className="font-display text-xl font-bold text-ink">Who can apply?</p>
-            <ul className="mt-2 grid gap-1.5 text-sm text-body sm:grid-cols-2 sm:gap-x-8">
+            <ul className="mt-2 grid grid-cols-1 gap-1.5 text-sm text-body sm:grid-cols-2 sm:gap-x-8">
               {["General contractors & renovators", "Flooring, tile & bath installers", "Builders & developers", "Property managers & designers"].map((t) => (
                 <li key={t} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-success" aria-hidden /> {t}

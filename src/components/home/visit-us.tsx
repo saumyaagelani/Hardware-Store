@@ -5,7 +5,7 @@ import { MapPlaceholder } from "@/components/ui/map-placeholder";
 
 export function VisitUs() {
   return (
-    <div className="grid overflow-hidden rounded-lg border border-line bg-white lg:grid-cols-[1fr_1.3fr]">
+    <div className="grid grid-cols-1 overflow-hidden rounded-lg border border-line bg-white lg:grid-cols-[1fr_1.3fr]">
       <div className="p-6 sm:p-10">
         <p className="eyebrow">Visit the showroom</p>
         <h2 className="mt-3 text-3xl leading-tight font-extrabold text-ink">See it, touch it, take it home.</h2>

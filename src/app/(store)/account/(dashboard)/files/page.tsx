@@ -19,7 +19,7 @@ export default async function FilesPage() {
     <>
       <PageHeader title="Project files" description="Photos, plans and documents you've shared with us on quote requests." />
       {files.length ? (
-        <ul className="grid gap-3 md:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {files.map((f) => {
             const quote = f.quoteId ? quoteById.get(f.quoteId) : undefined;
             return (

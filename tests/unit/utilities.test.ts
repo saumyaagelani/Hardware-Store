@@ -5,6 +5,7 @@ import { describeStock, statusFromQuantity } from "@/lib/stock";
 import { contactSchema, normalizePostalCode, quoteSchema, registerSchema } from "@/lib/validation";
 import { luhnValid, tokenizeDemoCard } from "@/lib/demo-card";
 import { validateUploadClient } from "@/lib/uploads";
+import { dateInputToEndOfDayISO, dateInputToISO, formatDate, localDateInput, toDateInput } from "@/lib/format";
 
 describe("square-footage calculator", () => {
   it("adds waste allowance and rounds up to whole units", () => {
@@ -107,5 +108,24 @@ describe("demo payments & uploads", () => {
     expect(validateUploadClient({ name: "photo.JPG", size: 1000 })).toBeNull();
     expect(validateUploadClient({ name: "script.exe", size: 1000 })).toMatch(/supported/);
     expect(validateUploadClient({ name: "huge.png", size: 11 * 1024 * 1024 })).toMatch(/10 MB/);
+  });
+});
+
+describe("admin date inputs (store time zone)", () => {
+  it("stores a date-only value at noon UTC so it displays as the same day in Toronto", () => {
+    const iso = dateInputToISO("2026-10-05");
+    expect(iso).toBe("2026-10-05T12:00:00.000Z");
+    expect(toDateInput(iso)).toBe("2026-10-05");
+    expect(formatDate(iso, { dateStyle: "long" })).toContain("October 5");
+  });
+  it("ends a sale at the end of the chosen day in Toronto (summer and winter)", () => {
+    expect(dateInputToEndOfDayISO("2026-07-15")).toBe("2026-07-16T03:59:59.999Z"); // EDT, UTC-4
+    expect(dateInputToEndOfDayISO("2026-01-15")).toBe("2026-01-16T04:59:59.999Z"); // EST, UTC-5
+    expect(toDateInput(dateInputToEndOfDayISO("2026-07-15"))).toBe("2026-07-15");
+  });
+  it("round-trips empty and invalid values safely", () => {
+    expect(toDateInput(undefined)).toBe("");
+    expect(toDateInput("not-a-date")).toBe("");
+    expect(localDateInput(1)).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 });

@@ -48,7 +48,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="container-page grid grid-cols-1 gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Logo tone="light" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">{business.tagline} Serving homeowners and trade professionals with in-store pickup and local delivery.</p>

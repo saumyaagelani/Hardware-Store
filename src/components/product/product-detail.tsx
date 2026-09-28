@@ -88,7 +88,7 @@ export function ProductDetail({
   const savings = price.mode === "price" && price.kind === "sale" ? price.savingsPercent : undefined;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
       <Gallery images={product.images} colourOverride={colourOverride} />
 
       <div>

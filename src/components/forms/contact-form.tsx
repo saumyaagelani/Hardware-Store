@@ -30,7 +30,7 @@ export function ContactForm({ initial }: { initial: { name: string; email: strin
   return (
     <form
       noValidate
-      className="grid gap-4 sm:grid-cols-2"
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2"
       onSubmit={(e) => {
         e.preventDefault();
         start(async () => {

@@ -8,7 +8,7 @@ import { usePricedCart } from "./use-priced-cart";
 import { CartLineItem } from "./cart-line-item";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ButtonLink, buttonClass } from "@/components/ui/button";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, pluralize } from "@/lib/format";
 import { estimateDeliveryAction } from "@/app/actions/cart";
 import type { DeliveryEstimate } from "@/lib/cart";
 import { cn } from "@/lib/cn";
@@ -32,10 +32,10 @@ export function CartView() {
 
   const totals = snapshot?.totals;
   return (
-    <div className="grid gap-8 lg:grid-cols-[1fr_380px] lg:gap-10">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px] lg:gap-10">
       <div>
         <div className="flex items-center justify-between border-b border-line pb-3">
-          <p className="text-sm text-body">{lines.reduce((n, l) => n + l.quantity, 0)} items</p>
+          <p className="text-sm text-body">{pluralize(lines.reduce((n, l) => n + l.quantity, 0), "item")}</p>
           <button type="button" onClick={() => window.confirm("Remove all items from your cart?") && clear()} className="text-sm font-medium text-body hover:text-danger">
             Clear cart
           </button>

@@ -11,7 +11,7 @@ const perks = [
 export function ContractorBand({ pitch }: { pitch: string }) {
   return (
     <section className="bg-ink text-white">
-      <div className="container-page grid gap-12 py-14 lg:grid-cols-[1fr_1.1fr] lg:py-20">
+      <div className="container-page grid grid-cols-1 gap-12 py-14 lg:grid-cols-[1fr_1.1fr] lg:py-20">
         <div>
           <p className="eyebrow text-gold!">For contractors & trade</p>
           <h2 className="mt-3 text-3xl leading-tight font-extrabold sm:text-[2.5rem]">Built for the trade. Priced for the trade.</h2>
@@ -34,7 +34,7 @@ export function ContractorBand({ pitch }: { pitch: string }) {
             </ButtonLink>
           </div>
         </div>
-        <ul className="grid gap-4 sm:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {perks.map(({ icon: Icon, title, body }) => (
             <li key={title} className="rounded-lg border border-ink-line bg-ink p-6">
               <Icon className="h-7 w-7 text-gold" aria-hidden />

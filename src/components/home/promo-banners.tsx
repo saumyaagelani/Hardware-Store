@@ -13,7 +13,7 @@ export function PromoBanners({ banners }: { banners: Banner[] }) {
   if (!banners.length) return null;
   const [first, ...rest] = banners;
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <PromoCard banner={first} large />
       <div className="grid gap-4">
         {rest.slice(0, 2).map((b) => (

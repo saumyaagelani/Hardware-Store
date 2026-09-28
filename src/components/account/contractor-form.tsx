@@ -76,7 +76,7 @@ export function ContractorForm({ prefill, signedIn }: { prefill: ContractorPrefi
       <fieldset>
         <legend className="mb-1 font-display text-xl font-bold text-ink">1. Contact</legend>
         <p className="mb-5 text-sm text-body">The main person we&apos;ll work with on your account.</p>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <TextField label="Contact name" required autoComplete="name" value={f.contactName} onChange={set("contactName")} error={errors.contactName} />
           <TextField label="Phone" type="tel" required autoComplete="tel" value={f.phone} onChange={set("phone")} error={errors.phone} />
           <TextField containerClassName="sm:col-span-2" label="Email" type="email" required autoComplete="email" value={f.email} onChange={set("email")} error={errors.email} disabled={signedIn} hint={signedIn ? "Your signed-in account will be upgraded." : undefined} />
@@ -100,7 +100,7 @@ export function ContractorForm({ prefill, signedIn }: { prefill: ContractorPrefi
       <fieldset>
         <legend className="mb-1 font-display text-xl font-bold text-ink">2. Business</legend>
         <p className="mb-5 text-sm text-body">Used to verify your business. Details marked optional can be added later.</p>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <TextField containerClassName="sm:col-span-2" label="Company / business name" required autoComplete="organization" value={f.companyName} onChange={set("companyName")} error={errors.companyName} />
           <SelectField
             label="Business type"
@@ -126,7 +126,7 @@ export function ContractorForm({ prefill, signedIn }: { prefill: ContractorPrefi
         <fieldset>
           <legend className="mb-1 font-display text-xl font-bold text-ink">3. Account login</legend>
           <p className="mb-5 text-sm text-body">You&apos;ll use this to sign in and see contractor pricing once approved.</p>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <TextField label="Password" type="password" required autoComplete="new-password" value={f.password} onChange={set("password")} error={errors.password} hint="8+ characters with a letter and a number" />
             <TextField label="Confirm password" type="password" required autoComplete="new-password" value={f.confirmPassword} onChange={set("confirmPassword")} error={errors.confirmPassword} />
           </div>

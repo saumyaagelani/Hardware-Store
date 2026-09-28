@@ -74,7 +74,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
       id: "overview",
       label: "Overview",
       content: (
-        <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
           <div className="prose-store">
             <p>{product.description}</p>
           </div>
@@ -95,7 +95,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
       id: "specs",
       label: "Specifications",
       content: (
-        <dl className="grid max-w-3xl overflow-hidden rounded-lg border border-line sm:grid-cols-2">
+        <dl className="grid grid-cols-1 max-w-3xl overflow-hidden rounded-lg border border-line sm:grid-cols-2">
           {[
             ["SKU", product.sku],
             ["Brand", product.brand],
@@ -123,7 +123,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
       id: "documents",
       label: `Documents (${product.documents.length})`,
       content: product.documents.length ? (
-        <ul className="grid max-w-3xl gap-3 sm:grid-cols-2">
+        <ul className="grid grid-cols-1 max-w-3xl gap-3 sm:grid-cols-2">
           {product.documents.map((d) => (
             <li key={d.id}>
               <a href={d.url} target="_blank" rel="noopener" className="flex items-center gap-3 rounded-lg border border-line p-4 hover:border-ink">

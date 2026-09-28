@@ -10,7 +10,7 @@ const paymentLabel = { card: "Credit card", apple_pay: "Apple Pay", google_pay: 
 export function OrderDetailBody({ order, admin = false }: { order: Order; admin?: boolean }) {
   const f = order.fulfilment;
   return (
-    <div className="grid gap-5 xl:grid-cols-[1fr_320px]">
+    <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1fr_320px]">
       <div className="space-y-5">
         <Panel title="Items" bodyClassName="p-0">
           <ul className="divide-y divide-line">
@@ -47,7 +47,7 @@ export function OrderDetailBody({ order, admin = false }: { order: Order; admin?
             </div>
           </dl>
         </Panel>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <Panel title={f.method === "pickup" ? "Pickup" : "Delivery"}>
             {f.method === "pickup" ? (
               <div className="text-sm text-body">
@@ -84,7 +84,7 @@ export function OrderDetailBody({ order, admin = false }: { order: Order; admin?
         </div>
         {admin ? (
           <Panel title="Customer">
-            <div className="grid gap-4 text-sm sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
               <div>
                 <p className="font-semibold text-ink">{order.customer.fullName}</p>
                 {order.customer.companyName ? <p className="text-body">{order.customer.companyName}</p> : null}

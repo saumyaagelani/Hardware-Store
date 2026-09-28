@@ -25,7 +25,7 @@ export default async function AdminOrderPage({ params }: PageProps<"/admin/order
         back={{ href: "/admin/orders", label: "Orders" }}
         actions={<StatusBadge tone={orderStatusMeta[order.status].tone}>{orderStatusMeta[order.status].label}</StatusBadge>}
       />
-      <div className="grid gap-6 2xl:grid-cols-[1fr_320px]">
+      <div className="grid grid-cols-1 gap-6 2xl:grid-cols-[1fr_320px]">
         <OrderDetailBody order={order} admin />
         <Panel title="Update order" className="h-fit">
           <OrderStatusControl orderId={order.id} status={order.status} feeToBeConfirmed={order.fulfilment.method === "delivery" && order.fulfilment.feeToBeConfirmed} />

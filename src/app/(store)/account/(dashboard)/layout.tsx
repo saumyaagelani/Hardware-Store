@@ -10,7 +10,7 @@ export default async function AccountLayout({ children }: { children: React.Reac
   const user = await requireUser("/account");
   return (
     <div className="bg-mist">
-      <div className="container-page grid gap-6 py-6 lg:grid-cols-[260px_1fr] lg:gap-10 lg:py-10">
+      <div className="container-page grid grid-cols-1 gap-6 py-6 lg:grid-cols-[260px_1fr] lg:gap-10 lg:py-10">
         <aside className="h-fit space-y-4 lg:sticky lg:top-6">
           <div className="flex items-center gap-3 rounded-lg border border-line bg-white p-4">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ink font-display font-bold text-gold">{initials(user.fullName)}</span>

@@ -19,7 +19,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/account/lo
 
   return (
     <div className="bg-mist">
-      <div className="container-page grid max-w-5xl gap-6 py-10 lg:grid-cols-[1.1fr_1fr] lg:py-16">
+      <div className="container-page grid grid-cols-1 max-w-5xl gap-6 py-10 lg:grid-cols-[1.1fr_1fr] lg:py-16">
         <div className="rounded-lg border border-line bg-white p-6 sm:p-10">
           <h1 className="text-3xl font-extrabold text-ink">Sign in</h1>
           <p className="mt-1 mb-6 text-body">Access your orders, quotes and saved addresses.</p>

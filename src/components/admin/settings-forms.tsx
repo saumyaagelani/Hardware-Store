@@ -99,7 +99,7 @@ export function DeliverySettingsForm({ zones, oversizedUnitThreshold, deliveryNo
         <div className="space-y-4">
           {list.map((z, i) => (
             <div key={i} className="rounded-md border border-line p-4">
-              <div className="grid gap-3 md:grid-cols-6">
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-6">
                 <TextField containerClassName="md:col-span-2" label="Zone name" value={z.name} onChange={(e) => upd(i, { name: e.target.value })} error={errors[`zones.${i}.name`]} />
                 <TextField containerClassName="md:col-span-2" label="Postal prefixes" value={z.postalPrefixes} onChange={(e) => upd(i, { postalPrefixes: e.target.value.toUpperCase() })} hint="Comma separated" error={errors[`zones.${i}.postalPrefixes`] ?? Object.entries(errors).find(([k]) => k.startsWith(`zones.${i}.postalPrefixes.`))?.[1]} />
                 <TextField label="Fee ($)" type="number" min={0} value={z.fee} onChange={(e) => upd(i, { fee: e.target.value })} />
@@ -126,7 +126,7 @@ export function DeliverySettingsForm({ zones, oversizedUnitThreshold, deliveryNo
         </div>
       </Card>
       <Card title="Large orders, tax & notes">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <TextField label="Oversized unit threshold" type="number" min={0} value={threshold} onChange={(e) => setThreshold(e.target.value)} hint="More oversized units than this → “Delivery fee to be confirmed”" />
           <TextField label="Sales tax rate (%)" type="number" min={0} max={30} step="0.01" value={tax} onChange={(e) => setTax(e.target.value)} />
           <TextField label="Tax label" value={label} onChange={(e) => setLabel(e.target.value)} error={errors.taxLabel} />
@@ -165,7 +165,7 @@ export function PickupSettingsForm({ locations }: { locations: PickupLocation[] 
             ) : null
           }
         >
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <TextField label="Location name" value={l.name} onChange={(e) => upd(i, { name: e.target.value })} error={errors[`${i}.name`]} />
             <TextField label="Estimated readiness" value={l.readyTime} onChange={(e) => upd(i, { readyTime: e.target.value })} hint="e.g. Within 2 business hours" />
             <TextField containerClassName="md:col-span-2" label="Pickup hours" value={l.hours} onChange={(e) => upd(i, { hours: e.target.value })} />
@@ -206,7 +206,7 @@ export function BannerEditor({ banner }: { banner?: Banner }) {
       }}
       className={cn("rounded-lg border bg-white p-5", b.active ? "border-line" : "border-dashed border-muted opacity-80")}
     >
-      <div className="grid gap-3 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
         <SelectField
           label="Placement"
           value={b.placement}
@@ -314,7 +314,7 @@ export function EmailSettingsForm({ templates, adminEmail, labels }: { templates
     >
       <Card title="Notification settings">
         <TextField label="Admin notification email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} error={errors.adminNotificationEmail} containerClassName="max-w-md" hint="New orders, quotes, applications and messages are sent here." />
-        <ul className="mt-6 grid gap-2 md:grid-cols-2">
+        <ul className="mt-6 grid grid-cols-1 gap-2 md:grid-cols-2">
           {(Object.keys(t) as EmailTemplate[]).map((key) => (
             <li key={key} className="rounded-md border border-line p-3">
               <Checkbox label={labels[key].label} description={`To: ${labels[key].audience}`} checked={t[key]} onChange={(e) => setT({ ...t, [key]: e.target.checked })} />

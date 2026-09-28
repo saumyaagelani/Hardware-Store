@@ -6,7 +6,7 @@ import { useEffect, useState, useTransition } from "react";
 import { AlertCircle, CalendarDays, CreditCard, Landmark, Lock, PackageCheck, ShieldCheck, Smartphone, Truck } from "lucide-react";
 import type { Address, PaymentMethod, PickupLocation } from "@/lib/types";
 import type { DeliveryEstimate } from "@/lib/cart";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, localDateInput } from "@/lib/format";
 import { tokenizeDemoCard, formatCardNumber, formatExpiry, detectBrand, type CardInput } from "@/lib/demo-card";
 import { track } from "@/lib/analytics";
 import { estimateDeliveryAction } from "@/app/actions/cart";
@@ -50,11 +50,7 @@ function Step({ n, title, children, aside }: { n: number; title: string; childre
   );
 }
 
-function tomorrowISO() {
-  const d = new Date();
-  d.setDate(d.getDate() + 1);
-  return d.toISOString().slice(0, 10);
-}
+const tomorrowISO = () => localDateInput(1);
 
 export function CheckoutForm({
   user,
@@ -176,7 +172,7 @@ export function CheckoutForm({
         e.preventDefault();
         submit();
       }}
-      className="grid gap-8 lg:grid-cols-[1fr_400px] lg:gap-10"
+      className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_400px] lg:gap-10"
     >
       <div className="space-y-5">
         {formError ? (
@@ -200,7 +196,7 @@ export function CheckoutForm({
           }
         >
           {!user ? <p className="-mt-2 mb-4 text-sm text-body">Checking out as a guest — no account needed. You can create one after your order.</p> : null}
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <TextField label="Email" type="email" required autoComplete="email" value={contact.email} onChange={(e) => setContact({ ...contact, email: e.target.value })} error={err("contact.email")} containerClassName="sm:col-span-2" hint="We'll send your order confirmation here." />
             <TextField label="Full name" required autoComplete="name" value={contact.fullName} onChange={(e) => setContact({ ...contact, fullName: e.target.value })} error={err("contact.fullName")} />
             <TextField label="Phone" type="tel" required autoComplete="tel" value={contact.phone} onChange={(e) => setContact({ ...contact, phone: e.target.value })} error={err("contact.phone")} />
@@ -270,7 +266,7 @@ export function CheckoutForm({
               ) : (
                 <p className="text-sm text-body">Enter your postal code to see the delivery fee for your area.</p>
               )}
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <TextField
                   label="Preferred delivery date"
                   optional
@@ -326,7 +322,7 @@ export function CheckoutForm({
             ]}
           />
           {payment === "card" ? (
-            <div className="mt-5 grid gap-4 sm:grid-cols-4">
+            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-4">
               <TextField
                 containerClassName="sm:col-span-4"
                 label="Card number"

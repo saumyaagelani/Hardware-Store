@@ -207,8 +207,8 @@ After editing seed files run `npm run demo:reset` (or use the toolbar) so the da
 
 ## Testing & QA status
 
-- **Unit (Vitest, 48 tests):** pricing visibility and contractor authorisation, sale behaviour, variant adjustments, browser-safe product views (no contractor-price leakage), cart and delivery calculations, tax, square-footage/waste calculator, quote references, stock states, validation, demo card tokenisation, upload rules, seed integrity.
-- **End-to-end (Playwright, 26 tests):** journeys A–G (guest checkout incl. declined card, e-Transfer pickup, free quote with upload + rejected file type, cart-to-quote, registration + dashboard, contractor application → admin approval → contractor pricing, rejected contractor, admin price/stock edit, hidden price, admin quote status → customer view, admin route protection, staff permission enforcement), console-error checks on key routes, filters, empty states, mobile navigation, and horizontal-overflow checks at 375/390/430/768/1024/1280/1440 px.
+- **Unit (Vitest, 51 tests):** pricing visibility and contractor authorisation, sale behaviour, variant adjustments, browser-safe product views (no contractor-price leakage), cart and delivery calculations, tax, square-footage/waste calculator, quote references, stock states, validation, demo card tokenisation, upload rules, seed integrity, admin date handling in the store's time zone.
+- **End-to-end (Playwright, 44 tests):** journeys A–G (guest checkout incl. declined card, e-Transfer pickup, free quote with upload + rejected file type, cart-to-quote, registration + dashboard, contractor application → admin approval → contractor pricing, rejected contractor, admin price/stock edit, hidden price, admin quote status → customer view, admin route protection, staff permission enforcement), console-error checks on key routes, filters, empty states, mobile navigation, and horizontal-overflow checks at 375/390/430/768/1024/1280/1440 px. A Stage 1 regression suite (`tests/e2e/regression.spec.ts`) adds a **contractor-price leak matrix** that scans the raw page payload for guests, regular customers, pending and rejected contractors and staff (plus an approved-contractor positive control), product variations, the square-footage calculator, the cart delivery checker, product → quote, upload size/content validation, admin inventory quick-edit, admin order status update, contractor rejection, the demo persona switcher, and overflow checks on account, cart-with-items and admin pages at every width.
 
 ## Prototype limitations
 
@@ -227,6 +227,18 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the Stage 2 checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-09-28 — Stage 1 audit and stabilisation
+- Checked every page as a guest, customer, pending, rejected and approved contractor, staff member and administrator, looking for errors and layout problems.
+- Fixed: on phones, the customer account pages, the "request a quote for this product" page and the admin media list were wider than the screen and could be dragged sideways. They now fit.
+- Fixed: on phones, the admin pricing table stretched the whole page. Tables now scroll inside their own box, as intended.
+- Fixed: restock and sale-end dates entered in the admin showed one day early on the website. Dates now show exactly as entered, and a sale runs until the end of the chosen day (Toronto time).
+- Fixed: late in the evening, the checkout's "preferred delivery date" could skip tomorrow.
+- Fixed: the cart said "1 items". It now says "1 item".
+- The browser tab now shows the store's logo instead of the default framework icon.
+- Removed an unused pop-up notification component and silenced a framework warning about smooth scrolling.
+- Added 18 automated regression tests, including a check that contractor prices never reach guests, regular customers, or pending or rejected contractors. There are now 44 end-to-end tests and 51 unit tests, and all pass.
+- No redesign: pages, user journeys, demo accounts and sample data are unchanged.
 
 ### 2026-09-28 — Website features guide (PDF)
 - Added `docs/Website-Features-Guide.pdf`, a 12-page PDF version of the features guide with clickable links, ready to email or share.

@@ -12,6 +12,7 @@ import { Checkbox, SelectField, TextField, TextareaField } from "@/components/ui
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/product/price";
 import { cn } from "@/lib/cn";
+import { toDateInput } from "@/lib/format";
 
 type Draft = Omit<ProductInput, "pricing" | "inventory"> & {
   pricing: { retail: string; sale: string; contractor: string; visibility: Product["pricing"]["visibility"]; unit: Product["pricing"]["unit"]; saleEndsAt: string };
@@ -21,7 +22,6 @@ type Draft = Omit<ProductInput, "pricing" | "inventory"> & {
 };
 
 const numOrNull = (v: string) => (v.trim() === "" ? null : Number(v));
-const dateInput = (iso?: string) => (iso ? iso.slice(0, 10) : "");
 
 function toDraft(p: Product | null): Draft {
   return {
@@ -40,13 +40,13 @@ function toDraft(p: Product | null): Draft {
       contractor: p?.pricing.contractor?.toString() ?? "",
       visibility: p?.pricing.visibility ?? "public",
       unit: p?.pricing.unit ?? "each",
-      saleEndsAt: dateInput(p?.pricing.saleEndsAt),
+      saleEndsAt: toDateInput(p?.pricing.saleEndsAt),
     },
     inventory: {
       status: p?.inventory.status ?? "in_stock",
       quantity: String(p?.inventory.quantity ?? 0),
       lowStockThreshold: String(p?.inventory.lowStockThreshold ?? 10),
-      restockDate: dateInput(p?.inventory.restockDate),
+      restockDate: toDateInput(p?.inventory.restockDate),
       leadTime: p?.inventory.leadTime ?? "",
     },
     coverage: p?.coverage?.perUnit?.toString() ?? "",
@@ -153,7 +153,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
         e.preventDefault();
         save();
       }}
-      className="grid gap-6 xl:grid-cols-[1fr_320px]"
+      className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_320px]"
     >
       <div className="min-w-0 space-y-6">
         {message ? (
@@ -163,7 +163,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
         ) : null}
 
         <Card title="General" id="general">
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <TextField containerClassName="sm:col-span-2" label="Product name" required value={d.name} onChange={(e) => set("name", e.target.value)} error={errors.name} />
             <TextField label="SKU / product code" required value={d.sku} onChange={(e) => set("sku", e.target.value)} error={errors.sku} />
             <TextField label="Brand / manufacturer" required value={d.brand} onChange={(e) => set("brand", e.target.value)} error={errors.brand} />
@@ -185,7 +185,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
         </Card>
 
         <Card title="Pricing" id="pricing" description="Contractor pricing is only shown to approved contractor accounts.">
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <TextField label="Retail price ($)" type="number" min={0} step="0.01" value={d.pricing.retail} onChange={(e) => setPricing("retail", e.target.value)} error={errors["pricing.retail"]} hint="Blank = no fixed price (Request a Quote)" />
             <TextField label="Sale price ($)" optional type="number" min={0} step="0.01" value={d.pricing.sale} onChange={(e) => setPricing("sale", e.target.value)} error={errors["pricing.sale"]} />
             <TextField label="Contractor price ($)" optional type="number" min={0} step="0.01" value={d.pricing.contractor} onChange={(e) => setPricing("contractor", e.target.value)} error={errors["pricing.contractor"]} />
@@ -214,7 +214,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
             />
             <TextField label="Sale ends" optional type="date" value={d.pricing.saleEndsAt} onChange={(e) => setPricing("saleEndsAt", e.target.value)} />
           </div>
-          <div className="mt-5 grid gap-3 rounded-md bg-mist p-4 sm:grid-cols-3">
+          <div className="mt-5 grid grid-cols-1 gap-3 rounded-md bg-mist p-4 sm:grid-cols-3">
             {(
               [
                 ["Guests & retail customers", pricingPreview.guest],
@@ -231,7 +231,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
         </Card>
 
         <Card title="Inventory" id="inventory" description="Local stock data. Architecture is ready for a POS / inventory integration later.">
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <SelectField label="Stock status" value={d.inventory.status} onChange={(e) => setInventory("status", e.target.value)} options={stockStatusOptions} />
             <TextField
               label="Quantity on hand"
@@ -253,7 +253,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
         </Card>
 
         <Card title="Specifications & measurements" id="specs">
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {(["colour", "finish", "material", "dimensions", "thickness"] as const).map((k) => (
               <TextField key={k} label={k.charAt(0).toUpperCase() + k.slice(1)} optional value={d.attributes?.[k] ?? ""} onChange={(e) => set("attributes", { ...d.attributes, [k]: e.target.value })} />
             ))}
@@ -275,7 +275,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
               <Plus className="h-4 w-4" aria-hidden /> Add specification
             </button>
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <TextareaField label="Installation information" optional rows={4} value={d.installation ?? ""} onChange={(e) => set("installation", e.target.value)} />
             <TextareaField label="Warranty information" optional rows={4} value={d.warranty ?? ""} onChange={(e) => set("warranty", e.target.value)} />
           </div>
@@ -304,7 +304,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
           {errors.documents ? <p className="field-error mb-2">{errors.documents}</p> : null}
           <div className="space-y-2">
             {(d.documents ?? []).map((doc, i) => (
-              <div key={i} className="grid gap-2 sm:grid-cols-[1fr_160px_1.4fr_auto]">
+              <div key={i} className="grid grid-cols-1 gap-2 sm:grid-cols-[1fr_160px_1.4fr_auto]">
                 <input className="field-input min-h-10! py-2!" aria-label={`Document ${i + 1} name`} value={doc.name} onChange={(e) => set("documents", d.documents!.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))} />
                 <select className="field-input min-h-10! py-2!" aria-label={`Document ${i + 1} type`} value={doc.kind} onChange={(e) => set("documents", d.documents!.map((x, j) => (j === i ? { ...x, kind: e.target.value as typeof doc.kind } : x)))}>
                   <option value="spec_sheet">Spec sheet</option>
@@ -325,7 +325,7 @@ export function ProductEditor({ product, categories, allProducts }: { product: P
         </Card>
 
         <Card title="Related products & accessories" id="relations">
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <RelationPicker label="Related products" value={d.relatedIds ?? []} onChange={(v) => set("relatedIds", v)} options={productOptions} />
             <RelationPicker label="Accessories & complementary items" value={d.accessoryIds ?? []} onChange={(v) => set("accessoryIds", v)} options={productOptions} />
           </div>

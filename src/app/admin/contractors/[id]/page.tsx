@@ -39,10 +39,10 @@ export default async function ContractorApplicationPage({ params }: PageProps<"/
         back={{ href: "/admin/contractors", label: "Contractor applications" }}
         actions={<StatusBadge tone={contractorStatusMeta[u.contractorStatus].tone}>{contractorStatusMeta[u.contractorStatus].label}</StatusBadge>}
       />
-      <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_340px]">
         <div className="space-y-5">
           <Panel title="Applicant">
-            <div className="grid gap-5 text-sm sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-5 text-sm sm:grid-cols-2">
               <div>
                 <p className="font-semibold text-ink">{u.fullName}</p>
                 <p className="text-body">{u.email}</p>
@@ -62,7 +62,7 @@ export default async function ContractorApplicationPage({ params }: PageProps<"/
             </div>
           </Panel>
           <Panel title="Business details">
-            <dl className="grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+            <dl className="grid grid-cols-1 gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
               {rows.map(([k, v]) => (
                 <div key={k}>
                   <dt className="text-body">{k}</dt>

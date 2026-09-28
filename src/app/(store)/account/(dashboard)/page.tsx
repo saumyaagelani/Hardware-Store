@@ -104,7 +104,7 @@ export default async function AccountOverview({ searchParams }: PageProps<"/acco
 
       <Panel title="Coming soon">
         <p className="mb-4 text-sm text-body">These account features are planned for the next phase.</p>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { icon: Heart, label: "Saved products" },
             { icon: Receipt, label: "Invoices & payment history" },

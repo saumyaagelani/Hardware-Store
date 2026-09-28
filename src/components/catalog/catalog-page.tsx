@@ -65,7 +65,7 @@ export async function CatalogPage({ filters, title, description, eyebrow, breadc
 
       {banner}
 
-      <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[240px_1fr]">
         <FilterSidebar facets={facets} showCategories={showCategoryFilter} />
         <div className="min-w-0">
           <div className="mb-5 flex items-center justify-between gap-3">

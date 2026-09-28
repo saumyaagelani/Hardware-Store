@@ -153,7 +153,7 @@ export function QuoteForm({
       ) : null}
 
       <Section title="Your details" description={prefill.signedIn ? "We've filled in what we know from your account." : "No account needed — we'll reply using your preferred contact method."}>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <TextField label="Full name" required autoComplete="name" value={form.fullName} onChange={set("fullName")} error={errors.fullName} />
           <TextField label="Email" type="email" required autoComplete="email" value={form.email} onChange={set("email")} error={errors.email} />
           <TextField label="Phone" type="tel" required autoComplete="tel" value={form.phone} onChange={set("phone")} error={errors.phone} />
@@ -228,7 +228,7 @@ export function QuoteForm({
             Your cart is empty — describe the products below or <Link href="/shop" className="font-semibold text-ink underline">browse products</Link> first.
           </p>
         ) : null}
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <TextareaField
             containerClassName="sm:col-span-2"
             label={items.length ? "Anything else you need?" : "Products required"}
@@ -267,7 +267,7 @@ export function QuoteForm({
               { value: "pickup", label: "I'll pick up", description: "Free pickup from our warehouse." },
             ]}
           />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <TextField label="Preferred project date" optional type="date" value={form.preferredDate} onChange={set("preferredDate")} hint="Approximate start or delivery date." />
           </div>
           <TextareaField label="Additional project details" optional value={form.details} onChange={set("details")} rows={4} placeholder="Subfloor type, access restrictions, timelines, budget…" />

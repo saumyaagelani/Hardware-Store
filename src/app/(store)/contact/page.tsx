@@ -22,7 +22,7 @@ export default async function ContactPage() {
         <h1 className="text-3xl font-extrabold text-ink sm:text-4xl">Contact us</h1>
         <p className="mt-2 text-body">Questions about a product, an order or a project? Our team is happy to help.</p>
       </div>
-      <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.3fr]">
         <div className="space-y-4">
           {[
             { icon: MapPin, title: "Showroom & warehouse", body: formattedAddress },

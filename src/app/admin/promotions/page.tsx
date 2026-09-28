@@ -19,7 +19,7 @@ export default async function PromotionsPage() {
   return (
     <>
       <AdminHeader title="Promotional banners" description="Announcement bar messages and homepage promo tiles. Featured and sale products are managed per product." />
-      <div className="grid gap-6 2xl:grid-cols-[1fr_340px]">
+      <div className="grid grid-cols-1 gap-6 2xl:grid-cols-[1fr_340px]">
         <div className="space-y-8">
           <section>
             <h2 className="mb-3 font-display text-lg font-bold text-ink">Announcement bar (rotates)</h2>

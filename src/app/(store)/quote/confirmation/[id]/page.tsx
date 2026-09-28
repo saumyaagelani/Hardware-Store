@@ -39,7 +39,7 @@ export default async function QuoteConfirmationPage({ params }: PageProps<"/quot
 
         <div className="mt-5 rounded-lg border border-line bg-white p-5 sm:p-6">
           <h2 className="font-display text-lg font-bold text-ink">Request summary</h2>
-          <dl className="mt-4 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+          <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
             <div>
               <dt className="text-body">Submitted</dt>
               <dd className="font-medium text-ink">{formatDateTime(quote.createdAt)}</dd>

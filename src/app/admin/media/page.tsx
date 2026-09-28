@@ -39,7 +39,7 @@ export default async function MediaPage({ searchParams }: PageProps<"/admin/medi
           ))}
         </ul>
       ) : (
-        <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {docs.map((d) => (
             <li key={`${d.product.id}-${d.id}`} className="flex items-center gap-3 rounded-lg border border-line bg-white p-4">
               <FileText className="h-6 w-6 shrink-0 text-danger" aria-hidden />
