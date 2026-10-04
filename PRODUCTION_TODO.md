@@ -48,6 +48,8 @@ Items marked `[x]` are already done in Stage 1.
 - [ ] **[DEV]** Choose ORM (Drizzle recommended) and write the schema from `src/lib/types.ts`
 - [ ] **[CLIENT]** Approve the hosting and cost proposal in [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md): no monthly platform subscriptions; annual billing where practical
 - [ ] **[DEV]** Self-hosted PostgreSQL on the approved VPS (no managed database subscription)
+- [ ] **[CLIENT]** Agree **post-launch maintenance responsibility** in writing (maintenance agreement or accepted risk). See HOSTING_AND_COSTS.md section 7
+- [ ] **[CLIENT]** Open every production account (domain, OVHcloud, Cloudflare, Stripe, AWS/email, Google) **in the business's name** with 2FA, and invite the developer as a collaborator; transfer or share the code repository at handover
 - [ ] **[DEV]** Repository layer replacing `getDb`/`mutate`; transactions for checkout (order + stock + payment) and for reference counters
 - [ ] **[DEV]** Money stored as integer cents or `numeric(10,2)`; timestamps as `timestamptz`
 - [ ] **[DEV]** Seed script for staging (demo data) that is never run in production

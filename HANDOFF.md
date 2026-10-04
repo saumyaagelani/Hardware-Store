@@ -204,7 +204,7 @@ More than 6 oversized units (doors, vanities, shower bases…) → the delivery 
 
 ## 13b. Hosting and cost constraint
 
-The client does **not** want a mandatory monthly platform or SaaS subscription. Annual billing is preferred, and usage-based or per-transaction fees are acceptable. The recommended production stack is in [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md): an annually prepaid Canadian VPS with Caddy, PostgreSQL, Amazon SES pay-as-you-go and Stripe, estimated at about C$75–280 a year plus usage and transaction fees. It is **awaiting client approval**. Nothing has been purchased. The current Render free service is for the demo only.
+The client does **not** want a mandatory monthly platform or SaaS subscription. Annual billing is preferred, and usage-based or per-transaction fees are acceptable. The recommended production stack is in [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md): an annually prepaid Canadian VPS with Caddy, PostgreSQL, Amazon SES pay-as-you-go and Stripe, estimated at about C$100–120 a year including HST (OVHcloud VPS-1 with a 12-month commitment, plus domain and backups), plus Stripe fees of 2.9% + C$0.30 per card payment. It is **awaiting client approval**. **Post-launch server maintenance must be arranged in writing**; it is not free ongoing developer work (see section 7 of that document). Nothing has been purchased. The current Render free service is for the demo only.
 
 ## 14. Exact next step after client approval
 

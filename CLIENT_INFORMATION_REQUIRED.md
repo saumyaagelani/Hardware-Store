@@ -96,7 +96,7 @@ Everything on the demo site today (business name "Northline Building Supply", ad
 - [ ] Who manages your current email (Google Workspace, Microsoft 365…), because email authentication records must not break it
 
 ### A12. Hosting and accounts
-- [ ] Approval of the hosting and cost proposal ([HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md)): a custom site on an annually prepaid server, with no monthly platform subscription (about C$75–280 a year plus small usage fees; card payments cost 2.9% + C$0.30 each)
+- [ ] Approval of the hosting and cost proposal ([HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md)): a custom site on an annually prepaid server, with no monthly platform subscription (about C$100–120 a year including HST; card payments cost 2.9% + C$0.30 each), plus a decision on **who maintains the server after launch**
 - [ ] Who owns the accounts (recommended: the business owns them and adds the developer as a team member)
 
 ### A13. Admin users

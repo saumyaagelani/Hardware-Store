@@ -248,6 +248,13 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 
 Newest first. Every code change pushed to GitHub gets an entry here.
 
+### 2026-10-04 — Final hosting recommendation (for approval)
+- Finalised **HOSTING_AND_COSTS.md**. The chosen server is OVHcloud's smallest suitable Canadian plan (VPS-1: 2 cores, 4 GB memory, 40 GB storage), with a check that it is enough for the shop, database, accounts, admin, orders and quotes.
+- Costs are split into mandatory yearly, optional, usage-based and per-sale costs. Expected **first-year and yearly renewal cost: about C$100–120 including tax**, plus Stripe fees.
+- Stripe fees are corrected to Stripe's official Canadian prices: 2.9% + C$0.30 per card payment, +0.8% for international cards, C$15 per dispute, no monthly fee. Confirmed support for Visa, Mastercard, American Express, Apple Pay and Google Pay. Interac e-Transfer stays a separate manual option.
+- Added a full backup plan (database every 6 hours, files nightly, encrypted, kept off-site in another Canadian data centre for 12 months, plus a monthly copy kept by the business), a server security checklist, a **post-launch maintenance responsibility** section, and an account-ownership table (every account in the business's name).
+- No website changes. Nothing has been purchased or deployed.
+
 ### 2026-10-04 — Hosting and running-cost proposal (for approval)
 - Added **HOSTING_AND_COSTS.md**: the recommended way to run the live store with **no monthly platform subscription** (no Shopify-style plan). It covers a custom site on one yearly-paid Canadian server with a free security certificate, the database and files on that server, nightly off-site backups, pay-per-use email and Stripe card payments (fees per sale only).
 - Estimated running cost: about **C$75–280 a year** for the domain and server, a few dollars a year for email and backups, plus **2.9% + C$0.30 per card payment**. Every item says whether it is billed yearly, by usage or per transaction, and free services have their limits written down.
