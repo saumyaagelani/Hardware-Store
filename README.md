@@ -238,6 +238,7 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 | [PHASE_2_PLAN.md](./PHASE_2_PLAN.md) | Developers | Current architecture, what is production-ready vs demo-only, the recommended Phase 2 order, migration risks |
 | [PRODUCTION_TODO.md](./PRODUCTION_TODO.md) | Everyone | Launch checklist. Each item is marked: can do now, needs client info, or needs third-party credentials |
 | [CLIENT_INFORMATION_REQUIRED.md](./CLIENT_INFORMATION_REQUIRED.md) | The client | Everything the store owner must supply, split into "required before production" and "optional / later" |
+| [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md) | The client and developers | Recommended production stack (custom site, annually prepaid server, no monthly platform subscription) with estimated yearly, usage-based and per-transaction costs, **for approval** |
 | [NEXT_CLAUDE_PROMPT.md](./NEXT_CLAUDE_PROMPT.md) | Future AI session | Ready-to-paste prompt for starting Phase 2 **after** client approval |
 | `docs/Website-Features-Guide.pdf` / `.docx` | The client | Illustrated tour of every feature with links |
 
@@ -246,6 +247,12 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-10-04 — Hosting and running-cost proposal (for approval)
+- Added **HOSTING_AND_COSTS.md**: the recommended way to run the live store with **no monthly platform subscription** (no Shopify-style plan). It covers a custom site on one yearly-paid Canadian server with a free security certificate, the database and files on that server, nightly off-site backups, pay-per-use email and Stripe card payments (fees per sale only).
+- Estimated running cost: about **C$75–280 a year** for the domain and server, a few dollars a year for email and backups, plus **2.9% + C$0.30 per card payment**. Every item says whether it is billed yearly, by usage or per transaction, and free services have their limits written down.
+- Updated the plan, checklist, client information list, handoff notes and next-session prompt: no monthly subscriptions, and **nothing is bought or set up until the client approves**.
+- No website changes. Nothing has been purchased.
 
 ### 2026-09-28 — Satoshi typeface and hero fine-tuning
 - The whole website (shop, account, checkout, quotes, contractor pages, admin and footer) now uses **Satoshi** for all text and headings, the same typeface as the reference site. It loads from Fontshare, the official free web-font service from its designers; if it can't load, the site falls back to Inter.

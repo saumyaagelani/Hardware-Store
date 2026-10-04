@@ -34,6 +34,7 @@ Stage 1 already includes, and works end to end with demo data:
 
 ## What NOT to do
 
+- **Do not introduce any mandatory monthly subscription** (Shopify/Wix-style platforms, paid Render/Vercel, managed databases, auth or email SaaS on monthly plans). The client wants a custom site with annual billing where practical. Use the stack in `HOSTING_AND_COSTS.md`, and **get client approval before purchasing or signing up for any paid service**. Never purchase anything yourself.
 - **Do not rebuild or redesign** the storefront, account or admin UI. Do not change routes, established user journeys or the approved colour tokens in `src/app/globals.css` unless an approved revision says so.
 - **Do not bypass `resolvePrice` / `toProductView`.** Never pass raw product rows or pricing objects to client components.
 - **Do not remove demo mode.** Keep it working on staging (`NEXT_PUBLIC_DEMO_MODE=true`, seeded demo data) until launch. Production turns it off with the env var.
@@ -55,12 +56,12 @@ Stage 1 already includes, and works end to end with demo data:
 2. **Database layer:** Postgres + Drizzle (or Prisma). Schema from `src/lib/types.ts`; money as integer cents or `numeric(10,2)`; `timestamptz`; transactions for checkout (order + stock + payment) and for reference counters; a staging-only seed script with the demo data.
 3. **Migrate one domain at a time** behind the existing `getDb` / `mutate` callers: catalogue → users/auth → cart pricing → orders → quotes → content/settings → email log. Keep every test green after each step.
 4. **Auth hardening:** password reset, email verification, rate limiting, optional staff 2FA, audit log.
-5. **File storage:** S3/R2 adapter behind `storeUpload` / `readUpload`, signed URLs, virus scanning.
-6. **Email:** implement `EmailProvider` (Postmark, Resend or SES), branded templates, SPF/DKIM/DMARC.
+5. **File storage:** keep private VPS-disk storage behind `storeUpload` / `readUpload`; add virus scanning and off-site backups.
+6. **Email:** implement `EmailProvider` for Amazon SES pay-as-you-go (or the client's SMTP); branded templates; SPF/DKIM/DMARC.
 7. **Payments:** implement `PaymentProvider` (Stripe recommended) with sandbox keys, hosted fields, wallets, webhooks, refunds; keep the e-Transfer flow.
 8. **Real business data and catalogue** from the client: business details, zones, tax, policies; product CSV import; photos via `next/image`.
 9. **SEO, analytics and cookie consent.**
-10. **Production hosting, domain and DNS, monitoring, backups.**
+10. **Production hosting on the approved annually prepaid VPS** (Caddy, PostgreSQL, backups, monitoring), domain and DNS.
 11. **Final QA and launch:** cross-browser, accessibility, performance, client UAT, `NEXT_PUBLIC_DEMO_MODE=false`, remove demo users from production data.
 
 Steps that need client information or third-party credentials are marked `[CLIENT]` and `[3RD-PARTY]` in `PRODUCTION_TODO.md`. If they're missing, build and test with sandbox or placeholder values behind env vars, and list exactly what's still needed.

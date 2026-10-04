@@ -202,6 +202,10 @@ More than 6 oversized units (doors, vanities, shower bases…) → the delivery 
 
 **Added:** `tests/e2e/regression.spec.ts` (18 tests, including the contractor-price leak matrix) and 3 unit tests.
 
+## 13b. Hosting and cost constraint
+
+The client does **not** want a mandatory monthly platform or SaaS subscription. Annual billing is preferred, and usage-based or per-transaction fees are acceptable. The recommended production stack is in [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md): an annually prepaid Canadian VPS with Caddy, PostgreSQL, Amazon SES pay-as-you-go and Stripe, estimated at about C$75–280 a year plus usage and transaction fees. It is **awaiting client approval**. Nothing has been purchased. The current Render free service is for the demo only.
+
 ## 14. Exact next step after client approval
 
 1. Record the client's decision and any revision list in the README change log.

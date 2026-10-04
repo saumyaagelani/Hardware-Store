@@ -46,7 +46,8 @@ Items marked `[x]` are already done in Stage 1.
 
 ## 4. Database
 - [ ] **[DEV]** Choose ORM (Drizzle recommended) and write the schema from `src/lib/types.ts`
-- [ ] **[3RD-PARTY]** Managed Postgres (Neon, Supabase, RDS…) for staging and production
+- [ ] **[CLIENT]** Approve the hosting and cost proposal in [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md): no monthly platform subscriptions; annual billing where practical
+- [ ] **[DEV]** Self-hosted PostgreSQL on the approved VPS (no managed database subscription)
 - [ ] **[DEV]** Repository layer replacing `getDb`/`mutate`; transactions for checkout (order + stock + payment) and for reference counters
 - [ ] **[DEV]** Money stored as integer cents or `numeric(10,2)`; timestamps as `timestamptz`
 - [ ] **[DEV]** Seed script for staging (demo data) that is never run in production
@@ -70,7 +71,7 @@ Items marked `[x]` are already done in Stage 1.
 
 ## 6. File storage
 - [x] **[DEV]** Upload validation: extension, 10 MB size limit, file-signature check, 8 files max, owner/staff-only download
-- [ ] **[3RD-PARTY]** Private object storage bucket (S3 / Cloudflare R2 / Azure Blob) and credentials
+- [ ] **[DEV]** Keep uploads on the VPS disk (private) and include them in encrypted off-site backups (Cloudflare R2 free allowance or the VPS backup add-on)
 - [ ] **[DEV]** Storage adapter behind `storeUpload`/`readUpload`; signed, short-lived download URLs
 - [ ] **[3RD-PARTY]** Malware scanning (e.g. ClamAV service or provider scanning)
 - [ ] **[DEV]** Strip image metadata (EXIF/GPS) on upload
@@ -79,7 +80,7 @@ Items marked `[x]` are already done in Stage 1.
 ## 7. Payments
 - [x] **[DEV]** `PaymentProvider` interface, order flow, declined/insufficient-funds handling, e-Transfer "awaiting payment" flow
 - [ ] **[CLIENT]** Choose provider and methods (card, Apple Pay, Google Pay, Interac e-Transfer, financing?)
-- [ ] **[3RD-PARTY]** Merchant account and API keys (sandbox + live), e.g. Stripe
+- [ ] **[3RD-PARTY]** Merchant account with **no monthly fee** and API keys (sandbox + live), e.g. Stripe (2.9% + C$0.30 per domestic card payment)
 - [ ] **[DEV]** Implement the provider; replace the demo card form with hosted fields / Payment Element
 - [ ] **[DEV]** Webhooks (payment succeeded/failed, refunds), idempotency keys, reconciliation view in admin
 - [ ] **[3RD-PARTY]** Apple Pay domain verification
@@ -89,7 +90,7 @@ Items marked `[x]` are already done in Stage 1.
 ## 8. Email
 - [x] **[DEV]** Notification templates for every event, per-template on/off toggles, admin log
 - [ ] **[CLIENT]** Sending address (e.g. orders@domain) and which staff inboxes receive admin alerts
-- [ ] **[3RD-PARTY]** Transactional email provider account (Postmark, Resend, SES or SendGrid) and API key
+- [ ] **[3RD-PARTY]** Amazon SES account on **pay-as-you-go ("à la carte")** pricing (about US$0.10 per 1,000 emails, no monthly fee), or SMTP details for the client's existing mailbox
 - [ ] **[3RD-PARTY]** SPF, DKIM and DMARC DNS records on the sending domain
 - [ ] **[DEV]** Implement `EmailProvider`; branded HTML templates; retry on failure
 - [ ] **[CLIENT]** Newsletter/marketing platform (if any) and CASL consent wording
@@ -116,10 +117,10 @@ Items marked `[x]` are already done in Stage 1.
 ## 12. Deployment
 - [x] **[DEV]** `render.yaml` Blueprint for the demo; auto-deploy on push to `claude/intelligent-edison-536z5s`
 - [ ] **[DEV]** CI (GitHub Actions): lint, typecheck, unit, build, e2e on every PR
-- [ ] **[3RD-PARTY]** Production hosting account (Render paid, Vercel, Fly or similar) billed to the client
+- [ ] **[3RD-PARTY]** Annually prepaid Canadian VPS in the business's name (see HOSTING_AND_COSTS.md); **not** a monthly platform such as paid Render, Vercel or Fly
 - [ ] **[DEV]** Separate staging and production environments with their own env vars and databases
 - [ ] **[DEV]** Production branch strategy (`main` for production, PR reviews), no direct pushes
-- [ ] **[3RD-PARTY]** Error monitoring (Sentry) and uptime monitoring
+- [ ] **[DEV]** Uptime monitoring (self-hosted Uptime Kuma and/or a free external monitor); error tracking optional (Sentry free tier) — no monthly plan
 - [ ] **[DEV]** Health check endpoint; log retention
 
 ## 13. Legal and policies

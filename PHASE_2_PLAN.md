@@ -119,15 +119,17 @@ These are complete user journeys and are **production-shaped**. Their UI and ser
 
 ## 3. What must change for production
 
-1. **Database:** managed Postgres (e.g. Neon, Supabase or RDS) with an ORM (Drizzle or Prisma), migrations, transactions, backups.
+> **Cost constraint (client requirement):** no mandatory monthly platform or SaaS subscription; annual billing where practical; usage- or transaction-based fees are acceptable. The recommended stack and costs are in [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md) and **need client approval before anything is purchased or set up**.
+
+1. **Database:** self-hosted PostgreSQL on the annually prepaid VPS (see HOSTING_AND_COSTS.md), with Drizzle, migrations, transactions and nightly off-site backups. Not a managed database, because those are billed monthly.
 2. **Auth hardening:** password reset, email verification, rate limiting and lockout, optional 2FA for staff, session revocation, audit log.
-3. **Payments:** a real provider (Stripe recommended for Canadian cards, Apple Pay and Google Pay; Moneris or Helcim if the client's bank requires it), hosted fields, webhooks, refunds, idempotency.
-4. **Email:** a transactional provider (Postmark, Resend or SES), branded templates, SPF/DKIM/DMARC.
-5. **File storage:** private object storage (S3 or Cloudflare R2) with signed URLs, virus scanning and a retention policy.
+3. **Payments:** a provider with **no monthly fee** (Stripe recommended for Canadian cards, Apple Pay and Google Pay; Helcim or Square as alternatives; avoid merchant plans with monthly fees), hosted fields, webhooks, refunds, idempotency.
+4. **Email:** Amazon SES pay-as-you-go ("à la carte", no monthly fee) or the client's existing mailbox over SMTP; branded templates; SPF/DKIM/DMARC.
+5. **File storage:** private storage on the VPS disk (already built), included in encrypted off-site backups; virus scanning (ClamAV, self-hosted) and a retention policy.
 6. **Catalogue and media:** real products, photos (`next/image` with a CDN), spec sheets, warranty documents.
 7. **Business data:** replace every placeholder in `src/config/business.ts` and the seed settings (delivery zones, pickup locations, tax, policies).
 8. **Demo removal:** `NEXT_PUBLIC_DEMO_MODE=false`, remove demo accounts from production data, remove the reset action from production builds.
-9. **Operations:** production hosting with a persistent runtime, custom domain and SSL, error monitoring, uptime checks, staging environment.
+9. **Operations:** an annually prepaid Canadian VPS running Caddy (free Let's Encrypt SSL), Node.js and PostgreSQL; custom domain; self-hosted uptime monitoring; a staging environment (a second app instance on the same server).
 10. **Legal:** privacy policy (PIPEDA), CASL-compliant consent, terms, returns and delivery policies, cookie consent.
 
 ---
@@ -139,16 +141,17 @@ Each step ends with `npm run lint && npm run typecheck && npm test && npm run bu
 | # | Step | Depends on | Client input? |
 | --- | --- | --- | --- |
 | 0 | **Apply approved Stage 1 revisions** (copy, layout and colour tweaks the client asked for). Tag the approved state first: `git tag stage1-approved` | Client feedback | Yes |
+| 0b | **Client approves hosting and costs** ([HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md)). Nothing is purchased before this | — | Yes |
 | 1 | **Staging environment and CI:** GitHub Actions running lint, typecheck, unit, build and e2e; a staging deploy with its own env vars | — | No |
 | 2 | **Database layer:** add Postgres + Drizzle/Prisma; schema mirrors `src/lib/types.ts`; implement a repository layer with the same shape as today's `getDb` / `mutate` callers; a seed script that loads the demo data into staging | 1 | No |
 | 3 | **Move reads and writes to the DB** one domain at a time (catalogue → users/auth → cart pricing → orders → quotes → content/settings → email log), keeping the tests green after each | 2 | No |
 | 4 | **Auth hardening:** password reset, email verification, rate limiting, staff 2FA (optional), audit log | 3, email provider for reset emails | Partly (email domain) |
-| 5 | **File storage:** S3/R2 adapter behind `storeUpload` / `readUpload`, signed URLs, virus scan | 3 | Credentials |
+| 5 | **File storage:** keep VPS-disk storage behind `storeUpload` / `readUpload`; add a virus scan and off-site backups | 3 | No |
 | 6 | **Email provider:** implement `EmailProvider`, branded templates, domain authentication | Domain / DNS | Yes |
 | 7 | **Payments:** implement `PaymentProvider` with sandbox keys, hosted card fields, wallets, webhooks, refunds; keep the e-Transfer flow | 3 | Yes (merchant account) |
 | 8 | **Real business data and catalogue:** business details, delivery zones, pickup locations, tax, policies; product import (CSV → DB) with photos and documents; switch to `next/image` | 3, client data | Yes |
 | 9 | **SEO, analytics, consent:** final metadata, JSON-LD with the real address, GA4 / Meta Pixel IDs, cookie consent, Search Console | 8 | Yes |
-| 10 | **Production hosting, domain and DNS:** persistent hosting, custom domain, SSL, monitoring, backups | 1–9 | Yes |
+| 10 | **Production hosting, domain and DNS** on the approved VPS (see HOSTING_AND_COSTS.md): Caddy and SSL, backups, monitoring | 1–9 | Yes, client approval of costs |
 | 11 | **Final QA and launch:** cross-browser and device testing, accessibility audit, performance, client UAT, turn off demo mode, go live | All | Sign-off |
 
 Steps 4–7 can run in parallel once step 3 is complete.
