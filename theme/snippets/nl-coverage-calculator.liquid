@@ -19,7 +19,8 @@
     <label class="nl-calc__or">Or total area (sq. ft.)<input type="number" min="0" step="1" inputmode="decimal" data-area placeholder="Optional"></label>
     <fieldset class="nl-calc__waste">
       <legend>Waste allowance</legend>
-      {%- for w in '0,5,10,15' | split: ',' -%}
+      {%- assign wastes = '0,5,10,15' | split: ',' -%}
+      {%- for w in wastes -%}
         <label><input type="radio" name="nl-waste-{{ product.id }}" value="{{ w }}" {% if w == '10' %}checked{% endif %}> {% if w == '0' %}None{% else %}{{ w }}%{% endif %}</label>
       {%- endfor -%}
     </fieldset>
