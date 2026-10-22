@@ -1,6 +1,6 @@
 {%- comment -%} Four "why shop with us" points under the hero, as on the prototype. {%- endcomment -%}
 <section class="nl-scope nl-vp" aria-label="Why shop with us">
-  <ul class="nl-container nl-vp__list">
+  <div class="nl-container"><ul class="nl-vp__list">
     {%- for block in section.blocks -%}
       <li class="nl-vp__item" {{ block.shopify_attributes }}>
         <span class="nl-icon-box">{% render 'nl-icon', name: block.settings.icon, size: 22 %}</span>
@@ -10,7 +10,7 @@
         </span>
       </li>
     {%- endfor -%}
-  </ul>
+  </ul></div>
 </section>
 <style>
   .nl-vp { background: var(--nl-surface); border-bottom: 1px solid var(--nl-edge); color: var(--nl-cream); }

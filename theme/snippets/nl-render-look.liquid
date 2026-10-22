@@ -34,11 +34,11 @@
   .nl-container { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 1rem; box-sizing: border-box; }
   @media (min-width: 640px) { .nl-container { padding-inline: 1.5rem; } }
   @media (min-width: 1024px) { .nl-container { padding-inline: 2rem; } }
-  .nl-scope, .nl-scope * { box-sizing: border-box; }
-  .nl-scope a { color: inherit; text-decoration: none; }
-  .nl-scope ul, .nl-scope ol { list-style: none; margin: 0; padding: 0; }
-  .nl-scope p, .nl-scope h1, .nl-scope h2, .nl-scope h3 { margin: 0; }
-  .nl-scope svg { flex-shrink: 0; }
+  :where(.nl-scope), :where(.nl-scope) * { box-sizing: border-box; }
+  :where(.nl-scope) :where(a) { color: inherit; text-decoration: none; }
+  :where(.nl-scope) :where(ul, ol) { list-style: none; margin: 0; padding: 0; }
+  :where(.nl-scope) :where(p, h1, h2, h3) { margin: 0; }
+  :where(.nl-scope) :where(svg) { flex-shrink: 0; }
   .nl-eyebrow { font-size: .8125rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--nl-gold); }
   .nl-h2 { margin-top: .75rem !important; font-size: clamp(1.875rem, 3.2vw, 2.5rem); line-height: 1.15; font-weight: 700; color: var(--nl-cream); }
   .nl-muted { color: var(--nl-stone); }
