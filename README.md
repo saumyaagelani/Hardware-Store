@@ -5,7 +5,7 @@ A client-facing prototype for a hardware / building-materials store selling viny
 The prototype demonstrates the full customer, contractor and admin experience with realistic demo data. External production services (payments, email, file storage, database) are simulated behind clean interfaces so the codebase can move to production in Stage 2 without a rewrite.
 
 **Live demo:** https://northline-prototype.onrender.com (branch `claude/intelligent-edison-536z5s`, auto-deploys on every push)
-**Last updated:** 2026-09-28 — see the [Change log](#change-log) at the bottom.
+**Last updated:** 2026-10-22 — see the [Change log](#change-log) at the bottom.
 
 > **Placeholder notice:** "Northline Building Supply", the address, phone numbers, emails, hours, brand names, product specifications and policies are **fictional placeholders**. Product images are generated illustrations, not photographs. Replace them before launch (see [Where to change things](#where-to-change-things)).
 
@@ -239,6 +239,7 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 | [PRODUCTION_TODO.md](./PRODUCTION_TODO.md) | Everyone | Launch checklist. Each item is marked: can do now, needs client info, or needs third-party credentials |
 | [CLIENT_INFORMATION_REQUIRED.md](./CLIENT_INFORMATION_REQUIRED.md) | The client | Everything the store owner must supply, split into "required before production" and "optional / later" |
 | [SHOPIFY_SETUP.md](./SHOPIFY_SETUP.md) | Developer, Aditya, the client | **Current plan:** step-by-step Shopify setup (Basic, yearly), costs, ownership and collaborator access, plus the ready-made import files and theme add-ons in `shopify/` |
+| [CLIENT_SHOPIFY_GUIDE.md](./CLIENT_SHOPIFY_GUIDE.md) | The store owner / admin | Plain-English checklist of everything the owner must do in Shopify (plan, business details, tax, payments, delivery, contractor pricing, launch) and how to run the store day to day |
 | [HOSTING_AND_COSTS.md](./HOSTING_AND_COSTS.md) (superseded) | The client and developers | Recommended production stack (custom site, annually prepaid server, no monthly platform subscription) with estimated yearly, usage-based and per-transaction costs, **for approval** |
 | [NEXT_CLAUDE_PROMPT.md](./NEXT_CLAUDE_PROMPT.md) | Future AI session | Ready-to-paste prompt for starting Phase 2 **after** client approval |
 | `docs/Website-Features-Guide.pdf` / `.docx` | The client | Illustrated tour of every feature with links |
@@ -248,6 +249,11 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-10-22 — Owner's guide for the Shopify store
+- Added **CLIENT_SHOPIFY_GUIDE.md**, a plain-English checklist for the store owner. It lists what is already done in Shopify (77 products, 12 collections, the new "Render look" design, quote and contractor pages) and what the owner still has to do: choose a plan, enter real business details, set up tax, payments, delivery and pickup, contractor pricing, policies, real photos and prices, test, and launch.
+- It also explains running the store day to day: fulfilling orders, marking e-Transfers paid, sending invoices, stock, discounts and approving contractors.
+- Documentation only; the website code is unchanged.
 
 ### 2026-10-22 — SG vinyl plank collection added (from Jaideep)
 - Added **18 SG vinyl planks** (SG-601 to SG-806, in 6 mm, 7 mm and 8 mm) from the supplier spec sheets, with the supplier's photos. They show "Request a Quote" until real prices arrive. Brand ("SG Collection") and stock (40 each) are placeholders to confirm with the client.
