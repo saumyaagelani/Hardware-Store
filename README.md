@@ -249,6 +249,12 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 
 Newest first. Every code change pushed to GitHub gets an entry here.
 
+### 2026-10-22 — SG vinyl plank collection added (from Jaideep)
+- Added **18 SG vinyl planks** (SG-601 to SG-806, in 6 mm, 7 mm and 8 mm) from the supplier spec sheets, with the supplier's photos. They show "Request a Quote" until real prices arrive. Brand ("SG Collection") and stock (40 each) are placeholders to confirm with the client.
+- The Shopify import file now includes them: **77 products, 108 variants and 18 photos**, which Shopify downloads automatically during import.
+- The demo data refreshes once on existing local copies so the new products appear.
+- Still to do before launch: clean supplier photos (the current ones carry a faint "WPS Office" watermark), the real brand name, prices and full specs.
+
 ### 2026-10-22 — Shopify import file can include real product photos
 - The Shopify product import file now includes links to real product photos (for example the supplier photos for the new SG vinyl planks), and Shopify downloads them automatically during import. The site's generated placeholder drawings are left out, because Shopify can't import that format.
 - The new SG vinyl planks and their photos will appear in the import file once Jaideep's change (pull request #1) is merged and the file is regenerated.
