@@ -11,6 +11,11 @@
  *
  * Product data is the prototype's placeholder catalogue. Replace it with the
  * client's real catalogue before launch (same columns).
+ *
+ * Images: real photos (files under public/, e.g. the SG supplier photos) are
+ * included as "Image Src" URLs so Shopify downloads them during import. The
+ * generated SVG placeholder art is skipped (Shopify can't import SVG product
+ * images). Override the public base URL with SHOPIFY_IMAGE_BASE if needed.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,6 +24,10 @@ import { isActiveSale } from "@/lib/pricing";
 import type { Product, VariantOption } from "@/lib/types";
 
 const OUT = path.join(process.cwd(), "shopify");
+const PUBLIC_DIR = path.join(process.cwd(), "public");
+const IMAGE_BASE = (process.env.SHOPIFY_IMAGE_BASE ?? "https://raw.githubusercontent.com/saumyaagelani/Hardware-Store/claude/intelligent-edison-536z5s/public").replace(/\/$/, "");
+/** Real photo files that exist under public/ (skips generated SVG placeholder art). */
+const photosFor = (p: Product) => p.images.filter((img) => !img.src.endsWith(".svg") && fs.existsSync(path.join(PUBLIC_DIR, img.src)));
 const db = createSeedDatabase();
 const categoryName = new Map(db.categories.map((c) => [c.id, c.name]));
 const subcategoryName = new Map(db.categories.flatMap((c) => c.subcategories.map((s) => [`${c.id}:${s.slug}`, s.name] as const)));
@@ -53,6 +62,7 @@ const HEADERS = [
   "Option1 Name", "Option1 Value", "Option2 Name", "Option2 Value", "Option3 Name", "Option3 Value",
   "Variant SKU", "Variant Inventory Tracker", "Variant Inventory Qty", "Variant Inventory Policy", "Variant Fulfillment Service",
   "Variant Price", "Variant Compare At Price", "Variant Requires Shipping", "Variant Taxable",
+  "Image Src", "Image Position", "Image Alt Text",
   "SEO Title", "SEO Description", "Status",
   "Coverage per unit sq ft (product.metafields.custom.coverage_sqft)",
   "Coverage unit (product.metafields.custom.coverage_unit)",
@@ -80,6 +90,7 @@ for (const p of db.products.filter((x) => x.active)) {
   ].filter(Boolean);
 
   const combos = combinations(p);
+  const photos = photosFor(p);
   const each = Math.floor(inventory.quantity / combos.length);
   combos.forEach((combo, i) => {
     const adj = combo.reduce((s, o) => s + (o.priceAdjustment ?? 0), 0);
@@ -113,6 +124,9 @@ for (const p of db.products.filter((x) => x.active)) {
       "Variant Compare At Price": !quoteOnly && sale ? money((pricing.retail as number) + adj) : "",
       "Variant Requires Shipping": "TRUE",
       "Variant Taxable": "TRUE",
+      "Image Src": photos[i] ? `${IMAGE_BASE}${photos[i].src}` : "",
+      "Image Position": photos[i] ? i + 1 : "",
+      "Image Alt Text": photos[i]?.alt ?? "",
       "SEO Title": first ? p.name : "",
       "SEO Description": first ? p.shortDescription : "",
       Status: first ? "active" : "",
@@ -131,6 +145,10 @@ for (const p of db.products.filter((x) => x.active)) {
         "Contractor fixed price": money(Math.min(pricing.contractor, sale ? (pricing.sale as number) : Infinity) + adj),
       });
     }
+  });
+  // Extra photos beyond the number of variant rows get image-only rows.
+  photos.slice(combos.length).forEach((img, j) => {
+    productRows.push({ Handle: p.slug, "Image Src": `${IMAGE_BASE}${img.src}`, "Image Position": combos.length + j + 1, "Image Alt Text": img.alt });
   });
 }
 
@@ -151,6 +169,6 @@ fs.writeFileSync(
   path.join(OUT, "delivery-zones.csv"),
   toCsv(zoneRows, ["Zone", "Postal code prefixes (enter each followed by *)", "Delivery price (CAD)", "Free delivery over (CAD)", "Delivery time (show in zone notes)"]),
 );
-console.log(`products.csv: ${new Set(productRows.map((r) => r.Handle)).size} products, ${productRows.length} variants`);
+console.log(`products.csv: ${new Set(productRows.map((r) => r.Handle)).size} products, ${productRows.filter((r) => r["Variant SKU"]).length} variants, ${productRows.filter((r) => r["Image Src"]).length} photos`);
 console.log(`contractor-prices.csv: ${contractorRows.length} variants`);
 console.log(`delivery-zones.csv: ${zoneRows.length} zones`);

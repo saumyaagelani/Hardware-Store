@@ -249,6 +249,11 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 
 Newest first. Every code change pushed to GitHub gets an entry here.
 
+### 2026-10-22 — Shopify import file can include real product photos
+- The Shopify product import file now includes links to real product photos (for example the supplier photos for the new SG vinyl planks), and Shopify downloads them automatically during import. The site's generated placeholder drawings are left out, because Shopify can't import that format.
+- The new SG vinyl planks and their photos will appear in the import file once Jaideep's change (pull request #1) is merged and the file is regenerated.
+- No website changes.
+
 ### 2026-10-20 — Stability fixes found while preparing the Shopify files
 - Fixed an occasional glitch where, while a page was still loading, the browser briefly drew the page twice. Occasionally this caused an error when choosing a product size or finish very quickly. The cart now loads in a way that doesn't redraw the whole page, and size/finish buttons were made more robust.
 - Fixed date-sensitive automated tests that started failing as real time passed (demo sales "expired"). The tests now use a fixed date.
