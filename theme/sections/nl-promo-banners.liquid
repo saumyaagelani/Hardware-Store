@@ -1,0 +1,76 @@
+{%- comment -%} Promo banners: one large (left) and two small (right), dark / gold / light, as on the prototype. {%- endcomment -%}
+<section class="nl-scope nl-container nl-pad nl-promos">
+  <div class="nl-promos__grid">
+    {%- for block in section.blocks limit: 3 -%}
+      {%- liquid
+        assign b = block.settings
+        assign large = false
+        if forloop.first
+          assign large = true
+        endif
+        assign art = b.image
+        if art == blank and b.collection != blank
+          assign art = b.collection.featured_image | default: b.collection.products.first.featured_media.preview_image
+        endif
+      -%}
+      {%- if forloop.index == 2 -%}<div class="nl-promos__stack">{%- endif -%}
+      <a href="{{ b.link | default: routes.all_products_collection_url }}" class="nl-promo nl-promo--{{ b.theme }}{% if large %} nl-promo--large{% endif %}" {{ block.shopify_attributes }}>
+        {%- if art -%}{{ art | image_url: width: 900 | image_tag: loading: 'lazy', alt: '', class: 'nl-promo__art', widths: '450, 900' }}{%- endif -%}
+        {%- if large -%}<span class="nl-promo__shade" aria-hidden="true"></span>{%- endif -%}
+        <span class="nl-promo__copy">
+          {%- if b.eyebrow != blank -%}<span class="nl-eyebrow nl-promo__eyebrow">{{ b.eyebrow }}</span>{%- endif -%}
+          <span class="nl-promo__title">{{ b.title }}</span>
+          {%- if b.body != blank -%}<span class="nl-promo__body">{{ b.body }}</span>{%- endif -%}
+          <span class="nl-promo__cta">{{ b.cta | default: 'Shop now' }} {% render 'nl-icon', name: 'arrow-right', size: 16 %}</span>
+        </span>
+      </a>
+      {%- if forloop.last and forloop.index > 1 -%}</div>{%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+<style>
+  .nl-promos__grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 1024px) { .nl-promos__grid { grid-template-columns: 1fr 1fr; } }
+  .nl-promos__stack { display: grid; gap: 1rem; }
+  .nl-promo { position: relative; display: flex; align-items: center; min-height: 11rem; overflow: hidden; border-radius: 10px; }
+  .nl-promo--large { min-height: 20rem; flex-direction: column; justify-content: flex-end; align-items: stretch; }
+  .nl-promo--dark { background: var(--nl-surface-2); color: var(--nl-cream); }
+  .nl-promo--gold { background: var(--nl-gold); color: var(--nl-page) !important; }
+  .nl-promo--light { background: var(--nl-surface); border: 1px solid var(--nl-edge); color: var(--nl-cream); }
+  .nl-promo__art { position: absolute; top: 0; right: 0; height: 100%; width: 40%; object-fit: cover; -webkit-mask-image: linear-gradient(to right, transparent, #000 35%); mask-image: linear-gradient(to right, transparent, #000 35%); transition: transform .5s; }
+  .nl-promo--large .nl-promo__art { inset: 0; width: 100%; opacity: .45; -webkit-mask-image: none; mask-image: none; }
+  .nl-promo:hover .nl-promo__art { transform: scale(1.03); }
+  .nl-promo__shade { position: absolute; inset: 0; background: linear-gradient(to top, var(--nl-page), rgb(29 33 28 / .7), transparent); }
+  .nl-promo__copy { position: relative; display: block; max-width: 62%; padding: 1.5rem; }
+  @media (min-width: 640px) { .nl-promo__copy { padding: 2rem; } }
+  .nl-promo--large .nl-promo__copy { max-width: none; }
+  .nl-promo--gold .nl-promo__eyebrow { color: var(--nl-page); }
+  .nl-promo__title { display: block; margin-top: .5rem; font-size: 1.5rem; line-height: 1.15; font-weight: 700; }
+  .nl-promo--large .nl-promo__title { font-size: clamp(1.875rem, 3vw, 2.25rem); }
+  .nl-promo__body { display: block; margin-top: .5rem; font-size: .875rem; opacity: .78; }
+  .nl-promo__cta { display: inline-flex; align-items: center; gap: .375rem; margin-top: 1rem; font-size: .875rem; font-weight: 600; }
+  .nl-promo:hover .nl-promo__cta svg { transform: translateX(2px); }
+</style>
+{% schema %}
+{
+  "name": "Northline promo banners",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "Banner",
+      "settings": [
+        { "type": "select", "id": "theme", "label": "Style", "default": "dark", "options": [ { "value": "dark", "label": "Dark" }, { "value": "gold", "label": "Gold" }, { "value": "light", "label": "Light" } ] },
+        { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "Fall Flooring Event" },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Save up to 20% on waterproof vinyl" },
+        { "type": "text", "id": "body", "label": "Text" },
+        { "type": "text", "id": "cta", "label": "Link label", "default": "Shop now" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image (optional)" },
+        { "type": "collection", "id": "collection", "label": "Use a photo from this collection (when no image)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Northline promo banners" }]
+}
+{% endschema %}

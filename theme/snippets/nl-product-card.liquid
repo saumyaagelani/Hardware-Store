@@ -1,0 +1,89 @@
+{%- comment -%}
+  Product card in the prototype's style. Usage: {% render 'nl-product-card', product: product, eager: false %}
+  Quote-only products (tag quote-only, or contractors-only for non-trade customers) show
+  "Price on quote" and a "Request a quote" button instead of a price and Add to cart.
+{%- endcomment -%}
+{%- liquid
+  assign root = routes.root_url | remove_last: '/'
+  assign variant = product.selected_or_first_available_variant
+  assign quote_only = false
+  if product.tags contains 'quote-only'
+    assign quote_only = true
+  elsif product.tags contains 'contractors-only'
+    unless customer and customer.b2b?
+      assign quote_only = true
+    endunless
+  endif
+  assign on_sale = false
+  if quote_only == false and product.compare_at_price > product.price
+    assign on_sale = true
+    assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+  assign unit = product.metafields.custom.coverage_unit.value
+  assign img = product.featured_media.preview_image
+  assign img2 = product.media[1].preview_image
+  assign badge_count = 0
+  assign load = 'lazy'
+  if eager
+    assign load = 'eager'
+  endif
+-%}
+<article class="nl-pcard">
+  <a href="{{ product.url }}" class="nl-pcard__media" tabindex="-1" aria-hidden="true">
+    {%- if img -%}
+      {{ img | image_url: width: 600 | image_tag: loading: load, alt: '', class: 'nl-pcard__img', sizes: '(min-width: 1280px) 300px, (min-width: 1024px) 33vw, 50vw', widths: '300, 450, 600' }}
+      {%- if img2 -%}{{ img2 | image_url: width: 600 | image_tag: loading: 'lazy', alt: '', class: 'nl-pcard__img nl-pcard__img--alt', sizes: '(min-width: 1280px) 300px, 50vw', widths: '300, 600' }}{%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'nl-pcard__img nl-pcard__ph' }}
+    {%- endif -%}
+    <span class="nl-pcard__flags">
+      {%- if on_sale -%}<span class="nl-flag nl-flag--gold">Sale −{{ savings }}%</span>{%- assign badge_count = 1 -%}{%- endif -%}
+      {%- if product.tags contains 'best-seller' and badge_count < 2 -%}<span class="nl-flag nl-flag--light">Best Seller</span>{%- assign badge_count = badge_count | plus: 1 -%}{%- endif -%}
+      {%- if product.tags contains 'new' and badge_count < 2 -%}<span class="nl-flag nl-flag--dark">New</span>{%- assign badge_count = badge_count | plus: 1 -%}{%- endif -%}
+      {%- if product.tags contains 'exclusive' and badge_count < 2 -%}<span class="nl-flag nl-flag--light">Exclusive</span>{%- endif -%}
+    </span>
+  </a>
+  <div class="nl-pcard__body">
+    {%- if product.vendor != blank -%}<p class="nl-pcard__brand">{{ product.vendor }}</p>{%- endif -%}
+    <h3 class="nl-pcard__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="nl-pcard__price">
+      {%- if quote_only -%}
+        <span class="nl-pcard__quote">Price on quote</span>
+      {%- else -%}
+        {%- if product.price_varies -%}<span class="nl-pcard__from">From</span>{%- endif -%}
+        <span class="nl-pcard__now{% if on_sale %} is-sale{% endif %}">{{ product.price | money }}</span>
+        {%- if unit != blank -%}<span class="nl-pcard__unit">/ {{ unit }}</span>{%- endif -%}
+        {%- if on_sale -%}
+          <s class="nl-pcard__was">{{ product.compare_at_price | money }}</s>
+          <span class="nl-pcard__save">Save {{ savings }}%</span>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <p class="nl-pcard__stock">
+      {%- if quote_only -%}
+        {% render 'nl-icon', name: 'file-text', size: 15 %} <span>Quote only{% if product.tags contains 'special-order' %} · special order{% endif %}</span>
+      {%- elsif product.available == false -%}
+        <span class="nl-dot nl-dot--out"></span><span class="is-out">Out of stock</span>
+      {%- elsif variant.inventory_management == 'shopify' and variant.inventory_quantity > 0 and variant.inventory_quantity <= 10 -%}
+        <span class="nl-dot nl-dot--low"></span><span class="is-low">Low Stock</span>
+      {%- else -%}
+        <span class="nl-dot nl-dot--in"></span><span class="is-in">In Stock</span>
+      {%- endif -%}
+    </p>
+    <div class="nl-pcard__actions">
+      {%- if quote_only -%}
+        <a class="nl-pbtn nl-pbtn--outline" href="{{ root }}/pages/quote?product={{ product.handle | url_encode }}">Request a quote</a>
+      {%- elsif product.available == false -%}
+        <a class="nl-pbtn nl-pbtn--outline" href="{{ product.url }}">View details</a>
+      {%- elsif product.has_only_default_variant -%}
+        <form action="{{ routes.cart_add_url }}" method="post" class="nl-pcard__form" data-nl-add>
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="nl-pbtn nl-pbtn--sage">{% render 'nl-icon', name: 'shopping-cart', size: 16 %} <span>Add to cart</span></button>
+        </form>
+      {%- else -%}
+        <a class="nl-pbtn nl-pbtn--outline" href="{{ product.url }}">Choose options</a>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

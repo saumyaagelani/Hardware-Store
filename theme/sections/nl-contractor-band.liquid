@@ -1,0 +1,80 @@
+{%- comment -%} "Built for the trade" contractor band, as on the prototype. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="nl-scope nl-cb">
+  <div class="nl-container nl-pad nl-cb__grid">
+    <div>
+      <p class="nl-eyebrow">{{ s.eyebrow }}</p>
+      <h2 class="nl-h2">{{ s.title }}</h2>
+      <p class="nl-cb__pitch">{{ s.pitch }}</p>
+      <ol class="nl-cb__steps">
+        {%- assign steps = s.steps | split: '|' -%}
+        {%- for step in steps -%}
+          <li><span class="nl-cb__num">{{ forloop.index }}</span><span class="nl-cb__step">{{ step | strip }}</span>{%- unless forloop.last -%}<span class="nl-cb__line" aria-hidden="true"></span>{%- endunless -%}</li>
+        {%- endfor -%}
+      </ol>
+      <div class="nl-cb__btns">
+        <a href="{{ s.btn1_link | default: '/pages/contractors' }}" class="nl-btn nl-btn--gold">{% render 'nl-icon', name: 'hard-hat', size: 20 %} {{ s.btn1_label }}</a>
+        <a href="{{ s.btn2_link | default: routes.account_login_url }}" class="nl-btn nl-btn--outline">{{ s.btn2_label }}</a>
+      </div>
+    </div>
+    <ul class="nl-cb__perks">
+      {%- for block in section.blocks -%}
+        <li class="nl-cb__perk" {{ block.shopify_attributes }}>
+          {% render 'nl-icon', name: block.settings.icon, size: 28, class: 'nl-gold' %}
+          <p class="nl-cb__perk-title">{{ block.settings.title }}</p>
+          <p class="nl-cb__perk-body">{{ block.settings.body }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+<style>
+  .nl-cb { background: var(--nl-surface); color: var(--nl-cream); }
+  .nl-cb__grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+  @media (min-width: 1024px) { .nl-cb__grid { grid-template-columns: 1fr 1.1fr; } }
+  .nl-cb__pitch { margin-top: 1rem !important; max-width: 32rem; color: rgb(243 241 233 / .75); line-height: 1.6; }
+  .nl-cb__steps { display: flex; flex-direction: column; gap: .75rem; margin-top: 2rem !important; }
+  @media (min-width: 640px) { .nl-cb__steps { flex-direction: row; align-items: center; gap: 0; } }
+  .nl-cb__steps li { display: flex; align-items: center; gap: .75rem; }
+  @media (min-width: 640px) { .nl-cb__steps li { flex: 1; } }
+  .nl-cb__num { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; flex-shrink: 0; border-radius: 9999px; background: var(--nl-gold); color: var(--nl-page); font-weight: 700; }
+  .nl-cb__step { font-size: .875rem; font-weight: 600; }
+  .nl-cb__line { display: none; flex: 1; height: 1px; margin-inline: .75rem; background: var(--nl-edge); }
+  @media (min-width: 640px) { .nl-cb__line { display: block; } }
+  .nl-cb__btns { display: flex; flex-direction: column; gap: .75rem; margin-top: 2.25rem; }
+  @media (min-width: 640px) { .nl-cb__btns { flex-direction: row; } }
+  .nl-cb__perks { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 640px) { .nl-cb__perks { grid-template-columns: 1fr 1fr; } }
+  .nl-cb__perk { border: 1px solid var(--nl-edge); background: var(--nl-surface-2); border-radius: 10px; padding: 1.5rem; }
+  .nl-cb__perk .nl-gold { color: var(--nl-gold); }
+  .nl-cb__perk-title { margin-top: 1rem !important; font-size: 1.125rem; font-weight: 700; }
+  .nl-cb__perk-body { margin-top: .375rem !important; font-size: .875rem; line-height: 1.6; color: rgb(243 241 233 / .7); }
+</style>
+{% schema %}
+{
+  "name": "Northline contractor band",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "For contractors & trade" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Built for the trade. Priced for the trade." },
+    { "type": "textarea", "id": "pitch", "label": "Text", "default": "Approved trade accounts see contractor pricing on every eligible product automatically, plus project quotes, job-site delivery and a dedicated account contact." },
+    { "type": "text", "id": "steps", "label": "Steps (separate with |)", "default": "Apply online|We verify your business|Contractor pricing unlocks" },
+    { "type": "text", "id": "btn1_label", "label": "Gold button", "default": "Apply for a trade account" },
+    { "type": "url", "id": "btn1_link", "label": "Gold button link" },
+    { "type": "text", "id": "btn2_label", "label": "Outline button", "default": "Contractor sign in" },
+    { "type": "url", "id": "btn2_link", "label": "Outline button link" }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Benefit",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "badge-dollar-sign", "options": [
+          { "value": "badge-dollar-sign", "label": "Price" }, { "value": "clipboard-list", "label": "Clipboard" }, { "value": "truck", "label": "Truck" }, { "value": "users", "label": "People" }, { "value": "hard-hat", "label": "Hard hat" } ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Contractor pricing" },
+        { "type": "text", "id": "body", "label": "Text", "default": "Trade prices shown automatically on eligible products once approved." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Northline contractor band" }]
+}
+{% endschema %}

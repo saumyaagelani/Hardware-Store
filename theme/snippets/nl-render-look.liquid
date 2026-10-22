@@ -1,0 +1,175 @@
+{%- comment -%}
+  "Render look": brand font (Satoshi) and the dark Northline palette, matching the
+  prototype at northline-prototype.onrender.com. Rendered from layout/theme.liquid.
+  Colours for Horizon's own sections come from Theme settings → Colors; this file
+  styles the custom nl-* sections and fills the gaps.
+{%- endcomment -%}
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap">
+<style>
+  :root {
+    --nl-page: #1d211c;
+    --nl-surface: #262b24;
+    --nl-surface-2: #32382f;
+    --nl-cream: #f3f1e9;
+    --nl-stone: #b2b7aa;
+    --nl-edge: #40463c;
+    --nl-gold: #f5b82e;
+    --nl-sage: #cdd7bd;
+    --nl-inverse: #20291c;
+    --nl-success: #86c98e;
+    --nl-font: "Satoshi", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body--family: var(--nl-font);
+    --font-heading--family: var(--nl-font);
+    --font-subheading--family: var(--nl-font);
+    --font-accent--family: var(--nl-font);
+  }
+  html, body { background: var(--nl-page); color: var(--nl-cream); }
+  body, h1, h2, h3, h4, h5, h6, button, input, select, textarea { font-family: var(--nl-font); }
+  h1, h2, h3, h4 { letter-spacing: -0.01em; }
+  ::selection { background: var(--nl-gold); color: var(--nl-page); }
+  :focus-visible { outline: 2px solid var(--nl-gold); outline-offset: 2px; }
+
+  /* Shared building blocks for the nl-* sections */
+  .nl-container { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 1rem; box-sizing: border-box; }
+  @media (min-width: 640px) { .nl-container { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .nl-container { padding-inline: 2rem; } }
+  .nl-scope, .nl-scope * { box-sizing: border-box; }
+  .nl-scope a { color: inherit; text-decoration: none; }
+  .nl-scope ul, .nl-scope ol { list-style: none; margin: 0; padding: 0; }
+  .nl-scope p, .nl-scope h1, .nl-scope h2, .nl-scope h3 { margin: 0; }
+  .nl-scope svg { flex-shrink: 0; }
+  .nl-eyebrow { font-size: .8125rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--nl-gold); }
+  .nl-h2 { margin-top: .75rem !important; font-size: clamp(1.875rem, 3.2vw, 2.5rem); line-height: 1.15; font-weight: 700; color: var(--nl-cream); }
+  .nl-muted { color: var(--nl-stone); }
+  .nl-pad { padding-block: 3.5rem; }
+  @media (min-width: 1024px) { .nl-pad { padding-block: 5rem; } }
+  .nl-heading-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+  .nl-heading-row h2 { margin-top: .5rem !important; font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 600; line-height: 1.2; }
+  .nl-heading-row p.nl-desc { margin-top: .5rem; color: var(--nl-stone); font-size: .9375rem; }
+  .nl-link-arrow { display: inline-flex; align-items: center; gap: .35rem; font-size: .875rem; font-weight: 600; color: var(--nl-cream); white-space: nowrap; }
+  .nl-link-arrow:hover { color: var(--nl-gold); }
+  .nl-btn { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 3rem; padding: 0 1.5rem; border-radius: 3px; border: 1px solid transparent; font: 500 1rem/1 var(--nl-font); cursor: pointer; transition: opacity .15s, background-color .15s, border-color .15s; text-decoration: none; }
+  .nl-btn--gold { background: var(--nl-gold); border-color: var(--nl-gold); color: var(--nl-page) !important; }
+  .nl-btn--gold:hover { opacity: .9; }
+  .nl-btn--outline { border-color: rgb(178 183 170 / .45); color: var(--nl-cream) !important; background: transparent; }
+  .nl-btn--outline:hover { border-color: var(--nl-cream); background: rgb(255 255 255 / .05); }
+  .nl-btn--sage { background: var(--nl-sage); border-color: var(--nl-sage); color: var(--nl-inverse) !important; }
+  .nl-btn--sage:hover { opacity: .9; }
+  .nl-card { border: 1px solid var(--nl-edge); background: var(--nl-surface); border-radius: 10px; }
+  .nl-icon-box { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 6px; background: var(--nl-surface-2); color: var(--nl-cream); flex-shrink: 0; }
+  .nl-icon-box svg { width: 1.375rem; height: 1.375rem; }
+
+  /* Logo (header + footer) */
+  .nl-logo { display: inline-flex; align-items: center; gap: .625rem; flex-shrink: 0; color: var(--nl-cream); text-decoration: none; }
+  .nl-logo__mark { width: 2.25rem; height: 2.25rem; }
+  @media (min-width: 640px) { .nl-logo__mark { width: 2.5rem; height: 2.5rem; } }
+  .nl-logo__img { height: 2.5rem; width: auto; }
+  .nl-logo__text { display: flex; flex-direction: column; line-height: 1; }
+  .nl-logo__name { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase; color: var(--nl-cream); }
+  @media (min-width: 640px) { .nl-logo__name { font-size: 1.375rem; } }
+  .nl-logo__sub { margin-top: .15rem; font-size: .625rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #9ca3af; }
+
+  /* Product grid + cards (prototype style) */
+  .nl-pgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 640px) { .nl-pgrid { gap: 1.25rem; } }
+  @media (min-width: 1024px) { .nl-pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .nl-pgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .nl-pcard { position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; border: 1px solid var(--nl-edge); border-radius: 10px; background: var(--nl-surface); color: var(--nl-cream); transition: box-shadow .2s; }
+  .nl-pcard:hover { box-shadow: 0 10px 30px -12px rgb(0 0 0 / .35); }
+  .nl-pcard a { color: inherit; text-decoration: none; }
+  .nl-pcard__media { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; background: #eceef1; }
+  .nl-pcard__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .3s; }
+  .nl-pcard__img--alt { opacity: 0; }
+  .nl-pcard:hover .nl-pcard__img--alt { opacity: 1; }
+  .nl-pcard:hover .nl-pcard__img:not(.nl-pcard__img--alt):has(+ .nl-pcard__img--alt) { opacity: 0; }
+  .nl-pcard__ph { fill: #b2b7aa; background: #eceef1; }
+  .nl-pcard__flags { position: absolute; top: .75rem; left: .75rem; display: flex; flex-direction: column; align-items: flex-start; gap: .375rem; }
+  .nl-flag { display: inline-flex; align-items: center; padding: .2rem .45rem; border-radius: 4px; font-size: .65625rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.3; }
+  .nl-flag--gold { background: var(--nl-gold); color: var(--nl-page); }
+  .nl-flag--light { background: var(--nl-page); color: var(--nl-cream); }
+  .nl-flag--dark { background: var(--nl-surface-2); color: var(--nl-cream); }
+  .nl-pcard__body { display: flex; flex: 1; flex-direction: column; padding: 1rem; }
+  .nl-pcard__brand { margin: 0; font-size: .6875rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--nl-stone); }
+  .nl-pcard__title { margin: .25rem 0 0; font-size: .9375rem; line-height: 1.35; font-weight: 600; }
+  .nl-pcard__title a { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.7em; }
+  .nl-pcard__title a:hover { text-decoration: underline; }
+  .nl-pcard__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .4rem; margin-top: .75rem; font-size: .8125rem; }
+  .nl-pcard__now { font-size: 1.0625rem; font-weight: 700; color: var(--nl-cream); }
+  .nl-pcard__now.is-sale { color: var(--nl-gold); }
+  .nl-pcard__from, .nl-pcard__unit, .nl-pcard__was { color: var(--nl-stone); }
+  .nl-pcard__save { font-weight: 600; color: var(--nl-gold); font-size: .75rem; }
+  .nl-pcard__quote { font-size: 1rem; font-weight: 600; color: var(--nl-cream); }
+  .nl-pcard__stock { display: flex; align-items: center; gap: .4rem; margin: .5rem 0 0; font-size: .8125rem; font-weight: 600; color: var(--nl-stone); }
+  .nl-dot { width: .5rem; height: .5rem; border-radius: 9999px; }
+  .nl-dot--in { background: var(--nl-success); } .is-in { color: var(--nl-success); }
+  .nl-dot--low { background: #f0c27a; } .is-low { color: #f0c27a; }
+  .nl-dot--out { background: #ef9a8f; } .is-out { color: #ef9a8f; }
+  .nl-pcard__actions { margin-top: auto; padding-top: 1rem; }
+  .nl-pcard__form { margin: 0; }
+  .nl-pbtn { display: inline-flex; width: 100%; align-items: center; justify-content: center; gap: .4rem; min-height: 2.5rem; padding: 0 1rem; border-radius: 6px; border: 1px solid transparent; font: 600 .875rem var(--nl-font); cursor: pointer; text-decoration: none; transition: opacity .15s, border-color .15s; }
+  .nl-pbtn--sage { background: var(--nl-sage); border-color: var(--nl-sage); color: var(--nl-inverse) !important; }
+  .nl-pbtn--sage:hover { opacity: .9; }
+  .nl-pbtn--outline { background: transparent; border-color: var(--nl-stone); color: var(--nl-cream) !important; }
+  .nl-pbtn--outline:hover { border-color: var(--nl-cream); }
+  .nl-pbtn[aria-busy="true"] { opacity: .6; pointer-events: none; }
+
+  /* Horizon pages (collections, product, cart, search) in the dark palette */
+  .product-card, .product-grid__card { --nl-card: 1; }
+  .badge, .product-badges__badge { border-radius: 4px !important; font-weight: 700; }
+  .price, .price__regular, product-price { color: var(--nl-cream); }
+  .price .compare-at-price, s.price-item { color: var(--nl-stone); }
+  .button:not(.button-secondary):not(.button-unstyled):not(.button--secondary):not(.link) { font-weight: 500; }
+  .shopify-section .rte a, .rte a { color: var(--nl-gold); }
+  .rte table { border-collapse: collapse; width: 100%; }
+  .rte th, .rte td { border: 1px solid var(--nl-edge); padding: .5rem .75rem; text-align: left; }
+  .rte th { background: var(--nl-surface); font-weight: 600; width: 40%; }
+  input, select, textarea { color-scheme: dark; }
+
+  /* Quote + contractor forms (sections nl-quote-request / nl-contractor-application) */
+  .nl-form-section { width: 100%; max-width: 52rem; margin-inline: auto; padding-inline: 1rem; box-sizing: border-box; color: var(--nl-cream); }
+  .nl-form-section h1 { font-size: clamp(1.875rem, 3.5vw, 2.5rem); font-weight: 700; line-height: 1.1; margin: 0 0 .75rem; }
+  .nl-form-section .nl-intro { color: var(--nl-stone); margin-bottom: 2rem; }
+  .nl-form fieldset { border: 1px solid var(--nl-edge) !important; border-radius: 10px; background: var(--nl-surface); padding: 1.5rem !important; }
+  .nl-form legend { padding: 0 .5rem; }
+  .nl-form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]), .nl-form select, .nl-form textarea {
+    min-height: 2.75rem; border: 1px solid var(--nl-edge); border-radius: 6px; background: var(--nl-page); color: var(--nl-cream); box-sizing: border-box;
+  }
+  .nl-form input:focus, .nl-form select:focus, .nl-form textarea:focus { outline: none; border-color: var(--nl-stone); box-shadow: 0 0 0 3px rgb(245 184 46 / .3); }
+  .nl-form button[type="submit"], .nl-form .button { min-height: 3rem; padding: 0 1.75rem; border: 0; border-radius: 3px; background: var(--nl-gold); color: var(--nl-page); font: 600 1rem var(--nl-font); cursor: pointer; }
+  .nl-form button[type="submit"]:hover { opacity: .9; }
+  .nl-success { color: var(--nl-success); }
+  .nl-error { color: #ef9a8f; }
+
+  /* Product page add-ons */
+  .nl-quote .button { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 3rem; border-radius: 3px; background: var(--nl-gold); color: var(--nl-page) !important; font-weight: 600; text-decoration: none; }
+  .nl-quote__note { color: var(--nl-stone); }
+  .nl-quote__note a { color: var(--nl-gold); }
+  .nl-calc { border-color: var(--nl-edge) !important; background: var(--nl-surface); border-radius: 10px !important; }
+  .nl-calc input[type="number"] { border: 1px solid var(--nl-edge); border-radius: 6px; background: var(--nl-page); color: var(--nl-cream); }
+  .nl-calc__apply { min-height: 2.5rem; padding: 0 1rem; border: 1px solid var(--nl-stone); border-radius: 6px; background: transparent; color: var(--nl-cream); font: 600 .875rem var(--nl-font); cursor: pointer; }
+  .nl-calc__apply:hover { border-color: var(--nl-cream); }
+  .nl-price-quote { font-size: 1.25rem; font-weight: 600; color: var(--nl-cream); }
+</style>
+<script>
+  /* Card "Add to cart": add without leaving the page, then update the header count. */
+  document.addEventListener('submit', async (e) => {
+    const form = e.target.closest && e.target.closest('form[data-nl-add]');
+    if (!form || !window.fetch) return;
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    const label = btn && btn.querySelector('span');
+    btn && btn.setAttribute('aria-busy', 'true');
+    try {
+      const res = await fetch('{{ routes.cart_add_url }}.js', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      if (!res.ok) throw new Error('add failed');
+      const cart = await (await fetch('{{ routes.cart_url }}.js')).json();
+      document.dispatchEvent(new CustomEvent('nl:cart-count', { detail: { count: cart.item_count } }));
+      if (label) { label.textContent = 'Added ✓'; setTimeout(() => (label.textContent = 'Add to cart'), 2000); }
+    } catch (err) {
+      form.submit();
+    } finally {
+      btn && btn.removeAttribute('aria-busy');
+    }
+  });
+</script>

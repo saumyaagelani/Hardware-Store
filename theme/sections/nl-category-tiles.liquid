@@ -1,0 +1,104 @@
+{%- comment -%} "Shop by category" tiles, as on the prototype, with a gold Deals tile at the end. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="nl-scope nl-container nl-pad nl-cats">
+  <div class="nl-heading-row">
+    <div>
+      <p class="nl-eyebrow">{{ s.eyebrow }}</p>
+      <h2>{{ s.title }}</h2>
+    </div>
+    {%- if s.link_label != blank -%}<a href="{{ s.link | default: routes.all_products_collection_url }}" class="nl-link-arrow">{{ s.link_label }} {% render 'nl-icon', name: 'arrow-right', size: 16 %}</a>{%- endif -%}
+  </div>
+  <ul class="nl-cats__grid">
+    {%- for block in section.blocks -%}
+      {%- assign c = block.settings.collection -%}
+      {%- if c != blank -%}
+        {%- liquid
+          assign tile_img = block.settings.image
+          if tile_img == blank and block.settings.asset != blank
+            assign tile_src = block.settings.asset | asset_url
+          else
+            assign tile_src = nil
+          endif
+          if tile_img == blank and tile_src == nil
+            assign tile_img = c.featured_image | default: c.products.first.featured_media.preview_image
+          endif
+        -%}
+        <li {{ block.shopify_attributes }}>
+          <a href="{{ c.url }}" class="nl-cat">
+            <span class="nl-cat__media">
+              {%- if tile_src -%}
+                <img src="{{ tile_src }}" alt="" loading="lazy" width="400" height="300">
+              {%- elsif tile_img -%}
+                {{ tile_img | image_url: width: 500 | image_tag: loading: 'lazy', alt: '', widths: '250, 500' }}
+              {%- endif -%}
+            </span>
+            <span class="nl-cat__foot">
+              <span>
+                <span class="nl-cat__name">{{ block.settings.label | default: c.title }}</span>
+                <span class="nl-cat__count">{{ c.products_count }} products</span>
+              </span>
+              {% render 'nl-icon', name: 'arrow-right', size: 16 %}
+            </span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if s.deals_label != blank -%}
+      <li>
+        <a href="{{ s.deals_link | default: '/collections/deals' }}" class="nl-cat nl-cat--deals">
+          {% render 'nl-icon', name: 'badge-percent', size: 32 %}
+          <span>
+            <span class="nl-cat__deals-title">{{ s.deals_label }}</span>
+            <span class="nl-cat__deals-link">Shop savings {% render 'nl-icon', name: 'arrow-right', size: 16 %}</span>
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+</section>
+<style>
+  .nl-cats__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+  @media (min-width: 640px) { .nl-cats__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; } }
+  @media (min-width: 1024px) { .nl-cats__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .nl-cats__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  .nl-cat { display: flex; flex-direction: column; height: 100%; overflow: hidden; border: 1px solid var(--nl-edge); border-radius: 10px; background: var(--nl-surface); transition: box-shadow .2s; }
+  .nl-cat:hover { box-shadow: 0 10px 30px -12px rgb(0 0 0 / .35); }
+  .nl-cat__media { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: #eceef1; }
+  .nl-cat__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+  .nl-cat:hover .nl-cat__media img { transform: scale(1.04); }
+  .nl-cat__foot { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: .5rem; padding: .75rem .875rem; }
+  .nl-cat__foot > svg { color: var(--nl-stone); transition: color .2s; }
+  .nl-cat:hover .nl-cat__foot > svg { color: var(--nl-cream); }
+  .nl-cat__name { display: block; font-size: .9375rem; line-height: 1.2; font-weight: 600; }
+  .nl-cat__count { font-size: .75rem; color: var(--nl-stone); }
+  .nl-cat--deals { min-height: 11rem; justify-content: space-between; padding: 1rem; background: var(--nl-gold); border-color: var(--nl-gold); color: var(--nl-page) !important; }
+  .nl-cat--deals:hover { opacity: .92; }
+  .nl-cat__deals-title { display: block; font-size: 1.25rem; line-height: 1.15; font-weight: 700; }
+  .nl-cat__deals-link { display: inline-flex; align-items: center; gap: .25rem; margin-top: .25rem; font-size: .875rem; font-weight: 600; }
+</style>
+{% schema %}
+{
+  "name": "Northline categories",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "Shop by category" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Everything for floors, doors & bath" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Browse all products" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "deals_label", "label": "Deals tile title (empty hides it)", "default": "Deals & Sale" },
+    { "type": "url", "id": "deals_link", "label": "Deals tile link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label (optional)" },
+        { "type": "image_picker", "id": "image", "label": "Image (optional)" },
+        { "type": "text", "id": "asset", "label": "Built-in illustration file (advanced)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Northline categories" }]
+}
+{% endschema %}

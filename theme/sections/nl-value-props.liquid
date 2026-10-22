@@ -1,0 +1,42 @@
+{%- comment -%} Four "why shop with us" points under the hero, as on the prototype. {%- endcomment -%}
+<section class="nl-scope nl-vp" aria-label="Why shop with us">
+  <ul class="nl-container nl-vp__list">
+    {%- for block in section.blocks -%}
+      <li class="nl-vp__item" {{ block.shopify_attributes }}>
+        <span class="nl-icon-box">{% render 'nl-icon', name: block.settings.icon, size: 22 %}</span>
+        <span>
+          <span class="nl-vp__title">{{ block.settings.title }}</span>
+          <span class="nl-vp__body">{{ block.settings.body }}</span>
+        </span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+<style>
+  .nl-vp { background: var(--nl-surface); border-bottom: 1px solid var(--nl-edge); color: var(--nl-cream); }
+  .nl-vp__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; padding-block: 2rem; }
+  @media (min-width: 1024px) { .nl-vp__list { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 2.5rem; } }
+  .nl-vp__item { display: flex; flex-direction: column; gap: .75rem; }
+  @media (min-width: 640px) { .nl-vp__item { flex-direction: row; align-items: flex-start; } }
+  .nl-vp__title { display: block; font-size: 1rem; font-weight: 700; }
+  .nl-vp__body { display: block; margin-top: .125rem; font-size: .8125rem; line-height: 1.4; color: var(--nl-stone); }
+</style>
+{% schema %}
+{
+  "name": "Northline value points",
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "store", "options": [
+          { "value": "store", "label": "Store" }, { "value": "truck", "label": "Truck" }, { "value": "hard-hat", "label": "Hard hat" },
+          { "value": "file-text", "label": "Document" }, { "value": "phone", "label": "Phone" }, { "value": "badge-percent", "label": "Discount" } ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Free in-store pickup" },
+        { "type": "text", "id": "body", "label": "Text", "default": "Most orders ready within 2 business hours" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Northline value points" }]
+}
+{% endschema %}

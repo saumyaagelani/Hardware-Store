@@ -1,0 +1,395 @@
+{
+  "sections": {
+    "hero": {
+      "type": "nl-hero",
+      "settings": {
+        "btn1_link": "/collections/all",
+        "btn2_link": "/pages/quote",
+        "card_link": "/collections/vinyl-flooring"
+      }
+    },
+    "value_props": {
+      "type": "nl-value-props",
+      "blocks": {
+        "point_1": {
+          "type": "point",
+          "settings": {
+            "icon": "store",
+            "title": "Free in-store pickup",
+            "body": "Most orders ready within 2 business hours"
+          }
+        },
+        "point_2": {
+          "type": "point",
+          "settings": {
+            "icon": "truck",
+            "title": "Local delivery",
+            "body": "Curbside delivery across our service zones"
+          }
+        },
+        "point_3": {
+          "type": "point",
+          "settings": {
+            "icon": "hard-hat",
+            "title": "Contractor pricing",
+            "body": "Approved trade accounts save automatically"
+          }
+        },
+        "point_4": {
+          "type": "point",
+          "settings": {
+            "icon": "file-text",
+            "title": "Free project quotes",
+            "body": "Send measurements or photos — we'll do the rest"
+          }
+        }
+      },
+      "block_order": [
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4"
+      ],
+      "settings": {}
+    },
+    "categories": {
+      "type": "nl-category-tiles",
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "collection": "vinyl-flooring",
+            "asset": "nl-cat-vinyl.svg"
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "collection": "stairs",
+            "asset": "nl-cat-stairs.svg"
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "collection": "doors",
+            "asset": "nl-cat-doors.svg"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "collection": "locks-door-hardware",
+            "asset": "nl-cat-locks.svg"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "collection": "shower-bases",
+            "asset": "nl-cat-shower-bases.svg"
+          }
+        },
+        "category_6": {
+          "type": "category",
+          "settings": {
+            "collection": "shower-doors",
+            "asset": "nl-cat-shower-doors.svg"
+          }
+        },
+        "category_7": {
+          "type": "category",
+          "settings": {
+            "collection": "shower-accessories",
+            "asset": "nl-cat-shower-accessories.svg"
+          }
+        },
+        "category_8": {
+          "type": "category",
+          "settings": {
+            "collection": "toilet-seats",
+            "asset": "nl-cat-toilet-seats.svg"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "collection": "vanities",
+            "asset": "nl-cat-vanities.svg"
+          }
+        },
+        "category_10": {
+          "type": "category",
+          "settings": {
+            "collection": "plumbing",
+            "asset": "nl-cat-plumbing.svg"
+          }
+        },
+        "category_11": {
+          "type": "category",
+          "settings": {
+            "collection": "wpc-wall-panels",
+            "asset": "nl-cat-wpc-wall-panels.svg"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4",
+        "category_5",
+        "category_6",
+        "category_7",
+        "category_8",
+        "category_9",
+        "category_10",
+        "category_11"
+      ],
+      "settings": {
+        "link": "/collections/all",
+        "deals_link": "/collections/deals"
+      }
+    },
+    "featured": {
+      "type": "nl-product-grid",
+      "settings": {
+        "eyebrow": "Customer favourites",
+        "title": "Featured products",
+        "collection": "featured",
+        "limit": 8,
+        "link_label": "View all",
+        "eager": true
+      }
+    },
+    "promos": {
+      "type": "nl-promo-banners",
+      "blocks": {
+        "promo_1": {
+          "type": "promo",
+          "settings": {
+            "theme": "dark",
+            "eyebrow": "Fall Flooring Event",
+            "title": "Save up to 20% on waterproof vinyl",
+            "body": "Harbour Oak, Urban Concrete and more — while stock lasts.",
+            "cta": "Shop vinyl deals",
+            "link": "/collections/deals",
+            "collection": "vinyl-flooring"
+          }
+        },
+        "promo_2": {
+          "type": "promo",
+          "settings": {
+            "theme": "gold",
+            "eyebrow": "Bathroom Refresh",
+            "title": "Vanities, shower doors & bases",
+            "body": "Coordinated matte black and chrome collections.",
+            "cta": "Shop bathroom",
+            "link": "/collections/vanities",
+            "collection": "vanities"
+          }
+        },
+        "promo_3": {
+          "type": "promo",
+          "settings": {
+            "theme": "light",
+            "eyebrow": "New Arrivals",
+            "title": "Fluted WPC feature walls",
+            "body": "Four finishes. Installs in an afternoon.",
+            "cta": "Explore panels",
+            "link": "/collections/wpc-wall-panels",
+            "collection": "wpc-wall-panels"
+          }
+        }
+      },
+      "block_order": [
+        "promo_1",
+        "promo_2",
+        "promo_3"
+      ],
+      "settings": {}
+    },
+    "on_sale": {
+      "type": "nl-product-grid",
+      "settings": {
+        "eyebrow": "Limited time",
+        "title": "On sale now",
+        "description": "Sale prices while stock lasts. Contractor accounts see their best available price.",
+        "collection": "deals",
+        "limit": 4,
+        "link_label": "View all deals"
+      }
+    },
+    "contractors": {
+      "type": "nl-contractor-band",
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "badge-dollar-sign",
+            "title": "Contractor pricing",
+            "body": "Trade prices shown automatically on eligible products once approved."
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "clipboard-list",
+            "title": "Project quotes",
+            "body": "Upload plans and takeoffs for itemised, job-specific pricing."
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "icon": "truck",
+            "title": "Job-site delivery",
+            "body": "Schedule deliveries to your site or pick up from the contractor yard."
+          }
+        },
+        "perk_4": {
+          "type": "perk",
+          "settings": {
+            "icon": "users",
+            "title": "Dedicated contact",
+            "body": "A named account contact for orders, special orders and returns."
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "btn1_link": "/pages/contractors",
+        "btn2_link": "/account/login"
+      }
+    },
+    "quote": {
+      "type": "nl-quote-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon": "ruler",
+            "title": "Share your project",
+            "body": "Products, colours, measurements or square footage."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon": "camera",
+            "title": "Attach photos or plans",
+            "body": "Floor plans, PDFs and site photos help us quote accurately."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon": "messages-square",
+            "title": "We review & advise",
+            "body": "Our team checks quantities, compatibility and lead times."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "icon": "file-check-2",
+            "title": "Receive your quote",
+            "body": "Itemised pricing, usually within one business day."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "btn1_link": "/pages/quote",
+        "btn2_link": "/pages/quote?from=cart"
+      }
+    },
+    "fulfilment": {
+      "type": "nl-fulfilment",
+      "blocks": {
+        "pickup_1": {
+          "type": "pickup",
+          "settings": {
+            "name": "Main Showroom & Warehouse",
+            "hours": "Mon–Fri 7:30–6:00 · Sat 8:00–4:00",
+            "ready": "Within 2 business hours"
+          }
+        },
+        "pickup_2": {
+          "type": "pickup",
+          "settings": {
+            "name": "Contractor Yard — Door 3",
+            "hours": "Mon–Fri 6:30–3:00",
+            "ready": "Next business day"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "name": "Local Delivery",
+            "lead": "1–3 business days",
+            "free_over": "$2,500",
+            "fee": "$79.00"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "name": "Metro Area",
+            "lead": "2–4 business days",
+            "free_over": "$4,000",
+            "fee": "$119.00"
+          }
+        },
+        "zone_5": {
+          "type": "zone",
+          "settings": {
+            "name": "Extended Area",
+            "lead": "3–5 business days",
+            "free_over": "",
+            "fee": "$169.00"
+          }
+        }
+      },
+      "block_order": [
+        "pickup_1",
+        "pickup_2",
+        "zone_3",
+        "zone_4",
+        "zone_5"
+      ],
+      "settings": {
+        "link": "/policies/shipping-policy"
+      }
+    },
+    "visit": {
+      "type": "nl-visit-us",
+      "settings": {
+        "btn1_link": "/pages/contact",
+        "btn2_link": "/pages/quote"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "value_props",
+    "categories",
+    "featured",
+    "promos",
+    "on_sale",
+    "contractors",
+    "quote",
+    "fulfilment",
+    "visit"
+  ]
+}

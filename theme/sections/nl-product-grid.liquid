@@ -1,0 +1,41 @@
+{%- comment -%} Product grid with a section heading ("Featured products", "On sale now"), as on the prototype. {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign c = s.collection | default: collections.all -%}
+<section class="nl-scope nl-pg{% if s.tinted %} nl-pg--tint{% endif %}">
+  <div class="nl-container nl-pad">
+    <div class="nl-heading-row">
+      <div>
+        <p class="nl-eyebrow">{{ s.eyebrow }}</p>
+        <h2>{{ s.title }}</h2>
+        {%- if s.description != blank -%}<p class="nl-desc">{{ s.description }}</p>{%- endif -%}
+      </div>
+      {%- if s.link_label != blank -%}<a href="{{ c.url }}" class="nl-link-arrow">{{ s.link_label }} {% render 'nl-icon', name: 'arrow-right', size: 16 %}</a>{%- endif -%}
+    </div>
+    <ul class="nl-pgrid">
+      {%- for product in c.products limit: s.limit -%}
+        <li>{% render 'nl-product-card', product: product, eager: s.eager %}</li>
+      {%- else -%}
+        <li class="nl-muted">No products yet.</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+<style>
+  .nl-pg--tint { background: var(--nl-page); }
+</style>
+{% schema %}
+{
+  "name": "Northline product grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "Customer favourites" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Featured products" },
+    { "type": "text", "id": "description", "label": "Text" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 16, "step": 1, "default": 8 },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View all" },
+    { "type": "checkbox", "id": "eager", "label": "Load images first (use for the top grid)", "default": false },
+    { "type": "checkbox", "id": "tinted", "label": "Tinted background", "default": false }
+  ],
+  "presets": [{ "name": "Northline product grid" }]
+}
+{% endschema %}

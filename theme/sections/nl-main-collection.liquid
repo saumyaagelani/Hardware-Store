@@ -1,0 +1,89 @@
+{%- comment -%} Collection page in the prototype's style: title, category chips, sort, product cards, pagination. {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- paginate collection.products by s.per_page -%}
+<section class="nl-scope nl-container nl-coll">
+  <nav class="nl-crumbs" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span>
+    {%- if collection.handle != 'all' -%}<a href="{{ routes.all_products_collection_url }}">Shop</a><span aria-hidden="true">/</span>{%- endif -%}
+    <span aria-current="page">{{ collection.title }}</span>
+  </nav>
+  <div class="nl-coll__head">
+    <div>
+      <h1 class="nl-coll__title">{% if collection.handle == 'all' %}All products{% else %}{{ collection.title }}{% endif %}</h1>
+      {%- if collection.description != blank -%}<div class="nl-coll__desc">{{ collection.description }}</div>{%- endif -%}
+      <p class="nl-coll__count">{{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}</p>
+    </div>
+    <form class="nl-coll__sort" method="get">
+      <label for="nl-sort">Sort by</label>
+      <select id="nl-sort" name="sort_by" onchange="this.form.submit()">
+        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>
+        {%- endfor -%}
+      </select>
+      <noscript><button type="submit">Apply</button></noscript>
+    </form>
+  </div>
+
+  {%- if s.chips != blank -%}
+    <ul class="nl-chips" aria-label="Categories">
+      <li><a href="{{ routes.all_products_collection_url }}" class="nl-chip{% if collection.handle == 'all' %} is-active{% endif %}">All</a></li>
+      {%- for c in s.chips -%}
+        <li><a href="{{ c.url }}" class="nl-chip{% if c.handle == collection.handle %} is-active{% endif %}">{{ c.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  <ul class="nl-pgrid">
+    {%- for product in collection.products -%}
+      <li>{% render 'nl-product-card', product: product, eager: forloop.first %}</li>
+    {%- else -%}
+      <li class="nl-coll__empty">No products in this category yet. <a href="{{ routes.all_products_collection_url }}">Browse all products</a></li>
+    {%- endfor -%}
+  </ul>
+
+  {%- if paginate.pages > 1 -%}
+    <nav class="nl-pages" aria-label="Pagination">
+      {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="nl-page">Previous</a>{%- endif -%}
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}<a href="{{ part.url }}" class="nl-page">{{ part.title }}</a>
+        {%- elsif part.title == paginate.current_page -%}<span class="nl-page is-current" aria-current="page">{{ part.title }}</span>
+        {%- else -%}<span class="nl-page is-gap">{{ part.title }}</span>{%- endif -%}
+      {%- endfor -%}
+      {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="nl-page">Next</a>{%- endif -%}
+    </nav>
+  {%- endif -%}
+</section>
+{%- endpaginate -%}
+<style>
+  .nl-coll { padding-block: 2rem 4rem; }
+  .nl-crumbs { display: flex; flex-wrap: wrap; gap: .5rem; font-size: .8125rem; color: var(--nl-stone); }
+  .nl-crumbs a:hover { color: var(--nl-cream); }
+  .nl-coll__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
+  .nl-coll__title { font-size: clamp(1.875rem, 3.5vw, 2.5rem); font-weight: 700; line-height: 1.1; }
+  .nl-coll__desc { margin-top: .5rem; max-width: 42rem; color: var(--nl-stone); }
+  .nl-coll__count { margin-top: .5rem !important; font-size: .875rem; color: var(--nl-stone); }
+  .nl-coll__sort { display: flex; align-items: center; gap: .5rem; font-size: .875rem; color: var(--nl-stone); }
+  .nl-coll__sort select { height: 2.5rem; padding: 0 2rem 0 .75rem; border: 1px solid var(--nl-edge); border-radius: 6px; background: var(--nl-surface); color: var(--nl-cream); font: 500 .875rem var(--nl-font); }
+  .nl-chips { display: flex; gap: .5rem; overflow-x: auto; margin: 1.5rem 0 !important; padding-bottom: .25rem !important; scrollbar-width: thin; }
+  .nl-chip { display: inline-flex; align-items: center; height: 2.25rem; padding: 0 .9rem; border: 1px solid var(--nl-edge); border-radius: 9999px; background: var(--nl-surface); font-size: .8125rem; font-weight: 600; white-space: nowrap; }
+  .nl-chip:hover { border-color: var(--nl-stone); }
+  .nl-chip.is-active { border-color: var(--nl-gold); background: var(--nl-surface-2); color: var(--nl-gold); }
+  .nl-coll .nl-pgrid { margin-top: 1.5rem; }
+  .nl-coll__empty { grid-column: 1 / -1; padding: 3rem 0; color: var(--nl-stone); }
+  .nl-coll__empty a { color: var(--nl-gold); }
+  .nl-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-top: 2.5rem; }
+  .nl-page { display: inline-flex; align-items: center; justify-content: center; min-width: 2.5rem; height: 2.5rem; padding: 0 .75rem; border: 1px solid var(--nl-edge); border-radius: 6px; background: var(--nl-surface); font-size: .875rem; font-weight: 600; }
+  .nl-page:hover { border-color: var(--nl-stone); }
+  .nl-page.is-current { background: var(--nl-gold); border-color: var(--nl-gold); color: var(--nl-page); }
+  .nl-page.is-gap { border: 0; background: transparent; }
+</style>
+{% schema %}
+{
+  "name": "Northline collection",
+  "settings": [
+    { "type": "range", "id": "per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 },
+    { "type": "collection_list", "id": "chips", "label": "Category chips" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "nl_footer": {
+      "type": "nl-footer",
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Shop",
+            "links": "All Products | /collections/all\nDeals & Sale | /collections/deals\nVinyl Flooring | /collections/vinyl-flooring\nDoors | /collections/doors\nVanities | /collections/vanities\nWPC Wall Panels | /collections/wpc-wall-panels"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "title": "Customer Service",
+            "links": "Free Quote | /pages/quote\nDelivery & Pickup | /policies/shipping-policy\nReturns | /policies/refund-policy\nContact Us | /pages/contact\nMy Account | /account"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "title": "Trade & Business",
+            "links": "Contractor Program | /pages/contractors\nApply for an Account | /pages/contractors\nProject Quotes | /pages/quote"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ],
+      "settings": {
+        "facebook": "https://www.facebook.com/",
+        "instagram": "https://www.instagram.com/"
+      }
+    }
+  },
+  "order": [
+    "nl_footer"
+  ]
+}

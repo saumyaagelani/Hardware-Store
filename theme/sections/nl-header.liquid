@@ -1,0 +1,283 @@
+{%- comment -%}
+  Northline header — recreates the prototype header: announcement bar, logo, search,
+  "Get a free quote", account, cart and the category bar.
+{%- endcomment -%}
+{%- assign root = routes.root_url | remove_last: '/' -%}
+{% render 'nl-render-look' %}
+<div class="nl-scope nl-header" id="nl-header">
+  <a href="#MainContent" class="nl-skip">Skip to content</a>
+
+  <div class="nl-announce">
+    <div class="nl-container nl-announce__row">
+      <p class="nl-announce__side">
+        {% render 'nl-icon', name: 'truck', size: 16, class: 'nl-gold' %}
+        {{ section.settings.announce_left }}
+      </p>
+      <p class="nl-announce__msg" aria-live="polite">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'announcement' -%}
+            <span class="nl-announce__item{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+              {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}">{{ block.settings.link_label }}</a>
+              {%- endif -%}
+            </span>
+          {%- endif -%}
+        {%- endfor -%}
+      </p>
+      {%- if section.settings.phone != blank -%}
+        <a class="nl-announce__side nl-announce__phone" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">
+          {% render 'nl-icon', name: 'phone', size: 16, class: 'nl-gold' %}
+          {{ section.settings.phone }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="nl-bar">
+    <div class="nl-container nl-bar__row">
+      <button type="button" class="nl-iconbtn nl-only-mobile" data-nl-open aria-label="Open menu" aria-controls="nl-drawer">
+        {% render 'nl-icon', name: 'menu', size: 24 %}
+      </button>
+
+      <a href="{{ routes.root_url }}" class="nl-logo" aria-label="{{ section.settings.brand_name | escape }} — home">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 400 | image_tag: alt: section.settings.brand_name, class: 'nl-logo__img', loading: 'eager' }}
+        {%- else -%}
+          <svg viewBox="0 0 40 40" class="nl-logo__mark" aria-hidden="true"><rect width="40" height="40" rx="6" fill="#F5B82E"/><path d="M8 19 20 9l12 10" fill="none" stroke="#1D211C" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 31V20l14 11V20" fill="none" stroke="#1D211C" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="nl-logo__text">
+            <span class="nl-logo__name">{{ section.settings.brand_short }}</span>
+            <span class="nl-logo__sub">{{ section.settings.brand_sub }}</span>
+          </span>
+        {%- endif -%}
+      </a>
+
+      <form action="{{ routes.search_url }}" method="get" role="search" class="nl-search nl-only-desktop">
+        {% render 'nl-icon', name: 'search', size: 18, class: 'nl-search__icon' %}
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search flooring, doors, vanities &amp; more" aria-label="Search products">
+        <input type="hidden" name="type" value="product">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="nl-actions">
+        <a href="{{ root }}/pages/quote" class="nl-quote-link">Get a free quote {% render 'nl-icon', name: 'arrow-up-right', size: 18 %}</a>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="nl-action">
+            {% render 'nl-icon', name: 'user', size: 22 %}
+            <span class="nl-action__label">
+              {%- if customer -%}
+                <span class="nl-action__small">Hi, {{ customer.first_name | default: 'there' }}</span>Account
+              {%- else -%}
+                <span class="nl-action__small">Sign in</span>Account
+              {%- endif -%}
+            </span>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="nl-action nl-cart">
+          {% render 'nl-icon', name: 'shopping-cart', size: 22 %}
+          <span class="nl-action__label nl-cart__label">Cart</span>
+          <span class="nl-cart__count" data-nl-cart-count>{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+    <div class="nl-container nl-only-mobile nl-search-mobile">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="nl-search">
+        {% render 'nl-icon', name: 'search', size: 18, class: 'nl-search__icon' %}
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search products" aria-label="Search products">
+        <input type="hidden" name="type" value="product">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <nav class="nl-nav nl-only-desktop" aria-label="Main">
+    <div class="nl-container nl-nav__row">
+      <a href="{{ routes.all_products_collection_url }}" class="nl-nav__all">{% render 'nl-icon', name: 'menu', size: 18 %} Shop all products</a>
+      <ul class="nl-nav__links">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'nav_link' -%}
+            <li {{ block.shopify_attributes }}><a href="{{ block.settings.link }}"{% if request.path == block.settings.link %} aria-current="page"{% endif %}>{{ block.settings.label }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if section.settings.highlight_label != blank -%}
+        <a href="{{ section.settings.highlight_link }}" class="nl-nav__highlight">{{ section.settings.highlight_label }} {% render 'nl-icon', name: 'arrow-up-right', size: 16 %}</a>
+      {%- endif -%}
+    </div>
+  </nav>
+
+  <div class="nl-drawer" id="nl-drawer" hidden>
+    <div class="nl-drawer__backdrop" data-nl-close></div>
+    <div class="nl-drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="nl-drawer__head">
+        <span class="nl-logo__name">{{ section.settings.brand_short }}</span>
+        <button type="button" class="nl-iconbtn" data-nl-close aria-label="Close menu">{% render 'nl-icon', name: 'x', size: 22 %}</button>
+      </div>
+      <ul class="nl-drawer__links">
+        <li><a href="{{ routes.all_products_collection_url }}">Shop all products</a></li>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'nav_link' -%}
+            <li><a href="{{ block.settings.link }}">{{ block.settings.label }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if section.settings.highlight_label != blank -%}
+          <li><a href="{{ section.settings.highlight_link }}" class="nl-gold">{{ section.settings.highlight_label }}</a></li>
+        {%- endif -%}
+        <li><a href="{{ root }}/pages/quote">Get a free quote</a></li>
+        {%- if shop.customer_accounts_enabled -%}<li><a href="{{ routes.account_url }}">My account</a></li>{%- endif -%}
+      </ul>
+      {%- if section.settings.phone != blank -%}
+        <p class="nl-drawer__phone">{% render 'nl-icon', name: 'phone', size: 16, class: 'nl-gold' %} {{ section.settings.phone }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .nl-header { position: relative; z-index: 30; color: var(--nl-cream); }
+  .nl-skip { position: absolute; left: -9999px; top: .5rem; z-index: 50; background: var(--nl-gold); color: var(--nl-page) !important; padding: .5rem 1rem; font-weight: 600; }
+  .nl-skip:focus { left: .5rem; }
+  .nl-gold { color: var(--nl-gold); }
+  .nl-only-desktop { display: none !important; }
+  @media (min-width: 1024px) { .nl-only-desktop { display: flex !important; } .nl-only-mobile { display: none !important; } }
+
+  .nl-announce { background: var(--nl-surface-2); border-bottom: 1px solid var(--nl-edge); font-size: .8125rem; }
+  .nl-announce__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.5rem; }
+  .nl-announce__side { display: none; align-items: center; gap: .4rem; color: rgb(243 241 233 / .82); white-space: nowrap; }
+  @media (min-width: 1024px) { .nl-announce__side { display: flex; } }
+  .nl-announce__msg { flex: 1; min-width: 0; text-align: center; color: rgb(243 241 233 / .9); }
+  @media (min-width: 1024px) { .nl-announce__msg { flex: none; } }
+  .nl-announce__item { display: none; }
+  .nl-announce__item.is-active { display: inline; }
+  .nl-announce__item a { margin-left: .5rem; font-weight: 600; color: var(--nl-gold); }
+  .nl-announce__item a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .nl-announce__phone { font-weight: 500; }
+  .nl-announce__phone:hover { color: var(--nl-cream); }
+
+  .nl-bar { background: var(--nl-page); }
+  .nl-bar__row { display: flex; align-items: center; gap: .75rem; height: 4rem; }
+  @media (min-width: 640px) { .nl-bar__row { height: 5rem; } }
+  @media (min-width: 1024px) { .nl-bar__row { height: 6rem; gap: 2.5rem; } }
+  .nl-iconbtn { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border: 0; background: transparent; color: var(--nl-cream); cursor: pointer; border-radius: 6px; padding: 0; }
+  .nl-iconbtn:hover { background: var(--nl-surface-2); }
+
+  .nl-logo { display: inline-flex; align-items: center; gap: .625rem; flex-shrink: 0; }
+  .nl-logo__mark { width: 2.25rem; height: 2.25rem; }
+  @media (min-width: 640px) { .nl-logo__mark { width: 2.5rem; height: 2.5rem; } }
+  .nl-logo__img { height: 2.5rem; width: auto; }
+  .nl-logo__text { display: flex; flex-direction: column; line-height: 1; }
+  .nl-logo__name { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase; color: var(--nl-cream); }
+  @media (min-width: 640px) { .nl-logo__name { font-size: 1.375rem; } }
+  .nl-logo__sub { margin-top: .15rem; font-size: .625rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #9ca3af; }
+
+  .nl-search { position: relative; display: flex; align-items: center; flex: 1; max-width: 36rem; margin-inline: auto; height: 3.5rem; border: 1px solid var(--nl-edge); background: var(--nl-surface); border-radius: 6px; }
+  .nl-search__icon { position: absolute; left: .9rem; color: var(--nl-stone); pointer-events: none; }
+  .nl-search input[type="search"] { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; color: var(--nl-cream); padding: 0 .75rem 0 2.6rem; font-size: .9375rem; outline: none; }
+  .nl-search input::placeholder { color: var(--nl-stone); }
+  .nl-search:focus-within { border-color: var(--nl-stone); box-shadow: 0 0 0 3px rgb(245 184 46 / .25); }
+  .nl-search button { margin-right: .4rem; height: 2.4rem; padding: 0 .9rem; border: 1px solid var(--nl-edge); border-radius: 4px; background: var(--nl-surface-2); color: var(--nl-cream); font: 600 .8125rem var(--nl-font); cursor: pointer; }
+  .nl-search button:hover { border-color: var(--nl-stone); }
+  .nl-search-mobile { padding-bottom: .75rem; }
+  .nl-search-mobile .nl-search { height: 2.75rem; max-width: none; }
+
+  .nl-actions { margin-left: auto; display: flex; align-items: center; gap: .25rem; }
+  @media (min-width: 640px) { .nl-actions { gap: .5rem; } }
+  @media (min-width: 1024px) { .nl-actions { margin-left: 0; } }
+  .nl-quote-link { display: none; align-items: center; gap: .375rem; padding: 0 .5rem; font-size: .9375rem; font-weight: 600; white-space: nowrap; }
+  @media (min-width: 768px) { .nl-quote-link { display: inline-flex; } }
+  .nl-quote-link:hover { color: var(--nl-gold); }
+  .nl-action { position: relative; display: inline-flex; align-items: center; gap: .5rem; padding: .5rem; border-radius: 6px; font-size: .875rem; font-weight: 600; }
+  .nl-action:hover { background: var(--nl-surface-2); }
+  .nl-action__label { display: none; flex-direction: column; line-height: 1.15; }
+  @media (min-width: 1280px) { .nl-action__label { display: flex; } }
+  .nl-action__small { font-size: .6875rem; font-weight: 500; color: var(--nl-stone); }
+  .nl-cart__label { display: none; }
+  @media (min-width: 640px) { .nl-cart__label { display: inline; } }
+  .nl-cart__count { display: inline-flex; align-items: center; justify-content: center; min-width: 1.5rem; height: 1.5rem; padding: 0 .4rem; border-radius: 9999px; background: var(--nl-surface-2); font-size: .75rem; font-weight: 700; }
+  .nl-cart__count:not([data-count="0"]) { background: var(--nl-gold); color: var(--nl-page); }
+
+  .nl-nav { border-top: 1px solid var(--nl-edge); border-bottom: 1px solid var(--nl-edge); background: var(--nl-page); }
+  .nl-nav__row { display: flex; align-items: center; gap: 1.5rem; height: 3.5rem; font-size: .9375rem; font-weight: 600; }
+  .nl-nav__all { display: inline-flex; align-items: center; gap: .6rem; padding-right: 1.5rem; border-right: 1px solid var(--nl-edge); height: 1.75rem; white-space: nowrap; }
+  .nl-nav__links { display: flex; align-items: center; gap: .25rem; flex: 1; min-width: 0; overflow: hidden; }
+  .nl-nav__links a { display: block; padding: .5rem .75rem; border-radius: 4px; white-space: nowrap; color: rgb(243 241 233 / .92); }
+  .nl-nav__links a:hover, .nl-nav__links a[aria-current] { color: var(--nl-gold); }
+  .nl-nav__all:hover { color: var(--nl-gold); }
+  .nl-nav__highlight { display: inline-flex; align-items: center; gap: .3rem; color: var(--nl-gold); white-space: nowrap; }
+  .nl-nav__highlight:hover { opacity: .85; }
+
+  .nl-drawer[hidden] { display: none; }
+  .nl-drawer { position: fixed; inset: 0; z-index: 100; }
+  .nl-drawer__backdrop { position: absolute; inset: 0; background: rgb(0 0 0 / .55); }
+  .nl-drawer__panel { position: absolute; inset: 0 auto 0 0; width: min(22rem, 88vw); background: var(--nl-surface); border-right: 1px solid var(--nl-edge); padding: 1rem 1.25rem 2rem; overflow-y: auto; }
+  .nl-drawer__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .nl-drawer__links li { border-bottom: 1px solid var(--nl-edge); }
+  .nl-drawer__links a { display: block; padding: .9rem .25rem; font-weight: 600; }
+  .nl-drawer__phone { display: flex; align-items: center; gap: .5rem; margin-top: 1.25rem !important; color: var(--nl-stone); }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById('nl-header');
+    if (!root) return;
+    const drawer = root.querySelector('#nl-drawer');
+    root.querySelectorAll('[data-nl-open]').forEach((b) => b.addEventListener('click', () => { drawer.hidden = false; document.body.style.overflow = 'hidden'; }));
+    root.querySelectorAll('[data-nl-close]').forEach((b) => b.addEventListener('click', () => { drawer.hidden = true; document.body.style.overflow = ''; }));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !drawer.hidden) { drawer.hidden = true; document.body.style.overflow = ''; } });
+
+    const items = root.querySelectorAll('.nl-announce__item');
+    if (items.length > 1) {
+      let i = 0;
+      setInterval(() => { items[i].classList.remove('is-active'); i = (i + 1) % items.length; items[i].classList.add('is-active'); }, 6000);
+    }
+
+    const count = root.querySelector('[data-nl-cart-count]');
+    const setCount = (n) => { if (count) { count.textContent = n; count.dataset.count = n; } };
+    setCount({{ cart.item_count }});
+    document.addEventListener('nl:cart-count', (e) => setCount(e.detail.count));
+    document.addEventListener('cart:update', (e) => {
+      const n = e?.detail?.resource?.item_count;
+      if (typeof n === 'number') return setCount(n);
+      fetch('{{ routes.cart_url }}.js').then((r) => r.json()).then((c) => setCount(c.item_count)).catch(() => {});
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Northline header",
+  "class": "nl-header-section",
+  "settings": [
+    { "type": "header", "content": "Brand" },
+    { "type": "image_picker", "id": "logo", "label": "Logo image (optional — replaces the built-in logo)" },
+    { "type": "text", "id": "brand_short", "label": "Brand name", "default": "Northline" },
+    { "type": "text", "id": "brand_sub", "label": "Brand subtitle", "default": "Building Supply" },
+    { "type": "text", "id": "brand_name", "label": "Full business name", "default": "Northline Building Supply" },
+    { "type": "header", "content": "Announcement bar" },
+    { "type": "text", "id": "announce_left", "label": "Left message", "default": "Free in-store pickup · Local delivery available" },
+    { "type": "text", "id": "phone", "label": "Phone number", "default": "(555) 010-0142" },
+    { "type": "header", "content": "Category bar" },
+    { "type": "text", "id": "highlight_label", "label": "Highlighted link", "default": "Contractor pricing" },
+    { "type": "url", "id": "highlight_link", "label": "Highlighted link URL" }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Contractor pricing now available — apply for a trade account in minutes" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Apply" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "nav_link",
+      "name": "Category link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Vinyl Flooring" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ]
+}
+{% endschema %}

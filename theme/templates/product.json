@@ -1,0 +1,199 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "grid",
+            "media_columns": "one",
+            "image_gap": 8,
+            "large_first_image": true,
+            "aspect_ratio": "square",
+            "media_fit": "contain",
+            "media_radius": 10,
+            "zoom": true,
+            "hide_variants": true
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "gap": 20,
+            "sticky_details_desktop": true,
+            "padding-block-start": 24,
+            "padding-block-end": 24
+          },
+          "blocks": {
+            "header": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "gap": 8,
+                "width": "fill",
+                "horizontal_alignment_flex_direction_column": "flex-start"
+              },
+              "blocks": {
+                "vendor": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>{{ closest.product.vendor }}</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font_size": "0.75rem",
+                    "case": "uppercase",
+                    "letter_spacing": "loose",
+                    "text_color": "#B2B7AA"
+                  },
+                  "blocks": {}
+                },
+                "title": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3"
+                  },
+                  "blocks": {}
+                },
+                "price": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "type_preset": "h4",
+                    "width": "100%",
+                    "alignment": "left"
+                  },
+                  "blocks": {}
+                },
+                "quote_price": {
+                  "type": "custom-liquid",
+                  "settings": {
+                    "custom_liquid": "{%- if closest.product.tags contains 'quote-only' -%}<p class=\"nl-price-quote\">Price on quote</p>{%- endif -%}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "vendor",
+                "title",
+                "price",
+                "quote_price"
+              ]
+            },
+            "divider": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "divider_color": "{{ settings.color_palette.color2 }}",
+                "width_percent": 100
+              },
+              "blocks": {}
+            },
+            "quote_actions": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "{% render 'nl-product-actions', product: closest.product %}"
+              },
+              "blocks": {}
+            },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": true,
+                "gift_card_form": true
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "calculator": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "{% render 'nl-coverage-calculator', product: closest.product %}"
+              },
+              "blocks": {}
+            },
+            "description": {
+              "type": "text",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "header",
+            "divider",
+            "quote_actions",
+            "variant_picker",
+            "buy_buttons",
+            "calculator",
+            "description"
+          ]
+        }
+      },
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      }
+    },
+    "related": {
+      "type": "nl-related",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

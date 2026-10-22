@@ -1,0 +1,40 @@
+{%- comment -%} "You may also like" on product pages: other products from the same category, in the prototype's card style. {%- endcomment -%}
+{%- liquid
+  assign source = nil
+  for c in product.collections
+    if c.handle != 'frontpage' and c.handle != 'deals' and c.handle != 'featured'
+      assign source = c
+      break
+    endif
+  endfor
+  if source == nil
+    assign source = collections.all
+  endif
+  assign shown = 0
+-%}
+<section class="nl-scope nl-container nl-pad nl-related">
+  <div class="nl-heading-row">
+    <div>
+      <p class="nl-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    <a href="{{ source.url }}" class="nl-link-arrow">View all {% render 'nl-icon', name: 'arrow-right', size: 16 %}</a>
+  </div>
+  <ul class="nl-pgrid">
+    {%- for p in source.products -%}
+      {%- if p.id != product.id and shown < 4 -%}
+        <li>{% render 'nl-product-card', product: p %}</li>
+        {%- assign shown = shown | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</section>
+{% schema %}
+{
+  "name": "Northline related products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "More in this category" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "You may also like" }
+  ]
+}
+{% endschema %}

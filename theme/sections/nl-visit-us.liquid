@@ -1,0 +1,87 @@
+{%- comment -%} "Visit the showroom" card with address, hours, phone and a map, as on the prototype. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="nl-scope nl-container nl-visit">
+  <div class="nl-card nl-visit__card">
+    <div class="nl-visit__copy">
+      <p class="nl-eyebrow">{{ s.eyebrow }}</p>
+      <h2 class="nl-visit__title">{{ s.title }}</h2>
+      <p class="nl-visit__text">{{ s.text }}</p>
+      <ul class="nl-visit__list">
+        <li>{% render 'nl-icon', name: 'map-pin', size: 20 %}<span>{{ s.address }}</span></li>
+        <li>{% render 'nl-icon', name: 'clock', size: 20 %}
+          <span class="nl-visit__hours">
+            {%- assign lines = s.hours | newline_to_br | split: '<br />' -%}
+            {%- for line in lines -%}
+              {%- assign parts = line | strip | split: '|' -%}
+              <span><span class="nl-muted">{{ parts[0] | strip }}</span><span>{{ parts[1] | strip }}</span></span>
+            {%- endfor -%}
+          </span>
+        </li>
+        <li>{% render 'nl-icon', name: 'phone', size: 20 %}<a href="tel:{{ s.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}" class="nl-visit__phone">{{ s.phone }}</a></li>
+      </ul>
+      <div class="nl-visit__btns">
+        <a href="{{ s.btn1_link | default: '/pages/contact' }}" class="nl-btn nl-btn--sage">{{ s.btn1_label }}</a>
+        <a href="{{ s.btn2_link | default: '/pages/quote' }}" class="nl-btn nl-btn--outline">{{ s.btn2_label }}</a>
+      </div>
+    </div>
+    <div class="nl-visit__map">
+      {%- if s.map_query != blank -%}
+        <iframe title="Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q={{ s.map_query | url_encode }}&z=15&output=embed"></iframe>
+      {%- else -%}
+        <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="600" height="400" fill="#e9ecef"/>
+          <path d="M0 300 C 120 280, 200 330, 330 300 S 520 250, 600 280 V400 H0Z" fill="#d6e2ec"/>
+          <g stroke="#fff" stroke-width="14"><path d="M90 0V400M250 0V400M410 0V400M540 0V400M0 80H600M0 210H600M0 340H600"/></g>
+          <path d="M0 260 L600 140" stroke="#f5c96a" stroke-width="12"/>
+          <g fill="#d1d5db"><rect x="120" y="100" width="70" height="40" rx="4"/><rect x="430" y="40" width="60" height="30" rx="4"/><rect x="300" y="240" width="70" height="40" rx="4"/></g>
+          <circle cx="330" cy="185" r="22" fill="#1d211c"/><path d="M330 175a8 8 0 0 0-8 8c0 6 8 13 8 13s8-7 8-13a8 8 0 0 0-8-8Z" fill="#f5b82e"/>
+          <rect x="262" y="214" width="136" height="24" rx="4" fill="#1d211c"/>
+          <text x="330" y="230" text-anchor="middle" font-family="Satoshi, sans-serif" font-size="11" font-weight="600" fill="#fff">{{ s.map_label | escape }}</text>
+          <text x="330" y="256" text-anchor="middle" font-family="Satoshi, sans-serif" font-size="9" fill="#6b7280">Map added once the address is confirmed</text>
+        </svg>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+<style>
+  .nl-visit { padding-bottom: 4rem; }
+  @media (min-width: 1024px) { .nl-visit { padding-bottom: 6rem; } }
+  .nl-visit__card { display: grid; grid-template-columns: 1fr; overflow: hidden; }
+  @media (min-width: 1024px) { .nl-visit__card { grid-template-columns: 1fr 1.3fr; } }
+  .nl-visit__copy { padding: 1.5rem; }
+  @media (min-width: 640px) { .nl-visit__copy { padding: 2.5rem; } }
+  .nl-visit__title { margin-top: .75rem !important; font-size: 1.875rem; line-height: 1.15; font-weight: 700; }
+  .nl-visit__text { margin-top: .75rem !important; color: var(--nl-stone); line-height: 1.6; }
+  .nl-visit__list { display: grid; gap: 1rem; margin-top: 1.5rem !important; font-size: .875rem; }
+  .nl-visit__list li { display: flex; gap: .75rem; }
+  .nl-visit__list li > svg { color: var(--nl-gold); margin-top: .1rem; }
+  .nl-visit__hours { display: grid; gap: .1rem; }
+  .nl-visit__hours > span { display: flex; justify-content: space-between; gap: 1.5rem; }
+  .nl-visit__hours > span > span:last-child { font-weight: 500; }
+  .nl-visit__phone { font-weight: 600; }
+  .nl-visit__phone:hover { text-decoration: underline; }
+  .nl-visit__btns { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+  .nl-visit__btns .nl-btn { min-height: 2.75rem; font-size: .9375rem; font-weight: 600; border-radius: 6px; }
+  .nl-visit__map { position: relative; min-height: 18rem; }
+  .nl-visit__map svg, .nl-visit__map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+</style>
+{% schema %}
+{
+  "name": "Northline visit us",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "Visit the showroom" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "See it, touch it, take it home." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Browse flooring samples, door styles and vanity finishes in person, and talk to our team about your project." },
+    { "type": "text", "id": "address", "label": "Address", "default": "100 Placeholder Avenue, Unit 4, Your City, ON A1A 1A1" },
+    { "type": "textarea", "id": "hours", "label": "Hours (one per line: Days | Time)", "default": "Monday – Friday | 7:30 am – 6:00 pm\nSaturday | 8:00 am – 4:00 pm\nSunday | Closed" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "(555) 010-0142" },
+    { "type": "text", "id": "map_query", "label": "Google Maps address (shows a live map)" },
+    { "type": "text", "id": "map_label", "label": "Map pin label", "default": "Northline Building Supply" },
+    { "type": "text", "id": "btn1_label", "label": "First button", "default": "Contact us" },
+    { "type": "url", "id": "btn1_link", "label": "First button link" },
+    { "type": "text", "id": "btn2_label", "label": "Second button", "default": "Get a quote" },
+    { "type": "url", "id": "btn2_link", "label": "Second button link" }
+  ],
+  "presets": [{ "name": "Northline visit us" }]
+}
+{% endschema %}

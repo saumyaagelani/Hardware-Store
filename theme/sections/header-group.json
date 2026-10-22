@@ -1,0 +1,99 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "nl_header": {
+      "type": "nl-header",
+      "blocks": {
+        "announcement_1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Contractor pricing now available — apply for a trade account in minutes",
+            "link_label": "Apply",
+            "link": "/pages/contractors"
+          }
+        },
+        "announcement_2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Fall Flooring Event: save up to 20% on select vinyl plank",
+            "link_label": "Shop deals",
+            "link": "/collections/deals"
+          }
+        },
+        "nav_link_3": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Vinyl Flooring",
+            "link": "/collections/vinyl-flooring"
+          }
+        },
+        "nav_link_4": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Doors & Locks",
+            "link": "/collections/doors"
+          }
+        },
+        "nav_link_5": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Stairs",
+            "link": "/collections/stairs"
+          }
+        },
+        "nav_link_6": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Bathroom",
+            "link": "/collections/vanities"
+          }
+        },
+        "nav_link_7": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Plumbing",
+            "link": "/collections/plumbing"
+          }
+        },
+        "nav_link_8": {
+          "type": "nav_link",
+          "settings": {
+            "label": "WPC Wall Panels",
+            "link": "/collections/wpc-wall-panels"
+          }
+        },
+        "nav_link_9": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Deals",
+            "link": "/collections/deals"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_1",
+        "announcement_2",
+        "nav_link_3",
+        "nav_link_4",
+        "nav_link_5",
+        "nav_link_6",
+        "nav_link_7",
+        "nav_link_8",
+        "nav_link_9"
+      ],
+      "settings": {
+        "brand_short": "Northline",
+        "brand_sub": "Building Supply",
+        "brand_name": "Northline Building Supply",
+        "announce_left": "Free in-store pickup · Local delivery available",
+        "phone": "(555) 010-0142",
+        "highlight_label": "Contractor pricing",
+        "highlight_link": "/pages/contractors"
+      }
+    }
+  },
+  "order": [
+    "nl_header"
+  ]
+}

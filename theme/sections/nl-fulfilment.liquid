@@ -1,0 +1,103 @@
+{%- comment -%} "Get it how you need it": pickup locations and delivery zones, as on the prototype. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="nl-scope nl-container nl-pad nl-ful">
+  <div class="nl-heading-row">
+    <div>
+      <p class="nl-eyebrow">{{ s.eyebrow }}</p>
+      <h2>{{ s.title }}</h2>
+      {%- if s.description != blank -%}<p class="nl-desc">{{ s.description }}</p>{%- endif -%}
+    </div>
+  </div>
+  <div class="nl-ful__grid">
+    <div class="nl-card nl-ful__card">
+      <div class="nl-ful__head">
+        <span class="nl-icon-box">{% render 'nl-icon', name: 'package-check', size: 22 %}</span>
+        <div><h3>{{ s.pickup_title }}</h3><p class="nl-muted">{{ s.pickup_sub }}</p></div>
+      </div>
+      <ul class="nl-ful__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'pickup' -%}
+            <li class="nl-ful__pick" {{ block.shopify_attributes }}>
+              {% render 'nl-icon', name: 'map-pin', size: 18, class: 'nl-gold' %}
+              <div>
+                <p class="nl-ful__name">{{ block.settings.name }}</p>
+                <p class="nl-muted">{{ block.settings.hours }}</p>
+                <p class="nl-ful__ready">Ready: {{ block.settings.ready }}</p>
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="nl-card nl-ful__card">
+      <div class="nl-ful__head">
+        <span class="nl-icon-box">{% render 'nl-icon', name: 'truck', size: 22 %}</span>
+        <div><h3>{{ s.delivery_title }}</h3><p class="nl-muted">{{ s.delivery_sub }}</p></div>
+      </div>
+      <ul class="nl-ful__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'zone' -%}
+            <li class="nl-ful__zone" {{ block.shopify_attributes }}>
+              <div>
+                <p class="nl-ful__name">{{ block.settings.name }}</p>
+                <p class="nl-muted">{{ block.settings.lead }}{% if block.settings.free_over != blank %} · Free over {{ block.settings.free_over }}{% endif %}</p>
+              </div>
+              <span class="nl-ful__fee">{{ block.settings.fee }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if s.note != blank -%}<p class="nl-ful__note">{% render 'nl-icon', name: 'calendar-clock', size: 16 %}<span>{{ s.note }}</span></p>{%- endif -%}
+      {%- if s.link_label != blank -%}<a href="{{ s.link | default: '/policies/shipping-policy' }}" class="nl-link-arrow nl-ful__link">{{ s.link_label }} {% render 'nl-icon', name: 'arrow-right', size: 16 %}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+<style>
+  .nl-ful__grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  @media (min-width: 1024px) { .nl-ful__grid { grid-template-columns: 1fr 1fr; } }
+  .nl-ful__card { padding: 1.5rem; }
+  @media (min-width: 640px) { .nl-ful__card { padding: 2rem; } }
+  .nl-ful__head { display: flex; align-items: center; gap: .75rem; }
+  .nl-ful__head h3 { font-size: 1.25rem; font-weight: 700; }
+  .nl-ful__head p { font-size: .875rem; }
+  .nl-ful__list { margin-top: 1.5rem !important; }
+  .nl-ful__list > li { padding-block: .875rem; border-top: 1px solid var(--nl-edge); font-size: .875rem; }
+  .nl-ful__list > li:first-child { border-top: 0; }
+  .nl-ful__pick { display: flex; gap: .75rem; }
+  .nl-ful__pick .nl-gold { color: var(--nl-gold); margin-top: .1rem; }
+  .nl-ful__name { font-weight: 600; }
+  .nl-ful__ready { margin-top: .25rem !important; font-size: .75rem; font-weight: 600; color: var(--nl-success); }
+  .nl-ful__zone { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .nl-ful__fee { font-size: 1.125rem; font-weight: 700; }
+  .nl-ful__note { display: flex; gap: .5rem; margin-top: 1rem !important; padding: .75rem; border-radius: 6px; background: var(--nl-page); font-size: .75rem; line-height: 1.6; color: var(--nl-stone); }
+  .nl-ful__link { margin-top: 1rem; }
+</style>
+{% schema %}
+{
+  "name": "Northline pickup & delivery",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "Delivery & pickup" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Get it how you need it" },
+    { "type": "text", "id": "description", "label": "Text", "default": "Choose free pickup or local delivery at checkout." },
+    { "type": "text", "id": "pickup_title", "label": "Pickup heading", "default": "Free in-store pickup" },
+    { "type": "text", "id": "pickup_sub", "label": "Pickup text", "default": "Order online, collect when it suits you." },
+    { "type": "text", "id": "delivery_title", "label": "Delivery heading", "default": "Local delivery" },
+    { "type": "text", "id": "delivery_sub", "label": "Delivery text", "default": "Enter your postal code at checkout to see your fee." },
+    { "type": "textarea", "id": "note", "label": "Delivery note", "default": "Oversized or large orders are reviewed by our team — the delivery fee is confirmed before dispatch. Preferred delivery dates are subject to confirmation." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Delivery & pickup details" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "blocks": [
+    { "type": "pickup", "name": "Pickup location", "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Main Showroom & Warehouse" },
+      { "type": "text", "id": "hours", "label": "Hours", "default": "Mon–Fri 7:30–6:00 · Sat 8:00–4:00" },
+      { "type": "text", "id": "ready", "label": "Ready time", "default": "Within 2 business hours" } ] },
+    { "type": "zone", "name": "Delivery zone", "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Local Delivery" },
+      { "type": "text", "id": "lead", "label": "Lead time", "default": "1–3 business days" },
+      { "type": "text", "id": "free_over", "label": "Free over (optional)", "default": "$2,500" },
+      { "type": "text", "id": "fee", "label": "Fee", "default": "$79.00" } ] }
+  ],
+  "presets": [{ "name": "Northline pickup & delivery" }]
+}
+{% endschema %}

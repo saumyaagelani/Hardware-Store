@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "main": {
+      "type": "nl-main-collection",
+      "settings": {
+        "per_page": 24,
+        "chips": [
+          "vinyl-flooring",
+          "stairs",
+          "doors",
+          "locks-door-hardware",
+          "shower-bases",
+          "shower-doors",
+          "shower-accessories",
+          "toilet-seats",
+          "vanities",
+          "plumbing",
+          "wpc-wall-panels",
+          "deals"
+        ]
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

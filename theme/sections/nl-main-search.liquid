@@ -1,0 +1,46 @@
+{%- comment -%} Search results in the prototype's style. {%- endcomment -%}
+{%- paginate search.results by 24 -%}
+<section class="nl-scope nl-container nl-coll nl-search-page">
+  <h1 class="nl-coll__title">{% if search.performed %}Results for “{{ search.terms | escape }}”{% else %}Search{% endif %}</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="nl-search nl-search-page__form">
+    {% render 'nl-icon', name: 'search', size: 18, class: 'nl-search__icon' %}
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search flooring, doors, vanities &amp; more" aria-label="Search products">
+    <input type="hidden" name="type" value="product">
+    <button type="submit">Search</button>
+  </form>
+  {%- if search.performed -%}
+    <p class="nl-coll__count">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %}</p>
+    <ul class="nl-pgrid">
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          <li>{% render 'nl-product-card', product: item %}</li>
+        {%- else -%}
+          <li class="nl-card nl-search-page__other"><a href="{{ item.url }}"><span class="nl-eyebrow">{{ item.object_type }}</span><span class="nl-search-page__other-title">{{ item.title }}</span></a></li>
+        {%- endif -%}
+      {%- else -%}
+        <li class="nl-coll__empty">Nothing matched. Try “vinyl”, “door” or “vanity”, or <a href="{{ routes.all_products_collection_url }}">browse all products</a>.</li>
+      {%- endfor -%}
+    </ul>
+    {%- if paginate.pages > 1 -%}
+      <nav class="nl-pages" aria-label="Pagination">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="nl-page">Previous</a>{%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}<a href="{{ part.url }}" class="nl-page">{{ part.title }}</a>
+          {%- elsif part.title == paginate.current_page -%}<span class="nl-page is-current" aria-current="page">{{ part.title }}</span>
+          {%- else -%}<span class="nl-page is-gap">{{ part.title }}</span>{%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="nl-page">Next</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+{%- endpaginate -%}
+<style>
+  .nl-search-page__form { margin: 1.25rem 0 0 !important; max-width: 40rem; }
+  .nl-search-page .nl-pgrid { margin-top: 1.5rem; }
+  .nl-search-page__other a { display: block; padding: 1.25rem; }
+  .nl-search-page__other-title { display: block; margin-top: .5rem; font-weight: 600; }
+</style>
+{% schema %}
+{ "name": "Northline search results", "settings": [] }
+{% endschema %}

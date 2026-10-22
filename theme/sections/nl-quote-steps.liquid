@@ -1,0 +1,67 @@
+{%- comment -%} "Tell us about your project" free-quote steps, as on the prototype. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="nl-scope nl-qs">
+  <div class="nl-container nl-pad nl-qs__grid">
+    <div>
+      <p class="nl-eyebrow">{{ s.eyebrow }}</p>
+      <h2 class="nl-h2">{{ s.title }}</h2>
+      <p class="nl-qs__pitch">{{ s.pitch }}</p>
+      <div class="nl-qs__btns">
+        <a href="{{ s.btn1_link | default: '/pages/quote' }}" class="nl-btn nl-btn--gold">{{ s.btn1_label }}</a>
+        <a href="{{ s.btn2_link | default: routes.cart_url }}" class="nl-btn nl-btn--outline">{{ s.btn2_label }}</a>
+      </div>
+    </div>
+    <ol class="nl-qs__steps">
+      {%- for block in section.blocks -%}
+        <li class="nl-qs__step" {{ block.shopify_attributes }}>
+          <span class="nl-qs__n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+          <span class="nl-qs__icon">{% render 'nl-icon', name: block.settings.icon, size: 20 %}</span>
+          <p class="nl-qs__title">{{ block.settings.title }}</p>
+          <p class="nl-qs__body">{{ block.settings.body }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+<style>
+  .nl-qs { background: var(--nl-page); color: var(--nl-cream); }
+  .nl-qs__grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+  @media (min-width: 1024px) { .nl-qs__grid { grid-template-columns: .9fr 1.6fr; align-items: center; } }
+  .nl-qs__pitch { margin-top: 1rem !important; color: var(--nl-stone); line-height: 1.6; }
+  .nl-qs__btns { display: flex; flex-direction: column; gap: .75rem; margin-top: 2rem; }
+  @media (min-width: 640px) { .nl-qs__btns { flex-direction: row; } }
+  .nl-qs__steps { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 640px) { .nl-qs__steps { grid-template-columns: 1fr 1fr; } }
+  .nl-qs__step { position: relative; border: 1px solid var(--nl-edge); background: var(--nl-surface); border-radius: 10px; padding: 1.5rem; }
+  .nl-qs__n { position: absolute; top: 1.25rem; right: 1.25rem; font-size: 2.25rem; font-weight: 700; color: var(--nl-cream); line-height: 1; }
+  .nl-qs__icon { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 6px; background: var(--nl-surface-2); color: var(--nl-gold); }
+  .nl-qs__title { margin-top: 1rem !important; font-size: 1.125rem; font-weight: 700; }
+  .nl-qs__body { margin-top: .25rem !important; font-size: .875rem; line-height: 1.6; color: var(--nl-stone); }
+</style>
+{% schema %}
+{
+  "name": "Northline quote steps",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "Free quote service" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Tell us about your project. We'll price it for free." },
+    { "type": "textarea", "id": "pitch", "label": "Text", "default": "Tell us about your project — measurements, photos or floor plans — and our team will prepare a detailed quote, usually within one business day." },
+    { "type": "text", "id": "btn1_label", "label": "Gold button", "default": "Start your free quote" },
+    { "type": "url", "id": "btn1_link", "label": "Gold button link" },
+    { "type": "text", "id": "btn2_label", "label": "Outline button", "default": "Quote my cart" },
+    { "type": "url", "id": "btn2_link", "label": "Outline button link" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "ruler", "options": [
+          { "value": "ruler", "label": "Ruler" }, { "value": "camera", "label": "Camera" }, { "value": "messages-square", "label": "Chat" }, { "value": "file-check-2", "label": "Document" } ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Share your project" },
+        { "type": "text", "id": "body", "label": "Text", "default": "Products, colours, measurements or square footage." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Northline quote steps" }]
+}
+{% endschema %}
