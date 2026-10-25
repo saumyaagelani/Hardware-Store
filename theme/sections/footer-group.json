@@ -34,7 +34,11 @@
       ],
       "settings": {
         "facebook": "https://www.facebook.com/",
-        "instagram": "https://www.instagram.com/"
+        "instagram": "https://www.instagram.com/",
+        "brand_short": "NK",
+        "brand_sub": "Flooring",
+        "brand_name": "NK Flooring",
+        "address": "1639 Marine Dr, Fort Erie, ON L2A 0C9"
       }
     }
   },

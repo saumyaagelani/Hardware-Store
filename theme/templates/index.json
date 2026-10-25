@@ -376,7 +376,10 @@
       "type": "nl-visit-us",
       "settings": {
         "btn1_link": "/pages/contact",
-        "btn2_link": "/pages/quote"
+        "btn2_link": "/pages/quote",
+        "address": "1639 Marine Dr, Fort Erie, ON L2A 0C9",
+        "map_query": "1639 Marine Dr, Fort Erie, ON L2A 0C9",
+        "map_label": "NK Flooring"
       }
     }
   },
