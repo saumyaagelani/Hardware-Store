@@ -13,7 +13,8 @@
         "btn2_link": "/pages/quote",
         "strip_a": "For homeowners & professionals",
         "strip_b": "Canadian projects. Covered.",
-        "caption": "A good home starts with a great foundation.",
+        "image": "shopify://shop_images/E9536DBF-5084-4D37-B3D1-0FF8A840345D.png",
+        "caption": "",
         "card_eyebrow": "Natural textures. Lasting impressions.",
         "card_title": "Explore vinyl flooring",
         "card_link": "/collections/vinyl-flooring"
@@ -116,6 +117,7 @@
           "settings": {
             "collection": "shower-doors",
             "label": "",
+            "image": "shopify://shop_images/7208AF75-62CC-4522-811E-81DE62181CD3.png",
             "asset": "nl-cat-shower-doors.svg"
           }
         },
@@ -124,6 +126,7 @@
           "settings": {
             "collection": "shower-accessories",
             "label": "",
+            "image": "shopify://shop_images/0A099FBB-5DB9-4CDE-8233-E9B31D04F4DA.png",
             "asset": "nl-cat-shower-accessories.svg"
           }
         },
@@ -132,6 +135,7 @@
           "settings": {
             "collection": "toilet-seats",
             "label": "",
+            "image": "shopify://shop_images/61511E56-8831-434B-9D7B-3634E66DFCE2.png",
             "asset": "nl-cat-toilet-seats.svg"
           }
         },
@@ -140,6 +144,7 @@
           "settings": {
             "collection": "vanities",
             "label": "",
+            "image": "shopify://shop_images/A22E5A2E-425C-469A-9EF3-B80EFE079509.png",
             "asset": "nl-cat-vanities.svg"
           }
         },
@@ -148,6 +153,7 @@
           "settings": {
             "collection": "plumbing",
             "label": "",
+            "image": "shopify://shop_images/BF7C9119-8F3F-4588-9FD4-00965C1E88CC.png",
             "asset": "nl-cat-plumbing.svg"
           }
         },
@@ -156,6 +162,7 @@
           "settings": {
             "collection": "wpc-wall-panels",
             "label": "",
+            "image": "shopify://shop_images/7BEF4DA8-EEBD-4627-A309-C343D58FDDBD.jpg",
             "asset": "nl-cat-wpc-wall-panels.svg"
           }
         }
