@@ -1,0 +1,53 @@
+{%- comment -%}
+  Cart summary for the quote page. Lists what is in the customer's cart (with a Copy button) so they can
+  paste it into their quote request. Shown only when the cart has items.
+{%- endcomment -%}
+{%- if cart.item_count > 0 -%}
+<section class="nl-scope nl-container nl-qcart" id="nl-qcart">
+  <div class="nl-qcart__box">
+    <p class="nl-qcart__title">{{ section.settings.title }}</p>
+    <ul class="nl-qcart__list">
+      {%- for item in cart.items -%}
+        <li><span>{{ item.quantity }} × {{ item.product.title }}{% if item.variant.title != 'Default Title' %} ({{ item.variant.title }}){% endif %}{% if item.sku != blank %} — SKU {{ item.sku }}{% endif %}</span></li>
+      {%- endfor -%}
+    </ul>
+    <textarea class="nl-qcart__text" readonly rows="{{ cart.items.size | plus: 1 }}" aria-label="Cart items as text">{% for item in cart.items %}{{ item.quantity }} x {{ item.product.title }}{% if item.variant.title != 'Default Title' %} ({{ item.variant.title }}){% endif %}{% if item.sku != blank %} - SKU {{ item.sku }}{% endif %}
+{% endfor %}</textarea>
+    <button type="button" class="nl-btn nl-btn--outline nl-qcart__copy" data-copy>Copy cart list</button>
+    <p class="nl-qcart__hint">{{ section.settings.hint }}</p>
+  </div>
+</section>
+<style>
+  .nl-qcart { padding-block: 1.5rem 0; }
+  .nl-qcart__box { padding: 1.25rem 1.5rem; border: 1px solid var(--nl-edge); border-radius: 10px; background: var(--nl-surface); }
+  .nl-qcart__title { font-size: 1.125rem; font-weight: 700; color: var(--nl-cream); }
+  .nl-qcart__list { margin: .75rem 0 !important; display: grid; gap: .35rem; font-size: .9375rem; color: var(--nl-cream); }
+  .nl-qcart__text { position: absolute; left: -9999px; }
+  .nl-qcart__copy { min-height: 2.5rem; font-size: .9375rem; }
+  .nl-qcart__hint { margin-top: .75rem !important; font-size: .875rem; color: var(--nl-stone); }
+</style>
+<script>
+  (() => {
+    const root = document.getElementById('nl-qcart');
+    if (!root) return;
+    const btn = root.querySelector('[data-copy]');
+    const text = root.querySelector('.nl-qcart__text');
+    btn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(text.value); }
+      catch (e) { text.style.position = 'static'; text.select(); document.execCommand('copy'); text.style.position = 'absolute'; }
+      const old = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(() => (btn.textContent = old), 2000);
+    });
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Northline quote cart",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Items from your cart" },
+    { "type": "textarea", "id": "hint", "label": "Hint", "default": "Click \"Copy cart list\", then paste it into the products / project details box of the form below." }
+  ],
+  "presets": [{ "name": "Northline quote cart" }]
+}
+{% endschema %}

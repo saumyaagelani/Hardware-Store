@@ -1,11 +1,65 @@
 {
   "sections": {
-    "main": {
-      "type": "nl-quote-request",
+    "179316930338775daf": {
+      "type": "_blocks",
+      "blocks": {
+        "forms_inline_AkmExQ": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "1220678",
+            "text_color": "#f3f1e9",
+            "button_background_color": "#f5b82e",
+            "button_label_color": "#1d211c",
+            "links_color": "#f5b82e",
+            "errors_color": "#E02229",
+            "text_alignment": "left",
+            "form_alignment": "flex-start",
+            "padding_top": 12,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_AkmExQ"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "nl_quote_cart": {
+      "type": "nl-quote-cart",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "nl_quote_cart",
+    "179316930338775daf"
   ]
 }
