@@ -20,6 +20,7 @@
     assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
   endif
   assign unit = product.metafields.custom.coverage_unit.value
+  assign restock = product.metafields.custom.restock_date.value
   assign img = product.featured_media.preview_image
   assign img2 = product.media[1].preview_image
   assign badge_count = 0
@@ -62,8 +63,10 @@
     <p class="nl-pcard__stock">
       {%- if quote_only -%}
         {% render 'nl-icon', name: 'file-text', size: 15 %} <span>Quote only{% if product.tags contains 'special-order' %} · special order{% endif %}</span>
+      {%- elsif product.tags contains 'special-order' and variant.inventory_management == 'shopify' and variant.inventory_quantity <= 0 -%}
+        <span class="nl-dot nl-dot--low"></span><span class="is-low">Available for special order</span>
       {%- elsif product.available == false -%}
-        <span class="nl-dot nl-dot--out"></span><span class="is-out">Out of stock</span>
+        <span class="nl-dot nl-dot--out"></span><span class="is-out">Out of stock{% if restock != blank %} · back {{ restock | date: '%b %-d' }}{% endif %}</span>
       {%- elsif variant.inventory_management == 'shopify' and variant.inventory_quantity > 0 and variant.inventory_quantity <= 10 -%}
         <span class="nl-dot nl-dot--low"></span><span class="is-low">Low Stock</span>
       {%- else -%}

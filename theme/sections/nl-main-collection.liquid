@@ -1,4 +1,4 @@
-{%- comment -%} Collection page in the prototype's style: title, category chips, sort, product cards, pagination. {%- endcomment -%}
+{%- comment -%} Collection page in the prototype's style: title, category chips, filters and sort, product cards, pagination. {%- endcomment -%}
 {%- assign s = section.settings -%}
 {%- paginate collection.products by s.per_page -%}
 <section class="nl-scope nl-container nl-coll">
@@ -13,17 +13,10 @@
       {%- if collection.description != blank -%}<div class="nl-coll__desc">{{ collection.description }}</div>{%- endif -%}
       <p class="nl-coll__count">{{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}</p>
     </div>
-    <form class="nl-coll__sort" method="get">
-      <label for="nl-sort">Sort by</label>
-      <select id="nl-sort" name="sort_by" onchange="this.form.submit()">
-        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-        {%- for option in collection.sort_options -%}
-          <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>
-        {%- endfor -%}
-      </select>
-      <noscript><button type="submit">Apply</button></noscript>
-    </form>
   </div>
+
+  {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+  {% render 'nl-filters', filters: collection.filters, sort_options: collection.sort_options, sort_by: sort_by, reset_url: collection.url, search_terms: nil %}
 
   {%- if s.chips != blank -%}
     <ul class="nl-chips" aria-label="Categories">

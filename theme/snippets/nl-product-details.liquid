@@ -1,0 +1,84 @@
+{%- comment -%}
+  Product information block for product pages. Usage (Custom Liquid block):
+    {% render 'nl-product-details', product: closest.product %}
+  Reads these product metafields (all optional; empty ones are hidden):
+    custom.colour_finish, custom.dimensions, custom.thickness, custom.material,
+    custom.installation_info, custom.warranty, custom.spec_sheet (PDF),
+    custom.restock_date, custom.min_order_qty, custom.coverage_sqft
+{%- endcomment -%}
+{%- liquid
+  assign mf = product.metafields.custom
+  assign variant = product.selected_or_first_available_variant
+  assign restock = mf.restock_date.value
+  assign spec_sheet = mf.spec_sheet.value
+  assign low = false
+  if variant.inventory_management == 'shopify' and variant.inventory_quantity > 0 and variant.inventory_quantity <= 10
+    assign low = true
+  endif
+-%}
+<div class="nl-pdetails">
+  <p class="nl-pdetails__stock">
+    {%- if product.tags contains 'quote-only' -%}
+      <span class="nl-dot nl-dot--low"></span> <span class="is-low">Quote only{% if product.tags contains 'special-order' %} · available for special order{% endif %}</span>
+    {%- elsif product.tags contains 'special-order' and variant.inventory_management == 'shopify' and variant.inventory_quantity <= 0 -%}
+      <span class="nl-dot nl-dot--low"></span> <span class="is-low">Available for special order</span>
+    {%- elsif product.available == false -%}
+      <span class="nl-dot nl-dot--out"></span> <span class="is-out">Out of stock{% if restock != blank %} · expected back {{ restock | date: '%B %-d, %Y' }}{% endif %}</span>
+    {%- elsif low -%}
+      <span class="nl-dot nl-dot--low"></span> <span class="is-low">Low stock — {{ variant.inventory_quantity }} left</span>
+    {%- else -%}
+      <span class="nl-dot nl-dot--in"></span> <span class="is-in">In stock</span>
+    {%- endif -%}
+    {%- if mf.min_order_qty.value != blank and mf.min_order_qty.value > 1 -%}
+      <span class="nl-pdetails__moq">Minimum order: {{ mf.min_order_qty.value }}</span>
+    {%- endif -%}
+  </p>
+
+  {%- capture rows -%}
+    {%- if product.vendor != blank -%}<tr><th>Brand</th><td>{{ product.vendor }}</td></tr>{%- endif -%}
+    {%- if variant.sku != blank -%}<tr><th>SKU / product code</th><td>{{ variant.sku }}</td></tr>{%- endif -%}
+    {%- if product.type != blank -%}<tr><th>Category</th><td>{{ product.type }}</td></tr>{%- endif -%}
+    {%- if mf.colour_finish.value != blank -%}<tr><th>Colour and finish</th><td>{{ mf.colour_finish.value }}</td></tr>{%- endif -%}
+    {%- if mf.dimensions.value != blank -%}<tr><th>Dimensions</th><td>{{ mf.dimensions.value }}</td></tr>{%- endif -%}
+    {%- if mf.thickness.value != blank -%}<tr><th>Thickness</th><td>{{ mf.thickness.value }}</td></tr>{%- endif -%}
+    {%- if mf.material.value != blank -%}<tr><th>Material</th><td>{{ mf.material.value }}</td></tr>{%- endif -%}
+    {%- if mf.coverage_sqft.value != blank -%}<tr><th>Coverage</th><td>{{ mf.coverage_sqft.value }} sq. ft. per {{ mf.coverage_unit.value | default: 'unit' }}</td></tr>{%- endif -%}
+  {%- endcapture -%}
+  {%- assign rows_clean = rows | strip -%}
+  {%- if rows_clean != blank -%}
+    <table class="nl-pdetails__table"><tbody>{{ rows_clean }}</tbody></table>
+  {%- endif -%}
+
+  {%- if mf.installation_info.value != blank -%}
+    <details class="nl-pdetails__more" open>
+      <summary>Installation information</summary>
+      <div>{{ mf.installation_info.value | newline_to_br }}</div>
+    </details>
+  {%- endif -%}
+  {%- if mf.warranty.value != blank -%}
+    <details class="nl-pdetails__more">
+      <summary>Warranty information</summary>
+      <div>{{ mf.warranty.value | newline_to_br }}</div>
+    </details>
+  {%- endif -%}
+  {%- if spec_sheet != blank -%}
+    <p class="nl-pdetails__doc"><a href="{{ spec_sheet.url }}" target="_blank" rel="noopener">{% render 'nl-icon', name: 'file-text', size: 16 %} Download specification sheet (PDF)</a></p>
+  {%- endif -%}
+</div>
+<style>
+  .nl-pdetails { margin: 1.25rem 0; color: var(--nl-cream); }
+  .nl-pdetails__stock { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 1rem; font-size: .9375rem; font-weight: 600; }
+  .nl-pdetails__moq { margin-left: auto; font-weight: 500; font-size: .8125rem; color: var(--nl-stone); }
+  .nl-pdetails__table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+  .nl-pdetails__table th, .nl-pdetails__table td { padding: .55rem .75rem; border: 1px solid var(--nl-edge); text-align: left; vertical-align: top; }
+  .nl-pdetails__table th { width: 38%; background: var(--nl-surface); font-weight: 600; }
+  .nl-pdetails__more { margin-top: .75rem; border: 1px solid var(--nl-edge); border-radius: 8px; background: var(--nl-surface); }
+  .nl-pdetails__more summary { padding: .7rem .9rem; font-weight: 600; cursor: pointer; }
+  .nl-pdetails__more div { padding: 0 .9rem .9rem; font-size: .875rem; line-height: 1.6; color: var(--nl-stone); }
+  .nl-pdetails__doc { margin-top: .9rem; }
+  .nl-pdetails__doc a { display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; color: var(--nl-gold); }
+  .nl-pdetails .nl-dot { display: inline-block; width: .5rem; height: .5rem; border-radius: 9999px; }
+  .nl-pdetails .nl-dot--in { background: var(--nl-success); } .nl-pdetails .is-in { color: var(--nl-success); }
+  .nl-pdetails .nl-dot--low { background: #f0c27a; } .nl-pdetails .is-low { color: #f0c27a; }
+  .nl-pdetails .nl-dot--out { background: #ef9a8f; } .nl-pdetails .is-out { color: #ef9a8f; }
+</style>

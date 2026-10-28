@@ -10,6 +10,7 @@
   </form>
   {%- if search.performed -%}
     <p class="nl-coll__count">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %}</p>
+    {% render 'nl-filters', filters: search.filters, sort_options: search.sort_options, sort_by: search.sort_by, reset_url: routes.search_url, search_terms: search.terms %}
     <ul class="nl-pgrid">
       {%- for item in search.results -%}
         {%- if item.object_type == 'product' -%}

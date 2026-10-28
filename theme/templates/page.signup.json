@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "nl-signup",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
