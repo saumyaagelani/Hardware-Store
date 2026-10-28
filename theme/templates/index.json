@@ -1,10 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "nl-hero",
       "settings": {
+        "eyebrow": "Your foundation for a better home",
+        "title_lead": "Quality building supplies.",
+        "title_accent": "Better prices.",
+        "body": "Flooring, interior doors, tiles and bathroom essentials. Thoughtfully selected for the spaces you live in and the projects you build.",
+        "btn1_label": "Shop products",
         "btn1_link": "/collections/all",
+        "btn2_label": "Get a free quote",
         "btn2_link": "/pages/quote",
+        "strip_a": "For homeowners & professionals",
+        "strip_b": "Canadian projects. Covered.",
+        "caption": "A good home starts with a great foundation.",
+        "card_eyebrow": "Natural textures. Lasting impressions.",
+        "card_title": "Explore vinyl flooring",
         "card_link": "/collections/vinyl-flooring"
       }
     },
@@ -59,6 +79,8 @@
           "type": "category",
           "settings": {
             "collection": "vinyl-flooring",
+            "label": "",
+            "image": "shopify://shop_images/00818916-9D65-4031-B7D7-E03AB037A9D9.png",
             "asset": "nl-cat-vinyl.svg"
           }
         },
@@ -66,6 +88,8 @@
           "type": "category",
           "settings": {
             "collection": "stairs",
+            "label": "",
+            "image": "shopify://shop_images/1A31AE61-48C3-4717-99F8-C6B92DEE8F2C.png",
             "asset": "nl-cat-stairs.svg"
           }
         },
@@ -73,6 +97,8 @@
           "type": "category",
           "settings": {
             "collection": "doors",
+            "label": "",
+            "image": "shopify://shop_images/2A4E8775-8E1F-4628-9B7E-EF8A2205EA6C.png",
             "asset": "nl-cat-doors.svg"
           }
         },
@@ -80,6 +106,8 @@
           "type": "category",
           "settings": {
             "collection": "locks-door-hardware",
+            "label": "",
+            "image": "shopify://shop_images/2AF461DE-C60E-4EC5-8A63-1EDABF2C2ADF.png",
             "asset": "nl-cat-locks.svg"
           }
         },
@@ -87,6 +115,8 @@
           "type": "category",
           "settings": {
             "collection": "shower-bases",
+            "label": "",
+            "image": "shopify://shop_images/97D8B3AE-5AA0-4B18-98C7-63690EC9A83D.png",
             "asset": "nl-cat-shower-bases.svg"
           }
         },
@@ -94,6 +124,7 @@
           "type": "category",
           "settings": {
             "collection": "shower-doors",
+            "label": "",
             "asset": "nl-cat-shower-doors.svg"
           }
         },
@@ -101,6 +132,7 @@
           "type": "category",
           "settings": {
             "collection": "shower-accessories",
+            "label": "",
             "asset": "nl-cat-shower-accessories.svg"
           }
         },
@@ -108,6 +140,7 @@
           "type": "category",
           "settings": {
             "collection": "toilet-seats",
+            "label": "",
             "asset": "nl-cat-toilet-seats.svg"
           }
         },
@@ -115,6 +148,7 @@
           "type": "category",
           "settings": {
             "collection": "vanities",
+            "label": "",
             "asset": "nl-cat-vanities.svg"
           }
         },
@@ -122,6 +156,7 @@
           "type": "category",
           "settings": {
             "collection": "plumbing",
+            "label": "",
             "asset": "nl-cat-plumbing.svg"
           }
         },
@@ -129,6 +164,7 @@
           "type": "category",
           "settings": {
             "collection": "wpc-wall-panels",
+            "label": "",
             "asset": "nl-cat-wpc-wall-panels.svg"
           }
         }
@@ -147,7 +183,11 @@
         "category_11"
       ],
       "settings": {
+        "eyebrow": "Shop by category",
+        "title": "Everything for floors, doors & bath",
+        "link_label": "Browse all products",
         "link": "/collections/all",
+        "deals_label": "Deals & Sale",
         "deals_link": "/collections/deals"
       }
     },
@@ -156,10 +196,12 @@
       "settings": {
         "eyebrow": "Customer favourites",
         "title": "Featured products",
+        "description": "",
         "collection": "featured",
         "limit": 8,
         "link_label": "View all",
-        "eager": true
+        "eager": true,
+        "tinted": false
       }
     },
     "promos": {
@@ -217,7 +259,9 @@
         "description": "Sale prices while stock lasts. Contractor accounts see their best available price.",
         "collection": "deals",
         "limit": 4,
-        "link_label": "View all deals"
+        "link_label": "View all deals",
+        "eager": false,
+        "tinted": false
       }
     },
     "contractors": {
@@ -263,7 +307,13 @@
         "perk_4"
       ],
       "settings": {
+        "eyebrow": "For contractors & trade",
+        "title": "Built for the trade. Priced for the trade.",
+        "pitch": "Approved trade accounts see contractor pricing on every eligible product automatically, plus project quotes, job-site delivery and a dedicated account contact.",
+        "steps": "Apply online|We verify your business|Contractor pricing unlocks",
+        "btn1_label": "Apply for a trade account",
         "btn1_link": "/pages/contractors",
+        "btn2_label": "Contractor sign in",
         "btn2_link": "/account/login"
       }
     },
@@ -310,7 +360,12 @@
         "step_4"
       ],
       "settings": {
+        "eyebrow": "Free quote service",
+        "title": "Tell us about your project. We'll price it for free.",
+        "pitch": "Tell us about your project — measurements, photos or floor plans — and our team will prepare a detailed quote, usually within one business day.",
+        "btn1_label": "Start your free quote",
         "btn1_link": "/pages/quote",
+        "btn2_label": "Quote my cart",
         "btn2_link": "/pages/quote?from=cart"
       }
     },
@@ -369,17 +424,33 @@
         "zone_5"
       ],
       "settings": {
+        "eyebrow": "Delivery & pickup",
+        "title": "Get it how you need it",
+        "description": "Choose free pickup or local delivery at checkout.",
+        "pickup_title": "Free in-store pickup",
+        "pickup_sub": "Order online, collect when it suits you.",
+        "delivery_title": "Local delivery",
+        "delivery_sub": "Enter your postal code at checkout to see your fee.",
+        "note": "Oversized or large orders are reviewed by our team — the delivery fee is confirmed before dispatch. Preferred delivery dates are subject to confirmation.",
+        "link_label": "Delivery & pickup details",
         "link": "/policies/shipping-policy"
       }
     },
     "visit": {
       "type": "nl-visit-us",
       "settings": {
-        "btn1_link": "/pages/contact",
-        "btn2_link": "/pages/quote",
+        "eyebrow": "Visit the showroom",
+        "title": "See it, touch it, take it home.",
+        "text": "Browse flooring samples, door styles and vanity finishes in person, and talk to our team about your project.",
         "address": "1639 Marine Dr, Fort Erie, ON L2A 0C9",
+        "hours": "Monday – Friday | 7:30 am – 6:00 pm\nSaturday | 8:00 am – 4:00 pm\nSunday | Closed",
+        "phone": "(555) 010-0142",
         "map_query": "1639 Marine Dr, Fort Erie, ON L2A 0C9",
-        "map_label": "NK Flooring"
+        "map_label": "NK Flooring",
+        "btn1_label": "Contact us",
+        "btn1_link": "/pages/contact",
+        "btn2_label": "Get a quote",
+        "btn2_link": "/pages/quote"
       }
     }
   },
