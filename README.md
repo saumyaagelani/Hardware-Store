@@ -5,7 +5,7 @@ A client-facing prototype for a hardware / building-materials store selling viny
 The prototype demonstrates the full customer, contractor and admin experience with realistic demo data. External production services (payments, email, file storage, database) are simulated behind clean interfaces so the codebase can move to production in Stage 2 without a rewrite.
 
 **Live demo:** https://northline-prototype.onrender.com (branch `claude/intelligent-edison-536z5s`, auto-deploys on every push)
-**Last updated:** 2026-10-22 — see the [Change log](#change-log) at the bottom.
+**Last updated:** 2026-10-28 — see the [Change log](#change-log) at the bottom.
 
 > **Placeholder notice:** "Northline Building Supply", the address, phone numbers, emails, hours, brand names, product specifications and policies are **fictional placeholders**. Product images are generated illustrations, not photographs. Replace them before launch (see [Where to change things](#where-to-change-things)).
 
@@ -249,6 +249,11 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-10-28 — NK Flooring details in the owner's guide and Shopify theme copy
+- The owner's guide now uses the store name **NK Flooring**, the Fort Erie address, the store email and the Basic plan price the owner gave (C$49/month).
+- The Shopify design copy "NK Flooring – update" has the name, address and email in the header, footer and "Visit us" section. It is not live until the owner publishes it.
+- Documentation only; the website code is unchanged.
 
 ### 2026-10-22 — Owner's guide for the Shopify store
 - Added **CLIENT_SHOPIFY_GUIDE.md**, a plain-English checklist for the store owner. It lists what is already done in Shopify (77 products, 12 collections, the new "Render look" design, quote and contractor pages) and what the owner still has to do: choose a plan, enter real business details, set up tax, payments, delivery and pickup, contractor pricing, policies, real photos and prices, test, and launch.

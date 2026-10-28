@@ -1,4 +1,4 @@
-# Your Shopify store: what you need to do
+# NK Flooring: your Shopify store, what you need to do
 
 A step-by-step guide for the store owner / admin. No technical knowledge needed. Do the parts in order and tick the boxes as you go.
 
@@ -36,13 +36,11 @@ A step-by-step guide for the store owner / admin. No technical knowledge needed.
 
 ### Step 1. Own your store and choose a plan
 - [ ] Log in to Shopify admin with the **owner** email. The store must belong to the business, not to a developer or a marketing person.
-- [ ] Go to **Settings → Plan** and pick **Basic, billed yearly** (about C$37/month, paid once a year).
-  - Check the current price at shopify.com/ca/pricing before paying. Prices change.
-  - Right now you are on a **trial**. You must upgrade before you can take real orders.
+- [x] You are on the **Basic** plan, at **C$49/month** as you told us. Check **Settings → Plan** to see your billing cycle. Shopify usually charges less per month if you pay for a year up front.
 - [ ] Give your developer and marketing person access as **collaborators** (free): **Settings → Users → Security**, share the *collaborator request code*, then approve their request and choose what they can see. Marketing staff do not need Orders, Payments or Customers.
 
 ### Step 2. Enter your business details
-- [ ] **Settings → Store details:** legal business name, address, phone number, store email, currency **CAD**.
+- [ ] **Settings → Store details:** store name **NK Flooring**, address **1639 Marine Dr, Fort Erie, ON L2A 0C9**, phone number, store email (**hardwarestore2002@gmail.com**), currency **CAD**. (Shopify's own settings can't be changed by your developer, so type these in yourself.)
   - Use an email address your team checks every day. **Quote requests and contractor applications are emailed to the store email.**
 - [ ] Update the details shown on the website itself (Shopify does not copy them over automatically):
   1. **Online Store → Themes → "Horizon – Render look" → Customize.**
@@ -147,7 +145,7 @@ For printable PDF invoices, the free **Shopify Order Printer** app adds a *Print
 
 | Item | About |
 | --- | --- |
-| Shopify **Basic** plan, billed yearly | C$37/month, charged once a year (about C$444) |
+| Shopify **Basic** plan | C$49/month (your current price). A yearly plan usually costs less per month; check Settings → Plan. |
 | Domain name | C$15–20 per year |
 | Card payments (Shopify Payments) | 2.8% + 30¢ on Visa/Mastercard. Amex and international cards cost more. |
 | Interac e-Transfer | No Shopify fee (your bank may charge) |
