@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero": {
@@ -444,7 +435,7 @@
         "text": "Browse flooring samples, door styles and vanity finishes in person, and talk to our team about your project.",
         "address": "1639 Marine Dr, Fort Erie, ON L2A 0C9",
         "hours": "Monday – Friday | 7:30 am – 6:00 pm\nSaturday | 8:00 am – 4:00 pm\nSunday | Closed",
-        "phone": "(555) 010-0142",
+        "phone": "548-922-2245",
         "map_query": "1639 Marine Dr, Fort Erie, ON L2A 0C9",
         "map_label": "NK Flooring",
         "btn1_label": "Contact us",

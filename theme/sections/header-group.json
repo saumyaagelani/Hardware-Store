@@ -69,6 +69,13 @@
             "label": "Deals",
             "link": "/collections/deals"
           }
+        },
+        "nav_link_10": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Sign up",
+            "link": "/pages/create-account"
+          }
         }
       },
       "block_order": [
@@ -80,14 +87,15 @@
         "nav_link_6",
         "nav_link_7",
         "nav_link_8",
-        "nav_link_9"
+        "nav_link_9",
+        "nav_link_10"
       ],
       "settings": {
         "brand_short": "NK",
         "brand_sub": "Flooring",
         "brand_name": "NK Flooring",
         "announce_left": "Free in-store pickup · Local delivery available",
-        "phone": "(555) 010-0142",
+        "phone": "548-922-2245",
         "highlight_label": "Contractor pricing",
         "highlight_link": "/pages/contractors"
       }
