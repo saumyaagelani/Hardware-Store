@@ -250,6 +250,12 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 
 Newest first. Every code change pushed to GitHub gets an entry here.
 
+### 2026-10-28 — Shopify: sign-up page, filters, product details, quote reference
+- Added a **Create account** form for the Shopify store (works without an app), basic **product filters and sorting**, a **product details** block (specs, warranty, installation, spec sheet, restock date) and **special-order / restock labels** on product cards.
+- The Shopify quote form now makes a **quote reference number** and has a link box for photos, plans and files.
+- Added new product and customer fields in Shopify to hold these details.
+- Owner's guide updated. The Render demo is unchanged.
+
 ### 2026-10-28 — NK Flooring details in the owner's guide and Shopify theme copy
 - The owner's guide now uses the store name **NK Flooring**, the Fort Erie address, the store email and the Basic plan price the owner gave (C$49/month).
 - The Shopify design copy "NK Flooring – update" has the name, address and email in the header, footer and "Visit us" section. It is not live until the owner publishes it.

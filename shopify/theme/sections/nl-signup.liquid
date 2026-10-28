@@ -1,0 +1,108 @@
+{%- comment -%}
+  Create-account request form (works without any app).
+  Collects the customer's details and emails them to the store (Settings -> Notifications -> Sender email).
+  Shopify's new customer accounts have no passwords: after submitting, the customer clicks "Log in"
+  and enters the same email to receive a one-time code. Contractor / business customers are
+  approved separately (Customers -> Companies) before they see trade prices.
+{%- endcomment -%}
+{%- assign root = routes.root_url | remove_last: '/' -%}
+<div class="nl-form-section nl-signup">
+  <h1>{{ section.settings.heading }}</h1>
+  {%- if section.settings.intro != blank -%}<div class="rte nl-intro">{{ section.settings.intro }}</div>{%- endif -%}
+
+  {%- form 'contact', id: 'nl-signup-form', class: 'nl-form' -%}
+    {%- if form.posted_successfully? -%}
+      <div class="nl-success" role="status" tabindex="-1">
+        <p><strong>Thanks — your details have been received.</strong></p>
+        <p>Next step: click <a href="{{ routes.account_login_url }}">Log in</a> and enter the same email address. We'll email you a one-time code, so there is no password to remember.</p>
+        <p>Contractor or business accounts are reviewed by our team before trade prices are unlocked. You can also <a href="{{ root }}/pages/contractors">apply for a trade account</a>.</p>
+      </div>
+    {%- else -%}
+      {%- if form.errors -%}<div class="nl-error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <input type="hidden" name="contact[Form]" value="Account sign-up request">
+
+      <fieldset>
+        <legend>About you</legend>
+        <div class="nl-sgrid">
+          <label>Account type *
+            <select name="contact[Account type]" required>
+              <option>Regular customer</option>
+              <option>Contractor / trade</option>
+              <option>Business / property manager</option>
+            </select>
+          </label>
+          <label>Full name *<input name="contact[Name]" required autocomplete="name"></label>
+          <label>Email address *<input type="email" name="contact[email]" required autocomplete="email"></label>
+          <label>Phone number *<input type="tel" name="contact[Phone]" required autocomplete="tel"></label>
+          <label>Company name (if applicable)<input name="contact[Company]" autocomplete="organization"></label>
+          <label>HST / business number (optional)<input name="contact[HST number]"></label>
+          <label class="nl-span">Preferred communication method
+            <select name="contact[Preferred contact]"><option>Email</option><option>Phone call</option><option>Text message</option></select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Billing address</legend>
+        <div class="nl-sgrid">
+          <label class="nl-span">Street address *<input name="contact[Billing street]" required autocomplete="billing street-address"></label>
+          <label>City *<input name="contact[Billing city]" required autocomplete="billing address-level2"></label>
+          <label>Province *<input name="contact[Billing province]" required value="ON" autocomplete="billing address-level1"></label>
+          <label>Postal code *<input name="contact[Billing postal code]" required autocomplete="billing postal-code"></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Delivery address</legend>
+        <label class="nl-check"><input type="checkbox" name="contact[Delivery same as billing]" value="Yes" checked data-same> Same as billing address</label>
+        <div class="nl-sgrid" data-delivery hidden>
+          <label class="nl-span">Street address<input name="contact[Delivery street]" autocomplete="shipping street-address"></label>
+          <label>City<input name="contact[Delivery city]" autocomplete="shipping address-level2"></label>
+          <label>Province<input name="contact[Delivery province]" value="ON" autocomplete="shipping address-level1"></label>
+          <label>Postal code<input name="contact[Delivery postal code]" autocomplete="shipping postal-code"></label>
+        </div>
+      </fieldset>
+
+      <p class="nl-hint">Passwords aren't needed: you sign in with an emailed code. You can also check out or request a quote as a guest at any time. See our <a href="{{ shop.privacy_policy.url }}">privacy policy</a>.</p>
+      <label class="nl-check"><input type="checkbox" name="contact[Marketing emails]" value="Yes"> Send me occasional deals and new-product news (optional)</label>
+      <button type="submit" class="button">Create my account</button>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+<style>
+  .nl-signup .nl-sgrid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 750px) { .nl-signup .nl-sgrid { grid-template-columns: 1fr 1fr; } .nl-signup .nl-span { grid-column: 1 / -1; } }
+  .nl-signup .nl-sgrid[hidden] { display: none; }
+  .nl-signup label { display: grid; gap: .35rem; font-size: .9rem; font-weight: 500; }
+  .nl-signup .nl-check { display: flex; align-items: center; gap: .6rem; margin: .5rem 0 1rem; }
+  .nl-signup .nl-check input { width: auto; min-height: 0; }
+  .nl-signup input, .nl-signup select { width: 100%; padding: .7rem .8rem; font: inherit; }
+  .nl-signup fieldset { margin: 0 0 1.5rem; padding: 0; border: 0; }
+  .nl-signup legend { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+  .nl-signup .nl-hint { font-size: .875rem; opacity: .8; margin: 0 0 1rem; }
+  .nl-signup .nl-success, .nl-signup .nl-error { padding: 1rem; border-radius: 6px; border: 1px solid currentColor; }
+  .nl-signup .nl-success a { color: var(--nl-gold); text-decoration: underline; }
+</style>
+<script>
+  (() => {
+    const form = document.getElementById('nl-signup-form');
+    if (!form) return;
+    const same = form.querySelector('[data-same]');
+    const box = form.querySelector('[data-delivery]');
+    if (!same || !box) return;
+    const sync = () => { box.hidden = same.checked; box.querySelectorAll('input').forEach((i) => { if (i.name.includes('street') || i.name.includes('city') || i.name.includes('postal')) i.required = !same.checked; }); };
+    same.addEventListener('change', sync); sync();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Northline sign up",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Create your account" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Tell us a little about you. After you submit, click <strong>Log in</strong> and enter the same email to get your sign-in code.</p>" }
+  ],
+  "presets": [{ "name": "Northline sign up" }]
+}
+{% endschema %}

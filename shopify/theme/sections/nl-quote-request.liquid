@@ -13,10 +13,11 @@
 
   {%- form 'contact', id: 'nl-quote-form', class: 'nl-form' -%}
     {%- if form.posted_successfully? -%}
-      <p class="nl-success" role="status" tabindex="-1">Thanks — your quote request has been received. We usually reply within one business day.</p>
+      <p class="nl-success" role="status" tabindex="-1">Thanks — your quote request has been received. Your reference number is <strong data-qref-show>saved with your request</strong>. We usually reply within one business day.</p>
     {%- else -%}
       {%- if form.errors -%}<div class="nl-error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
       <input type="hidden" name="contact[Form]" value="Quote request">
+      <input type="hidden" name="contact[Quote reference]" data-qref>
       <fieldset>
         <legend>Your details</legend>
         <div class="nl-grid">
@@ -50,7 +51,8 @@
           <label>Preferred project date<input type="date" name="contact[Preferred date]"></label>
         </div>
         <label class="nl-span">Additional project details<textarea name="contact[body]" rows="4" placeholder="Subfloor type, access restrictions, timelines, budget…"></textarea></label>
-        <p class="nl-hint">Photos, plans or drawings? Email them to <a href="mailto:{{ shop.email }}">{{ shop.email }}</a> with your name — we'll attach them to your request.</p>
+        <label class="nl-span">Link to your photos, plans or files (optional)<input type="url" name="contact[File link]" placeholder="https://drive.google.com/… or Dropbox / OneDrive / WeTransfer link"></label>
+        <p class="nl-hint">Upload your photos, floor plans, PDFs or other project files to Google Drive, Dropbox or OneDrive, set the link to "anyone with the link can view", and paste it above. Or email them to <a href="mailto:{{ shop.email }}">{{ shop.email }}</a> with your name and reference number.</p>
       </fieldset>
       <p class="nl-hint">By submitting you agree to be contacted about this request. See our <a href="{{ shop.privacy_policy.url }}">privacy policy</a>.</p>
       <button type="submit" class="button">Submit quote request</button>
@@ -84,6 +86,25 @@
         box.value = cart.items.map((i) => `${i.quantity} × ${i.product_title}${i.variant_title ? ` (${i.variant_title})` : ''}${i.sku ? ` — SKU ${i.sku}` : ''}`).join('\n');
       }
     } catch (e) { /* leave the field for the customer to fill in */ }
+  })();
+</script>
+
+<script>
+  (() => {
+    try {
+      const f = document.getElementById('nl-quote-form');
+      const ref = f && f.querySelector('[data-qref]');
+      if (ref) {
+        const d = new Date();
+        const pad = (n) => String(n).padStart(2, '0');
+        const code = Math.random().toString(36).slice(2, 6).toUpperCase();
+        ref.value = 'NK-Q-' + String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + pad(d.getDate()) + '-' + code;
+        f.addEventListener('submit', () => sessionStorage.setItem('nlQuoteRef', ref.value));
+      }
+      const show = document.querySelector('[data-qref-show]');
+      const saved = sessionStorage.getItem('nlQuoteRef');
+      if (show && saved) show.textContent = saved;
+    } catch (e) { /* reference is optional */ }
   })();
 </script>
 

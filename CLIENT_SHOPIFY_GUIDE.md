@@ -163,3 +163,13 @@ Prices exclude tax and can change. Confirm them at shopify.com/ca/pricing when y
 - [ ] Your contractor price list (Step 10)
 - [ ] A list of design changes after you've previewed the new theme (Step 7)
 - [ ] Your approved policies (Step 6)
+
+---
+
+## Part 7. Newer additions (sign-up, filters, product details)
+
+- **Create account page** (`/pages/create-account`, header link "Sign up"): collects account type, name, email, phone, company, HST number, preferred contact method, billing and delivery address. The details arrive by email. There are no passwords: customers sign in with an emailed code.
+- **Quote form:** now creates a **reference number** (for example NK-Q-261028-AB12) and has a **"Link to your photos, plans or files"** box. Real file uploads still need an upload app (see Step 9).
+- **Filters and sorting** on category and search pages. Turn on the filters you want (price, availability, brand, type) in the free **Search & Discovery** app.
+- **Product details block** on each product page: colour, dimensions, thickness, material, installation and warranty notes, spec-sheet PDF, stock status and expected restock date. Fill these in per product under **Products → (product) → Metafields**.
+- **Stock labels** on product cards: In stock, Low stock, Out of stock (with the restock date if set), Available for special order (products tagged `special-order`).
