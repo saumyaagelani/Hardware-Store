@@ -62,16 +62,24 @@
       <div class="nl-actions">
         <a href="{{ root }}/pages/quote" class="nl-quote-link">Get a free quote {% render 'nl-icon', name: 'arrow-up-right', size: 18 %}</a>
         {%- if shop.customer_accounts_enabled -%}
-          <a href="{{ routes.account_url }}" class="nl-action">
-            {% render 'nl-icon', name: 'user', size: 22 %}
-            <span class="nl-action__label">
-              {%- if customer -%}
-                <span class="nl-action__small">Hi, {{ customer.first_name | default: 'there' }}</span>Account
-              {%- else -%}
-                <span class="nl-action__small">Sign in</span>Account
-              {%- endif -%}
-            </span>
-          </a>
+          {%- if customer -%}
+            <a href="{{ routes.account_url }}" class="nl-action">
+              {% render 'nl-icon', name: 'user', size: 22 %}
+              <span class="nl-action__label"><span class="nl-action__small">Hi, {{ customer.first_name | default: 'there' }}</span>Account</span>
+            </a>
+          {%- else -%}
+            <details class="nl-acct" data-nl-acct>
+              <summary class="nl-action" aria-label="Sign in or sign up">
+                {% render 'nl-icon', name: 'user', size: 22 %}
+                <span class="nl-action__label"><span class="nl-action__small">Sign in /</span>Sign up</span>
+              </summary>
+              <div class="nl-acct__menu">
+                <a class="nl-acct__btn nl-acct__btn--gold" href="{{ routes.account_login_url }}">Sign in</a>
+                <a class="nl-acct__btn" href="{{ root }}/pages/create-account">Create account</a>
+                <p class="nl-acct__note">New here? Create an account to save your details and see your orders and quotes.</p>
+              </div>
+            </details>
+          {%- endif -%}
         {%- endif -%}
         <a href="{{ routes.cart_url }}" class="nl-action nl-cart">
           {% render 'nl-icon', name: 'shopping-cart', size: 22 %}
@@ -124,7 +132,10 @@
           <li><a href="{{ section.settings.highlight_link }}" class="nl-gold">{{ section.settings.highlight_label }}</a></li>
         {%- endif -%}
         <li><a href="{{ root }}/pages/quote">Get a free quote</a></li>
-        {%- if shop.customer_accounts_enabled -%}<li><a href="{{ routes.account_url }}">My account</a></li>{%- endif -%}
+        {%- if shop.customer_accounts_enabled -%}
+          {%- if customer -%}<li><a href="{{ routes.account_url }}">My account</a></li>
+          {%- else -%}<li><a href="{{ routes.account_login_url }}">Sign in</a></li><li><a href="{{ root }}/pages/create-account">Create account</a></li>{%- endif -%}
+        {%- endif -%}
       </ul>
       {%- if section.settings.phone != blank -%}
         <p class="nl-drawer__phone">{% render 'nl-icon', name: 'phone', size: 16, class: 'nl-gold' %} {{ section.settings.phone }}</p>
@@ -196,6 +207,16 @@
   .nl-cart__count { display: inline-flex; align-items: center; justify-content: center; min-width: 1.5rem; height: 1.5rem; padding: 0 .4rem; border-radius: 9999px; background: var(--nl-surface-2); font-size: .75rem; font-weight: 700; }
   .nl-cart__count:not([data-count="0"]) { background: var(--nl-gold); color: var(--nl-page); }
 
+  .nl-acct { position: relative; }
+  .nl-acct > summary { list-style: none; cursor: pointer; }
+  .nl-acct > summary::-webkit-details-marker { display: none; }
+  .nl-acct__menu { position: absolute; z-index: 60; top: calc(100% + .4rem); right: 0; width: 15rem; display: grid; gap: .6rem; padding: 1rem; border: 1px solid var(--nl-edge); border-radius: 10px; background: var(--nl-surface); box-shadow: 0 18px 40px -16px rgb(0 0 0 / .55); }
+  .nl-acct__btn { display: flex; align-items: center; justify-content: center; min-height: 2.75rem; border: 1px solid var(--nl-stone); border-radius: 6px; font-weight: 600; font-size: .9375rem; color: var(--nl-cream); }
+  .nl-acct__btn:hover { border-color: var(--nl-cream); }
+  .nl-acct__btn--gold { background: var(--nl-gold); border-color: var(--nl-gold); color: var(--nl-page); }
+  .nl-acct__btn--gold:hover { opacity: .9; }
+  .nl-acct__note { margin: 0 !important; font-size: .8125rem; line-height: 1.5; color: var(--nl-stone); }
+
   .nl-nav { border-top: 1px solid var(--nl-edge); border-bottom: 1px solid var(--nl-edge); background: var(--nl-page); }
   .nl-nav__row { display: flex; align-items: center; gap: 1.5rem; height: 3.5rem; font-size: .9375rem; font-weight: 600; }
   .nl-nav__all { display: inline-flex; align-items: center; gap: .6rem; padding-right: 1.5rem; border-right: 1px solid var(--nl-edge); height: 1.75rem; white-space: nowrap; }
@@ -224,6 +245,12 @@
     root.querySelectorAll('[data-nl-open]').forEach((b) => b.addEventListener('click', () => { drawer.hidden = false; document.body.style.overflow = 'hidden'; }));
     root.querySelectorAll('[data-nl-close]').forEach((b) => b.addEventListener('click', () => { drawer.hidden = true; document.body.style.overflow = ''; }));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !drawer.hidden) { drawer.hidden = true; document.body.style.overflow = ''; } });
+
+    const acct = root.querySelector('[data-nl-acct]');
+    if (acct) {
+      document.addEventListener('click', (e) => { if (!acct.contains(e.target)) acct.removeAttribute('open'); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') acct.removeAttribute('open'); });
+    }
 
     const items = root.querySelectorAll('.nl-announce__item');
     if (items.length > 1) {

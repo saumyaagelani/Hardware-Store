@@ -69,13 +69,6 @@
             "label": "Deals",
             "link": "/collections/deals"
           }
-        },
-        "nav_link_10": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Sign up",
-            "link": "/pages/create-account"
-          }
         }
       },
       "block_order": [
@@ -87,8 +80,7 @@
         "nav_link_6",
         "nav_link_7",
         "nav_link_8",
-        "nav_link_9",
-        "nav_link_10"
+        "nav_link_9"
       ],
       "settings": {
         "brand_short": "NK",
