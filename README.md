@@ -5,7 +5,7 @@ A client-facing prototype for a hardware / building-materials store selling viny
 The prototype demonstrates the full customer, contractor and admin experience with realistic demo data. External production services (payments, email, file storage, database) are simulated behind clean interfaces so the codebase can move to production in Stage 2 without a rewrite.
 
 **Live demo:** https://northline-prototype.onrender.com (branch `claude/intelligent-edison-536z5s`, auto-deploys on every push)
-**Last updated:** 2026-11-03 — see the [Change log](#change-log) at the bottom.
+**Last updated:** 2026-11-04 — see the [Change log](#change-log) at the bottom.
 
 > **Placeholder notice:** "Northline Building Supply", the address, phone numbers, emails, hours, brand names, product specifications and policies are **fictional placeholders**. Product images are generated illustrations, not photographs. Replace them before launch (see [Where to change things](#where-to-change-things)).
 
@@ -249,6 +249,12 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-11-04 — Shopify: sub-categories on the website, not in the quote form
+- **Sub-categories now show on the website** under each main category as clickable pills on the collection page (for example Vinyl Flooring: 6mm / 7mm / 8mm; Interior Doors: Solid Core / Hollow Core; Door Locks: Privacy / Entry / Dummy / Passage; Shower Bases: 32x60 / 32x48 / 36x48; Porcelain Tiles: 1x2 / 2x2 / 2x4). A pill only appears when at least one product carries that tag.
+- Products were tagged from their names (the sub-category is stored as a product tag, so staff can add it to any product).
+- The quote page and product page **no longer ask for a sub-category**; they only pass the product and category. Every product card also has a small **Request a quote** link, and the product page has one too.
+- Known gaps: Hollow Core, Dummy, 32x48 and Porcelain Tiles have no products yet, so their pills stay hidden.
 
 ### 2026-11-03 — Shopify: quote requests now name the product and sub-category
 - On a product that is "request a quote" only, customers can now **pick a sub-category** (for example Solid Core / Hollow Core for interior doors, or 6mm / 7mm / 8mm for vinyl flooring) before clicking **Request a quote**.
