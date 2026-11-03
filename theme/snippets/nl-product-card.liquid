@@ -87,6 +87,9 @@
       {%- else -%}
         <a class="nl-pbtn nl-pbtn--outline" href="{{ product.url }}">Choose options</a>
       {%- endif -%}
+      {%- unless quote_only -%}
+        <a class="nl-pcard__quote" href="{{ root }}/pages/quote?product={{ product.handle | url_encode }}">Request a quote</a>
+      {%- endunless -%}
     </div>
   </div>
 </article>

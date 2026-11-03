@@ -78,4 +78,7 @@
   </script>
   <style>.nl-quote__sub { display: block; margin-bottom: .75rem; } .nl-quote__sub span { display: block; margin-bottom: .35rem; font-size: .875rem; font-weight: 600; } .nl-quote__sub select { width: 100%; min-height: 2.75rem; padding: .5rem .75rem; }
   .nl-quote { margin: 1rem 0; } .nl-quote__note { margin-top: .6rem; font-size: .875rem; opacity: .8; }</style>
+{%- else -%}
+  <p class="nl-quote-soft"><a href="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}">Need a bulk or custom price? Request a quote</a></p>
+  <style>.nl-quote-soft { margin: .75rem 0; font-size: .9375rem; } .nl-quote-soft a { text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }</style>
 {%- endif -%}
