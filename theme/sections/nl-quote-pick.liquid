@@ -6,6 +6,7 @@
     with a "Copy" button as a fallback.
 {%- endcomment -%}
 {%- assign s = section.settings -%}
+{%- capture cat_text -%}{% render 'nl-quote-cats' %}{%- endcapture -%}
 <section class="nl-scope nl-container nl-qpick" id="nl-qpick">
   <div class="nl-qpick__box">
     <p class="nl-qpick__title">{{ s.title }}</p>
@@ -28,7 +29,7 @@
         <span class="nl-qpick__label">{{ s.cat_label }}</span>
         <select data-cat>
           <option value="">Select a category</option>
-          {%- assign lines = s.categories | newline_to_br | split: '<br />' -%}
+          {%- assign lines = cat_text | newline_to_br | split: '<br />' -%}
           {%- for line in lines -%}
             {%- assign parts = line | strip | split: '|' -%}
             {%- if parts[0] != blank -%}
@@ -205,6 +206,10 @@
             const match = [...cat.options].find((o) => o.value && p.type.toLowerCase().includes(o.value.toLowerCase()));
             if (match) { cat.value = match.value; cat.dispatchEvent(new Event('change')); }
           }
+          const wantCat = params.get('cat');
+          if (wantCat && [...cat.options].some((o) => o.value === wantCat)) { cat.value = wantCat; cat.dispatchEvent(new Event('change')); }
+          const wantSub = params.get('sub');
+          if (wantSub && [...sub.options].some((o) => o.value === wantSub)) sub.value = wantSub;
           sync();
         })
         .catch(() => {});
@@ -221,7 +226,6 @@
     { "type": "text", "id": "title", "label": "Heading", "default": "What do you need a quote for?" },
     { "type": "text", "id": "cat_label", "label": "Category label", "default": "Category" },
     { "type": "text", "id": "sub_label", "label": "Sub-category label", "default": "Sub-category" },
-    { "type": "textarea", "id": "categories", "label": "Categories, one per line: Name | size; size", "default": "Vinyl Flooring | 6mm; 7mm; 8mm\nInterior Doors | Solid Core; Hollow Core\nShower Doors |\nDoor Locks | Privacy; Entry; Dummy; Passage\nPorcelain Tiles | 1x2; 2x2; 2x4\nShower Bases | 32x60; 32x48; 36x48\nStairs |\nShower Accessories |\nToilet Seats |\nVanities |\nPlumbing |\nWPC Wall Panels |\nOther / not sure |" },
     { "type": "text", "id": "notes_label", "label": "Notes label", "default": "Size / quantity / anything else (optional)" },
     { "type": "text", "id": "notes_placeholder", "label": "Notes placeholder", "default": "e.g. 600 sq ft, 3 doors" },
     { "type": "textarea", "id": "hint", "label": "Hint", "default": "Your choices are added to the form below automatically. If they don't appear, click \"Copy summary\" and paste it into the Product selected box." }
