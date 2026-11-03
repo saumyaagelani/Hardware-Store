@@ -5,7 +5,7 @@ A client-facing prototype for a hardware / building-materials store selling viny
 The prototype demonstrates the full customer, contractor and admin experience with realistic demo data. External production services (payments, email, file storage, database) are simulated behind clean interfaces so the codebase can move to production in Stage 2 without a rewrite.
 
 **Live demo:** https://northline-prototype.onrender.com (branch `claude/intelligent-edison-536z5s`, auto-deploys on every push)
-**Last updated:** 2026-10-28 — see the [Change log](#change-log) at the bottom.
+**Last updated:** 2026-11-03 — see the [Change log](#change-log) at the bottom.
 
 > **Placeholder notice:** "Northline Building Supply", the address, phone numbers, emails, hours, brand names, product specifications and policies are **fictional placeholders**. Product images are generated illustrations, not photographs. Replace them before launch (see [Where to change things](#where-to-change-things)).
 
@@ -249,6 +249,13 @@ See **[PRODUCTION_TODO.md](./PRODUCTION_TODO.md)** for the production checklist.
 ## Change log
 
 Newest first. Every code change pushed to GitHub gets an entry here.
+
+### 2026-11-03 — Shopify: quote requests now name the product and sub-category
+- On a product that is "request a quote" only, customers can now **pick a sub-category** (for example Solid Core / Hollow Core for interior doors, or 6mm / 7mm / 8mm for vinyl flooring) before clicking **Request a quote**.
+- The quote page now shows **the exact product** they came from (photo, name, SKU) and a **Category → Sub-category** picker. These details are written into a **"Product selected"** field in the quote form (Shopify Forms) instead of the company name box. If that field is missing, a **Copy summary** button appears.
+- Sub-categories are now: Vinyl Flooring (6mm, 7mm, 8mm), Interior Doors (Solid Core, Hollow Core), Shower Doors (none), Door Locks (Privacy, Entry, Dummy, Passage), Porcelain Tiles (1x2, 2x2, 2x4), Shower Bases (32x60, 32x48, 36x48). They live in one place (`nl-quote-cats`) used by both the product page and the quote page.
+- Added the **Quote my cart** box on the cart page (sends cart items to the quote page).
+- Added SEO titles and descriptions for all collections and the quote, contractor, create-account and contact pages (in Shopify admin, not in code).
 
 ### 2026-10-28 — Shopify: sign-up page, filters, product details, quote reference
 - Added a **Create account** form for the Shopify store (works without an app), basic **product filters and sorting**, a **product details** block (specs, warranty, installation, spec sheet, restock date) and **special-order / restock labels** on product cards.

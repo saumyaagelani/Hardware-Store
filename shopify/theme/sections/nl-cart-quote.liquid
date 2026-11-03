@@ -1,0 +1,37 @@
+{%- comment -%}
+  "Quote my cart" box for the cart page. Shows only when the cart has items.
+  Sends the customer to the quote page, which lists the cart items so they can be included in the request.
+{%- endcomment -%}
+{%- assign root = routes.root_url | remove_last: '/' -%}
+{%- if cart.item_count > 0 -%}
+<section class="nl-scope nl-container nl-cartquote">
+  <div class="nl-cartquote__box">
+    <div class="nl-cartquote__text">
+      <p class="nl-cartquote__title">{{ section.settings.title }}</p>
+      <p class="nl-cartquote__body">{{ section.settings.body }}</p>
+    </div>
+    <a class="nl-btn nl-btn--gold" href="{{ root }}/pages/quote?from=cart">{{ section.settings.button }} {% render 'nl-icon', name: 'arrow-right', size: 18 %}</a>
+  </div>
+</section>
+<style>
+  .nl-cartquote { padding-block: 1.5rem 0; }
+  .nl-cartquote__box { display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem 1.5rem; border: 1px solid var(--nl-edge); border-radius: 10px; background: var(--nl-surface); }
+  @media (min-width: 768px) { .nl-cartquote__box { flex-direction: row; align-items: center; justify-content: space-between; } }
+  .nl-cartquote__title { font-size: 1.125rem; font-weight: 700; color: var(--nl-cream); }
+  .nl-cartquote__body { margin-top: .25rem !important; font-size: .9375rem; color: var(--nl-stone); }
+</style>
+{%- elsif request.design_mode -%}
+  <p class="nl-scope nl-container" style="padding-block:1rem;color:var(--nl-stone)">"Quote my cart" box (shows when the cart has items).</p>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Northline cart quote",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Want a price instead of buying now?" },
+    { "type": "text", "id": "body", "label": "Text", "default": "Send everything in this cart to us as a free quote request. We'll reply with itemised pricing, usually within one business day." },
+    { "type": "text", "id": "button", "label": "Button label", "default": "Request a quote for this cart" }
+  ],
+  "presets": [{ "name": "Northline cart quote" }]
+}
+{% endschema %}

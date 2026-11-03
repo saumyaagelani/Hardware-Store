@@ -38,7 +38,7 @@ Items marked `[x]` are already done in Stage 1.
 ## 3. Catalogue and content
 - [ ] **[CLIENT]** Full product list (name, SKU, category, brand, description, specs, prices: retail, sale, contractor; units, coverage per box, variants, stock, lead times)
 - [ ] **[CLIENT]** Product photos (high resolution, rights cleared) and spec sheets, installation guides, warranty documents
-- [ ] **[CLIENT]** Confirm the 11 categories and subcategories, and which products are "contractors only" or "request a quote"
+- [ ] **[CLIENT]** Confirm the categories and subcategories (client sent the Shopify quote-form list on 2026-11-03: Vinyl 6/7/8mm, Interior Doors, Door Locks, Porcelain Tiles, Shower Bases; Porcelain Tiles has no collection yet), and which products are "contractors only" or "request a quote"
 - [ ] **[CLIENT]** Homepage copy, About Us, banners and promotions
 - [ ] **[DEV]** CSV/Excel import tool for products (to the database) with validation report
 - [ ] **[DEV]** Switch product `<img>` to `next/image` with configured `remotePatterns`; re-enable the `@next/next/no-img-element` lint rule

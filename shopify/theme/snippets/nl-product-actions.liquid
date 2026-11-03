@@ -26,10 +26,38 @@
   <style>
     product-form, .product-form, .product-form__buttons, .product-form__input--quantity, .shopify-payment-button,
     [data-block-type="buy-buttons"], .buy-buttons-block, .product-details .price, .product__info-container .price,
-    .product-information .price, .product__price { display: none !important; }
+    .product-information .price, .product__price, product-price, product-form-component, sticky-add-to-cart, .buy-buttons-block { display: none !important; }
   </style>
+  {%- capture cat_text -%}{% render 'nl-quote-cats' %}{%- endcapture -%}
+  {%- assign tag_text = product.tags | join: ' ' -%}
+  {%- assign haystack = product.type | append: ' ' | append: tag_text | downcase -%}
+  {%- for c in product.collections -%}{%- assign haystack = haystack | append: ' ' | append: c.title | downcase -%}{%- endfor -%}
+  {%- assign match_cat = '' -%}
+  {%- assign match_subs = '' -%}
+  {%- assign cat_lines = cat_text | strip | newline_to_br | split: '<br />' -%}
+  {%- for line in cat_lines -%}
+    {%- assign parts = line | strip | split: '|' -%}
+    {%- assign keys = parts[2] | split: ',' -%}
+    {%- for k in keys -%}
+      {%- assign key = k | strip | downcase -%}
+      {%- if match_cat == '' and key != '' and haystack contains key -%}
+        {%- assign match_cat = parts[0] | strip -%}
+        {%- assign match_subs = parts[1] | strip -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
   <div class="nl-quote">
-    <a class="button button--full-width" href="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}">Request a quote</a>
+    {%- if match_subs != blank -%}
+      {%- assign sub_list = match_subs | split: ';' -%}
+      <label class="nl-quote__sub">
+        <span>{{ match_cat }} — choose an option</span>
+        <select data-nl-quote-sub>
+          <option value="">Select an option</option>
+          {%- for o in sub_list -%}<option value="{{ o | strip | escape }}">{{ o | strip }}</option>{%- endfor -%}
+        </select>
+      </label>
+    {%- endif -%}
+    <a class="button button--full-width" data-nl-quote-link data-base="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}{% if match_cat != blank %}&cat={{ match_cat | url_encode }}{% endif %}" href="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}{% if match_cat != blank %}&cat={{ match_cat | url_encode }}{% endif %}">Request a quote</a>
     <p class="nl-quote__note">
       {%- if product.tags contains 'contractors-only' -%}
         Trade pricing for approved contractor accounts. <a href="{{ routes.root_url | remove_last: '/' }}/pages/contractors">Apply for a trade account</a> or request a quote.
@@ -38,5 +66,16 @@
       {%- endif -%}
     </p>
   </div>
-  <style>.nl-quote { margin: 1rem 0; } .nl-quote__note { margin-top: .6rem; font-size: .875rem; opacity: .8; }</style>
+  <script>
+    (() => {
+      const link = document.querySelector('[data-nl-quote-link]');
+      const sel = document.querySelector('[data-nl-quote-sub]');
+      if (!link || !sel) return;
+      sel.addEventListener('change', () => {
+        link.href = link.dataset.base + (sel.value ? '&sub=' + encodeURIComponent(sel.value) : '');
+      });
+    })();
+  </script>
+  <style>.nl-quote__sub { display: block; margin-bottom: .75rem; } .nl-quote__sub span { display: block; margin-bottom: .35rem; font-size: .875rem; font-weight: 600; } .nl-quote__sub select { width: 100%; min-height: 2.75rem; padding: .5rem .75rem; }
+  .nl-quote { margin: 1rem 0; } .nl-quote__note { margin-top: .6rem; font-size: .875rem; opacity: .8; }</style>
 {%- endif -%}
