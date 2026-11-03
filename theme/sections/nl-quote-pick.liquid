@@ -97,7 +97,7 @@
       if (state.product) lines.push('Product: ' + state.product);
       cartLines().forEach((l, i) => lines.push((i === 0 ? 'Cart items: ' : '            ') + l));
       if (cat.value) lines.push('Category: ' + cat.value);
-      if (sub.value && !subWrap.hidden) lines.push('Size: ' + sub.value);
+      if (sub.value && !subWrap.hidden) lines.push('Sub-category: ' + sub.value);
       if (notes.value.trim()) lines.push('Notes: ' + notes.value.trim());
       return lines.length ? [START, ...lines, END].join('\n') : '';
     };
@@ -169,7 +169,7 @@
       const subs = (opt && opt.dataset.subs ? opt.dataset.subs.split(';') : []).map((x) => x.trim()).filter(Boolean);
       sub.innerHTML = '';
       if (subs.length) {
-        sub.appendChild(new Option('Select a size', ''));
+        sub.appendChild(new Option('Select an option', ''));
         subs.forEach((x) => sub.appendChild(new Option(x, x)));
         subWrap.hidden = false;
       } else {
@@ -220,8 +220,8 @@
   "settings": [
     { "type": "text", "id": "title", "label": "Heading", "default": "What do you need a quote for?" },
     { "type": "text", "id": "cat_label", "label": "Category label", "default": "Category" },
-    { "type": "text", "id": "sub_label", "label": "Size label", "default": "Size / thickness" },
-    { "type": "textarea", "id": "categories", "label": "Categories, one per line: Name | size; size", "default": "Vinyl Flooring | 6mm; 7mm; 8mm\nStairs |\nDoors |\nLocks & Door Hardware |\nShower Bases |\nShower Doors |\nShower Accessories |\nToilet Seats |\nVanities |\nPlumbing |\nWPC Wall Panels |\nOther / not sure |" },
+    { "type": "text", "id": "sub_label", "label": "Sub-category label", "default": "Sub-category" },
+    { "type": "textarea", "id": "categories", "label": "Categories, one per line: Name | size; size", "default": "Vinyl Flooring | 6mm; 7mm; 8mm\nInterior Doors | Solid Core; Hollow Core\nShower Doors |\nDoor Locks | Privacy; Entry; Dummy; Passage\nPorcelain Tiles | 1x2; 2x2; 2x4\nShower Bases | 32x60; 32x48; 36x48\nStairs |\nShower Accessories |\nToilet Seats |\nVanities |\nPlumbing |\nWPC Wall Panels |\nOther / not sure |" },
     { "type": "text", "id": "notes_label", "label": "Notes label", "default": "Size / quantity / anything else (optional)" },
     { "type": "text", "id": "notes_placeholder", "label": "Notes placeholder", "default": "e.g. 600 sq ft, 3 doors" },
     { "type": "textarea", "id": "hint", "label": "Hint", "default": "Your choices are added to the form below automatically. If they don't appear, click \"Copy summary\" and paste it into the Product selected box." }
