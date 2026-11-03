@@ -208,7 +208,12 @@
           }
           const wantCat = params.get('cat');
           if (wantCat && [...cat.options].some((o) => o.value === wantCat)) { cat.value = wantCat; cat.dispatchEvent(new Event('change')); }
-          const wantSub = params.get('sub');
+          let wantSub = params.get('sub');
+          if (!wantSub) {
+            const t = p.title.toLowerCase();
+            const hit = [...sub.options].find((o) => o.value && t.includes(o.value.toLowerCase()));
+            if (hit) wantSub = hit.value;
+          }
           if (wantSub && [...sub.options].some((o) => o.value === wantSub)) sub.value = wantSub;
           sync();
         })

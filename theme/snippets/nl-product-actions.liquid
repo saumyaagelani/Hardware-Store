@@ -46,8 +46,18 @@
       {%- endif -%}
     {%- endfor -%}
   {%- endfor -%}
+  {%- assign title_lc = product.title | downcase -%}
+  {%- assign title_sub = '' -%}
+  {%- assign all_subs = match_subs | split: ';' -%}
+  {%- for o in all_subs -%}
+    {%- assign o_clean = o | strip -%}
+    {%- assign o_lc = o_clean | downcase -%}
+    {%- if title_sub == '' and o_lc != '' and title_lc contains o_lc -%}{%- assign title_sub = o_clean -%}{%- endif -%}
+  {%- endfor -%}
   <div class="nl-quote">
-    {%- if match_subs != blank -%}
+    {%- if title_sub != blank -%}
+      <p class="nl-quote__fixed">{{ match_cat }}: <strong>{{ title_sub }}</strong></p>
+    {%- elsif match_subs != blank -%}
       {%- assign sub_list = match_subs | split: ';' -%}
       <label class="nl-quote__sub">
         <span>{{ match_cat }} — choose an option</span>
@@ -57,7 +67,7 @@
         </select>
       </label>
     {%- endif -%}
-    <a class="button button--full-width" data-nl-quote-link data-base="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}{% if match_cat != blank %}&cat={{ match_cat | url_encode }}{% endif %}" href="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}{% if match_cat != blank %}&cat={{ match_cat | url_encode }}{% endif %}">Request a quote</a>
+    <a class="button button--full-width" data-nl-quote-link data-base="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}{% if match_cat != blank %}&cat={{ match_cat | url_encode }}{% endif %}" href="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}{% if match_cat != blank %}&cat={{ match_cat | url_encode }}{% endif %}{% if title_sub != blank %}&sub={{ title_sub | url_encode }}{% endif %}">Request a quote</a>
     <p class="nl-quote__note">
       {%- if product.tags contains 'contractors-only' -%}
         Trade pricing for approved contractor accounts. <a href="{{ routes.root_url | remove_last: '/' }}/pages/contractors">Apply for a trade account</a> or request a quote.
@@ -76,7 +86,7 @@
       });
     })();
   </script>
-  <style>.nl-quote__sub { display: block; margin-bottom: .75rem; } .nl-quote__sub span { display: block; margin-bottom: .35rem; font-size: .875rem; font-weight: 600; } .nl-quote__sub select { width: 100%; min-height: 2.75rem; padding: .5rem .75rem; }
+  <style>.nl-quote__fixed { margin-bottom: .75rem; font-size: .9375rem; } .nl-quote__sub { display: block; margin-bottom: .75rem; } .nl-quote__sub span { display: block; margin-bottom: .35rem; font-size: .875rem; font-weight: 600; } .nl-quote__sub select { width: 100%; min-height: 2.75rem; padding: .5rem .75rem; }
   .nl-quote { margin: 1rem 0; } .nl-quote__note { margin-top: .6rem; font-size: .875rem; opacity: .8; }</style>
 {%- else -%}
   <p class="nl-quote-soft"><a href="{{ routes.root_url | remove_last: '/' }}/pages/quote?product={{ product.handle | url_encode }}">Need a bulk or custom price? Request a quote</a></p>
