@@ -1,0 +1,231 @@
+{%- comment -%}
+  Quote page helper, shown above the quote form:
+  - shows the exact product the customer clicked "Request a quote" on (?product=handle) and the cart items (?from=cart)
+  - Category -> Sub-category pickers
+  - builds a short summary and writes it into the form's details box automatically (best effort),
+    with a "Copy" button as a fallback.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="nl-scope nl-container nl-qpick" id="nl-qpick">
+  <div class="nl-qpick__box">
+    <p class="nl-qpick__title">{{ s.title }}</p>
+
+    <div class="nl-qpick__product" data-product hidden></div>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="nl-qpick__cart" data-cart hidden>
+        <p class="nl-qpick__label">Items from your cart</p>
+        <ul class="nl-qpick__list">
+          {%- for item in cart.items -%}
+            <li data-line="{{ item.quantity }} x {{ item.product.title | escape }}{% if item.variant.title != 'Default Title' %} ({{ item.variant.title | escape }}){% endif %}{% if item.sku != blank %} - SKU {{ item.sku | escape }}{% endif %}">{{ item.quantity }} × {{ item.product.title }}{% if item.variant.title != 'Default Title' %} ({{ item.variant.title }}){% endif %}{% if item.sku != blank %} — SKU {{ item.sku }}{% endif %}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    <div class="nl-qpick__row">
+      <label class="nl-qpick__field">
+        <span class="nl-qpick__label">{{ s.cat_label }}</span>
+        <select data-cat>
+          <option value="">Select a category</option>
+          {%- assign lines = s.categories | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}
+            {%- assign parts = line | strip | split: '|' -%}
+            {%- if parts[0] != blank -%}
+              <option value="{{ parts[0] | strip | escape }}" data-subs="{{ parts[1] | strip | escape }}">{{ parts[0] | strip }}</option>
+            {%- endif -%}
+          {%- endfor -%}
+        </select>
+      </label>
+      <label class="nl-qpick__field" data-sub-wrap hidden>
+        <span class="nl-qpick__label">{{ s.sub_label }}</span>
+        <select data-sub></select>
+      </label>
+    </div>
+
+    <label class="nl-qpick__field">
+      <span class="nl-qpick__label">{{ s.notes_label }}</span>
+      <input type="text" data-notes placeholder="{{ s.notes_placeholder }}">
+    </label>
+
+    <textarea class="nl-qpick__text" data-summary readonly rows="4" aria-label="Quote summary"></textarea>
+    <p class="nl-qpick__status" data-status></p>
+    <button type="button" class="nl-btn nl-btn--outline nl-qpick__copy" data-copy hidden>Copy summary</button>
+    <p class="nl-qpick__hint">{{ s.hint }}</p>
+  </div>
+</section>
+<style>
+  .nl-qpick { padding-block: 1.5rem 0; }
+  .nl-qpick__box { padding: 1.25rem 1.5rem; border: 1px solid var(--nl-edge); border-radius: 10px; background: var(--nl-surface); display: grid; gap: 1rem; }
+  .nl-qpick__title { font-size: 1.125rem; font-weight: 700; color: var(--nl-cream); }
+  .nl-qpick__label { display: block; margin-bottom: .35rem; font-size: .8125rem; font-weight: 600; color: var(--nl-stone); }
+  .nl-qpick__row { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .nl-qpick__row { grid-template-columns: 1fr 1fr; } }
+  .nl-qpick select, .nl-qpick input[type=text] { width: 100%; min-height: 2.75rem; padding: .5rem .75rem; border-radius: 6px; border: 1px solid var(--nl-edge); background: transparent; color: var(--nl-cream); font: inherit; }
+  .nl-qpick select option { color: #1d211c; }
+  .nl-qpick__product { display: flex; gap: 1rem; align-items: center; padding: .75rem; border: 1px solid var(--nl-edge); border-radius: 8px; }
+  .nl-qpick__product[hidden], .nl-qpick__cart[hidden], .nl-qpick [hidden] { display: none !important; }
+  .nl-qpick__product img { width: 4.5rem; height: 4.5rem; object-fit: cover; border-radius: 6px; }
+  .nl-qpick__pname { font-weight: 700; color: var(--nl-cream); }
+  .nl-qpick__pmeta { font-size: .875rem; color: var(--nl-stone); margin-top: .15rem; }
+  .nl-qpick__list { display: grid; gap: .35rem; font-size: .9375rem; color: var(--nl-cream); }
+  .nl-qpick__text { position: absolute; left: -9999px; }
+  .nl-qpick__status { font-size: .875rem; color: var(--nl-gold); min-height: 1.2em; }
+  .nl-qpick__copy { min-height: 2.5rem; font-size: .9375rem; justify-self: start; }
+  .nl-qpick__hint { font-size: .875rem; color: var(--nl-stone); }
+</style>
+<script>
+  (() => {
+    const root = document.getElementById('nl-qpick');
+    if (!root) return;
+    const $ = (sel) => root.querySelector(sel);
+    const cat = $('[data-cat]'), sub = $('[data-sub]'), subWrap = $('[data-sub-wrap]');
+    const notes = $('[data-notes]'), summary = $('[data-summary]'), status = $('[data-status]');
+    const copyBtn = $('[data-copy]'), productBox = $('[data-product]'), cartBox = $('[data-cart]');
+    const params = new URLSearchParams(location.search);
+    const state = { product: '' };
+    const START = '--- Quote request details ---';
+    const END = '--- end ---';
+
+    if (cartBox && params.get('from') === 'cart') cartBox.hidden = false;
+
+    const cartLines = () => (cartBox && !cartBox.hidden)
+      ? [...cartBox.querySelectorAll('[data-line]')].map((li) => li.getAttribute('data-line')) : [];
+
+    const build = () => {
+      const lines = [];
+      if (state.product) lines.push('Product: ' + state.product);
+      cartLines().forEach((l, i) => lines.push((i === 0 ? 'Cart items: ' : '            ') + l));
+      if (cat.value) lines.push('Category: ' + cat.value);
+      if (sub.value && !subWrap.hidden) lines.push('Size: ' + sub.value);
+      if (notes.value.trim()) lines.push('Notes: ' + notes.value.trim());
+      return lines.length ? [START, ...lines, END].join('\n') : '';
+    };
+
+    // Find the form's "Product selected" field by its label (open shadow roots and same-origin iframes included).
+    // It never falls back to another field, so nothing lands in e.g. the company name box.
+    const labelOf = (el) => {
+      const bits = [el.getAttribute('aria-label'), el.getAttribute('placeholder'), el.getAttribute('name')];
+      if (el.labels) el.labels.forEach((l) => bits.push(l.textContent));
+      const by = el.getAttribute('aria-labelledby');
+      if (by) by.split(' ').forEach((id) => { const n = (el.getRootNode().getElementById || document.getElementById).call(el.getRootNode().getElementById ? el.getRootNode() : document, id); if (n) bits.push(n.textContent); });
+      const wrap = el.closest('label, fieldset, [class*="field"], [class*="Field"], div');
+      if (wrap) { const l = wrap.querySelector('label, legend'); if (l) bits.push(l.textContent); }
+      return bits.filter(Boolean).join(' ').toLowerCase();
+    };
+    const findTextarea = (node) => {
+      const found = [];
+      const walk = (n) => {
+        if (!n) return;
+        n.querySelectorAll && n.querySelectorAll('textarea, input[type=text], input:not([type])').forEach((t) => { if (!root.contains(t)) found.push(t); });
+        n.querySelectorAll && n.querySelectorAll('*').forEach((el) => {
+          if (el.shadowRoot) walk(el.shadowRoot);
+          if (el.tagName === 'IFRAME') { try { walk(el.contentDocument); } catch (e) {} }
+        });
+      };
+      walk(node);
+      const labelled = found.map((el) => ({ el, label: labelOf(el) })).filter((x) => /product/.test(x.label));
+      const best = labelled.find((x) => /product selected|selected product/.test(x.label)) || labelled[0];
+      return best ? best.el : null;
+    };
+
+    const setValue = (ta, value) => {
+      const proto = ta.tagName === 'TEXTAREA' ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+      const setter = Object.getOwnPropertyDescriptor(proto, 'value');
+      setter && setter.set ? setter.set.call(ta, value) : (ta.value = value);
+      ta.dispatchEvent(new Event('input', { bubbles: true }));
+      ta.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+
+    let filled = false;
+    const sync = () => {
+      const text = build();
+      summary.value = text;
+      const ta = findTextarea(document);
+      if (ta && text) {
+        const re = new RegExp(START.replace(/[-]/g, '\\-') + '[\\s\\S]*?' + END.replace(/[-]/g, '\\-'));
+        const cur = ta.value || '';
+        setValue(ta, re.test(cur) ? cur.replace(re, text) : (text + (cur ? '\n\n' + cur : '')));
+        filled = true;
+        status.textContent = 'Added to the form below ✓';
+        copyBtn.hidden = true;
+      } else if (text) {
+        filled = false;
+        status.textContent = '';
+        copyBtn.hidden = false;
+      } else {
+        status.textContent = '';
+        copyBtn.hidden = true;
+      }
+    };
+
+    // The form can load after this script, so keep watching until its text box shows up.
+    const observer = new MutationObserver(() => { if (!filled && build()) sync(); });
+    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(() => observer.disconnect(), 30000);
+
+    cat.addEventListener('change', () => {
+      const opt = cat.selectedOptions[0];
+      const subs = (opt && opt.dataset.subs ? opt.dataset.subs.split(';') : []).map((x) => x.trim()).filter(Boolean);
+      sub.innerHTML = '';
+      if (subs.length) {
+        sub.appendChild(new Option('Select a size', ''));
+        subs.forEach((x) => sub.appendChild(new Option(x, x)));
+        subWrap.hidden = false;
+      } else {
+        subWrap.hidden = true;
+      }
+      sync();
+    });
+    sub.addEventListener('change', sync);
+    notes.addEventListener('input', sync);
+
+    copyBtn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(summary.value); }
+      catch (e) { summary.style.position = 'static'; summary.select(); document.execCommand('copy'); summary.style.position = 'absolute'; }
+      const old = copyBtn.textContent; copyBtn.textContent = 'Copied ✓'; setTimeout(() => (copyBtn.textContent = old), 2000);
+    });
+
+    // Product the customer asked a quote for.
+    const handle = params.get('product');
+    if (handle) {
+      fetch('/products/' + encodeURIComponent(handle) + '.js')
+        .then((r) => r.ok ? r.json() : Promise.reject())
+        .then((p) => {
+          const v = p.variants && p.variants[0];
+          const variantTitle = v && v.title !== 'Default Title' ? v.title : '';
+          const sku = v && v.sku ? v.sku : '';
+          state.product = p.title + (variantTitle ? ' (' + variantTitle + ')' : '') + (sku ? ' - SKU ' + sku : '') + ' - ' + location.origin + p.url;
+          const img = p.featured_image ? '<img src="' + p.featured_image.replace(/(\.[a-z]+)(\?|$)/i, '_160x160$1$2') + '" alt="">' : '';
+          productBox.innerHTML = img + '<div><p class="nl-qpick__pname"></p><p class="nl-qpick__pmeta"></p></div>';
+          productBox.querySelector('.nl-qpick__pname').textContent = p.title;
+          productBox.querySelector('.nl-qpick__pmeta').textContent = [variantTitle, sku && 'SKU ' + sku].filter(Boolean).join(' · ');
+          productBox.hidden = false;
+          if (p.type) {
+            const match = [...cat.options].find((o) => o.value && p.type.toLowerCase().includes(o.value.toLowerCase()));
+            if (match) { cat.value = match.value; cat.dispatchEvent(new Event('change')); }
+          }
+          sync();
+        })
+        .catch(() => {});
+    } else {
+      sync();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Northline quote helper",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "What do you need a quote for?" },
+    { "type": "text", "id": "cat_label", "label": "Category label", "default": "Category" },
+    { "type": "text", "id": "sub_label", "label": "Size label", "default": "Size / thickness" },
+    { "type": "textarea", "id": "categories", "label": "Categories (one per line: Category | size; size; ... leave blank if no sizes)", "default": "Vinyl Flooring | 6mm; 7mm; 8mm\nStairs |\nDoors |\nLocks & Door Hardware |\nShower Bases |\nShower Doors |\nShower Accessories |\nToilet Seats |\nVanities |\nPlumbing |\nWPC Wall Panels |\nOther / not sure |" },
+    { "type": "text", "id": "notes_label", "label": "Notes label", "default": "Size / quantity / anything else (optional)" },
+    { "type": "text", "id": "notes_placeholder", "label": "Notes placeholder", "default": "e.g. 600 sq ft, 3 doors" },
+    { "type": "textarea", "id": "hint", "label": "Hint", "default": "Your choices are added to the form below automatically. If they don't appear, click \"Copy summary\" and paste it into the Product selected box." }
+  ],
+  "presets": [{ "name": "Northline quote helper" }]
+}
+{% endschema %}
