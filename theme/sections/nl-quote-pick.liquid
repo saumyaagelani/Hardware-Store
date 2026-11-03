@@ -33,7 +33,7 @@
           {%- for line in lines -%}
             {%- assign parts = line | strip | split: '|' -%}
             {%- if parts[0] != blank -%}
-              <option value="{{ parts[0] | strip | escape }}" data-subs="{{ parts[1] | strip | escape }}">{{ parts[0] | strip }}</option>
+              <option value="{{ parts[0] | strip | escape }}">{{ parts[0] | strip }}</option>
             {%- endif -%}
           {%- endfor -%}
         </select>

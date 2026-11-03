@@ -15,6 +15,32 @@
     </div>
   </div>
 
+  {%- comment -%} Sub-categories under the main category (list lives in snippets/nl-quote-cats). Products carry the sub-category as a tag. {%- endcomment -%}
+  {%- capture cat_text -%}{% render 'nl-quote-cats' %}{%- endcapture -%}
+  {%- assign coll_hay = collection.handle | append: ' ' | append: collection.title | downcase -%}
+  {%- assign subs_here = '' -%}
+  {%- assign cat_lines = cat_text | strip | newline_to_br | split: '<br />' -%}
+  {%- for line in cat_lines -%}
+    {%- assign parts = line | strip | split: '|' -%}
+    {%- assign keys = parts[2] | split: ',' -%}
+    {%- for k in keys -%}
+      {%- assign key = k | strip | downcase -%}
+      {%- if subs_here == '' and key != '' and coll_hay contains key -%}{%- assign subs_here = parts[1] | strip -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  {%- if subs_here != blank -%}
+    {%- assign sub_list = subs_here | split: ';' -%}
+    <ul class="nl-chips nl-subcats" aria-label="Sub-categories">
+      <li><a href="{{ collection.url }}" class="nl-chip{% if collection.current_tags.size == 0 %} is-active{% endif %}">All {{ collection.title }}</a></li>
+      {%- for o in sub_list -%}
+        {%- assign tag = o | strip -%}
+        {%- if collection.all_tags contains tag -%}
+          <li><a href="{{ collection.url }}/{{ tag | handleize }}" class="nl-chip{% if collection.current_tags contains tag %} is-active{% endif %}">{{ tag }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
   {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
   {% render 'nl-filters', filters: collection.filters, sort_options: collection.sort_options, sort_by: sort_by, reset_url: collection.url, search_terms: nil %}
 

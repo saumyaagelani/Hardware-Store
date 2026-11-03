@@ -46,6 +46,7 @@
       {%- endif -%}
     {%- endfor -%}
   {%- endfor -%}
+  {%- assign match_subs = '' -%}
   {%- assign title_lc = product.title | downcase -%}
   {%- assign title_sub = '' -%}
   {%- assign all_subs = match_subs | split: ';' -%}
